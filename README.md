@@ -10,7 +10,9 @@
 
 ## Demo
 
-直接 double-click `index.html`，或者用 dev server：
+🔗 **線上版：https://web-design-tutorial.vercel.app**
+
+本地睇：直接 double-click `index.html`，或者用 dev server：
 
 ```bash
 python3 -m http.server 8000
@@ -18,7 +20,9 @@ python3 -m http.server 8000
 npx serve .
 ```
 
-之後揀「跟住 Tour 行一次」（由頭到尾 1/18 → 18/18）或者「自由探索」。
+之後揀「跟住 Tour 行一次」（由頭到尾 1/24 → 24/24）或者「自由探索」。
+
+> Push 去 `main` branch 會自動部署到 Vercel。
 
 ### Deep link
 
