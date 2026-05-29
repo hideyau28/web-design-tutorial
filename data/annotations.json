@@ -1,0 +1,1268 @@
+{
+  "announce": {
+    "cat": "structure",
+    "name": "Announcement Bar",
+    "zh": "公告條 · 又叫 Promo Bar / Top Bar",
+    "hint": "網站最頂嗰條細條",
+    "plain": "網頁最頂嗰條細條，用嚟推新嘢嘅 banner。",
+    "checklist": [
+      "訊息夠唔夠短？一行內講完？",
+      "有冇 emoji 同 strong 突出 keyword？",
+      "結尾有冇 inline link 引人撳？",
+      "背景深色 / 中性色，唔搶 hero？"
+    ],
+    "quickFix": [
+      {
+        "problem": "Banner 太搶眼，蓋過 hero",
+        "say": "將 announce bar 改用深色 gradient 背景 + 13px 細字 + 白色文字，唔好用品牌色實底。"
+      },
+      {
+        "problem": "想加 emoji 同 highlight keyword",
+        "say": "Emoji 放最前，用 <strong> 標出最重要嗰個 keyword，再加 inline 連結 →。"
+      },
+      {
+        "problem": "想用戶可以關閉",
+        "say": "右邊加 ✕ 細掣，撳咗用 localStorage 記低 dismissed 之後唔再 show。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "用品牌色實底蓋過 hero",
+        "一段長文 / 冇 highlight",
+        "冇 inline link 引人撳"
+      ],
+      "good": [
+        "深色 gradient + 13px 細白字",
+        "1 emoji + 1 strong keyword",
+        "結尾 inline →"
+      ]
+    },
+    "purpose": "用嚟推最新嘅嘢 — 新功能、活動、折扣、緊急通知。係用戶一打開就會見到嘅唯一一條 banner，所以好寶貴。",
+    "design": [
+      "高度好細（一般 32-44px），唔搶 hero 嘅 attention",
+      "深色背景 + 細字，視覺上係「附屬」訊息，易 dismiss",
+      "結尾通常有一個 inline link，引導 click"
+    ],
+    "tech": [
+      "簡單嘅 div + linear-gradient background",
+      "通常會 sticky 喺 top 或者可以 dismiss（加個 ✕）",
+      "響應式：手機要考慮要唔要簡化 / hide"
+    ],
+    "code": "<span class=\"c\">/* gradient 漸變背景 */</span>\n<span class=\"k\">background</span>: <span class=\"v\">linear-gradient(90deg, #1A1A2E 0%, #2A1B4A 100%)</span>;"
+  },
+  "nav": {
+    "cat": "structure",
+    "name": "Navigation Bar",
+    "zh": "導覽列 · Nav / Header",
+    "hint": "永遠喺度，幫你去任何地方",
+    "plain": "永遠黐喺最頂嗰條導覽列，幫人跳去任何地方。",
+    "checklist": [
+      "左 logo / 中 nav links / 右 CTA — 3 段式 layout？",
+      "Scroll 落去 nav 仲跟住喺度（sticky）？",
+      "有冇玻璃模糊感（透明 + backdrop-filter）？",
+      "CTA 同 nav links 視覺對比夠大？"
+    ],
+    "quickFix": [
+      {
+        "problem": "Nav scroll 唔到時消失",
+        "say": "Nav 加 position: sticky; top: 0; z-index: 50。"
+      },
+      {
+        "problem": "Nav 同 page 顏色撞",
+        "say": "Nav 加 backdrop-filter: blur(14px) saturate(180%) + rgba 半透明背景，scroll 之後再加細邊框。"
+      },
+      {
+        "problem": "Nav 入面太擠",
+        "say": "中間 links gap 28px，logo 同 CTA 兩邊各 32px gap，padding 16px 24px。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "Scroll 之後消失",
+        "Logo 同 links 攝晒一齊",
+        "CTA 太細混入 links"
+      ],
+      "good": [
+        "Sticky + backdrop blur + 半透明",
+        "左 logo / 中 nav / 右 CTA",
+        "CTA 用實底突圍"
+      ]
+    },
+    "purpose": "Navigation 嘅責任係：用戶去任何主要區都唔使捲返頂。同時要俾品牌 logo + 一個明顯 CTA 嘅位。",
+    "design": [
+      "左 logo / 中 nav links / 右 CTA — 行咗 20 年都仲 work 嘅 pattern",
+      "Sticky（黏住頂）令用戶隨時跳去其他頁",
+      "玻璃感（backdrop-filter blur）係 modern 標誌，等 nav 同 page background 有層次但唔阻擋",
+      "Scroll 落去之後 nav 加一條細邊 / 變實色，俾用戶知「我已經唔喺最頂」"
+    ],
+    "tech": [
+      "position: sticky; top: 0; — 純 CSS 就做到黏住",
+      "backdrop-filter: blur(14px) saturate(180%) — 玻璃效果",
+      "JS 偵測 scroll 距離，加 .scrolled class 改變邊框",
+      "z-index: 50 — 確保浮喺其他內容之上"
+    ],
+    "code": "<span class=\"k\">position</span>: <span class=\"v\">sticky</span>;\n<span class=\"k\">top</span>: <span class=\"v\">0</span>;\n<span class=\"k\">backdrop-filter</span>: <span class=\"v\">saturate(180%) blur(14px)</span>;\n<span class=\"k\">background</span>: <span class=\"v\">rgba(250,247,242,0.75)</span>;"
+  },
+  "dropdown": {
+    "cat": "structure",
+    "name": "Dropdown / Mega Menu",
+    "zh": "下拉選單 · 又叫 Flyout / Mega Menu",
+    "hint": "Hover「功能」見到下拉嗰個",
+    "plain": "Hover / Click trigger 出嚟嘅 panel。Nav 想 expand 多嘢就用呢個。",
+    "checklist": [
+      "Hover + Click 兩個都 trigger 到？",
+      "Esc 鍵可以關 + focus 還原到 trigger？",
+      "Caret ▾ 隨開合自動旋轉提示狀態？",
+      "Panel 入面每個 item 有 icon + 標題 + 副文？"
+    ],
+    "quickFix": [
+      {
+        "problem": "Dropdown 太硬 pop 出 / 消失",
+        "say": "Panel 用 opacity + transform translateY 漸入，唔好用 display: none / block — 加 transition: 0.2s cubic-bezier。"
+      },
+      {
+        "problem": "Hover 容易誤觸",
+        "say": "Trigger 同 panel 之間留 12px gap + 大個 hover region。Mouse enter dropdown container 而唔係 trigger 本身。"
+      },
+      {
+        "problem": "冇 a11y",
+        "say": "Trigger 加 aria-expanded、aria-haspopup=\"true\"、aria-controls；panel role=\"menu\"，每 item role=\"menuitem\"；Esc 關。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "得文字 link 冇 icon",
+        "Hover 立即消失冇 buffer",
+        "冇 aria 屬性"
+      ],
+      "good": [
+        "Icon + title + sub 三層資訊",
+        "opacity + translate 漸入",
+        "aria-expanded + Esc + focus 還原"
+      ]
+    },
+    "purpose": "Nav 入面 sections 太多嗰陣，將相關嘅 collapse 入 dropdown / mega menu。常見：「功能」展開所有 feature、「資源」展開 blog/docs/help。",
+    "design": [
+      "Item 至少 3 個元素：emoji icon + 粗體標題 + 細灰副文",
+      "Trigger 用 ▾ caret 提示「呢度可以展開」",
+      "展開有 micro-animation（唔好硬 toggle）"
+    ],
+    "tech": [
+      "Hover + click 兩個 trigger 路徑",
+      "aria-expanded / aria-haspopup / role=menu / role=menuitem",
+      "Esc 關 + click outside 關 + focus 還原"
+    ],
+    "code": "<span class=\"k\">aria-expanded</span>=<span class=\"v\">\"false\"</span>\n<span class=\"k\">aria-haspopup</span>=<span class=\"v\">\"true\"</span>\n<span class=\"k\">aria-controls</span>=<span class=\"v\">\"panel\"</span>"
+  },
+  "hero": {
+    "cat": "structure",
+    "name": "Hero Section",
+    "zh": "Hero 區 · 又叫 Above the Fold",
+    "hint": "一打開頁面，最大、最搶眼嗰幅",
+    "plain": "網頁最頂、最大、最搶眼嗰幅。一打開第一眼睇到嘅嘢。",
+    "checklist": [
+      "Headline 短唔短？一句、講 benefit（唔係 feature）？",
+      "有冇主 CTA + 次 CTA 兩粒掣？",
+      "CTA 下面有冇 social proof（評分 / 用戶數 / 頭像）？",
+      "右邊有冇 visual / mockup 撐住個畫面？"
+    ],
+    "quickFix": [
+      {
+        "problem": "Headline 太長太硬",
+        "say": "Headline 改成一句講 benefit，例如「做多啲、做好啲」，次要訊息放副標題。"
+      },
+      {
+        "problem": "CTA 唔夠突出",
+        "say": "主 CTA 用品牌色實底 + 大陰影，次 CTA 改 outline / ghost — 一定要視覺有主次。"
+      },
+      {
+        "problem": "個 hero 平平無起伏",
+        "say": "右邊加 product mockup，加 perspective + rotateY(-8deg) + 大陰影，再喺旁邊加 2 個浮動 stats card。"
+      },
+      {
+        "problem": "冇 social proof",
+        "say": "CTA 下面加：4 個重疊頭像 + ★★★★★ 4.9 + 用戶數（24,000 唔好寫 24k）。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "Headline 一大段講 feature",
+        "3 粒 CTA 並排令人 paralyze",
+        "冇 social proof / 冇 visual"
+      ],
+      "good": [
+        "Headline 一句講 benefit",
+        "1 主 (實底) + 1 次 (outline)",
+        "CTA 下加 4.9 + 24k + 右邊 mockup"
+      ]
+    },
+    "purpose": "Hero 係用戶第一眼睇到嘅嘢。3 秒內要答到：(1) 呢度係咩 (2) 對我有咩用 (3) 我要做咩。如果 hero 唔 work，跌 50% 用戶。",
+    "design": [
+      "黃金 F-pattern：左邊大字 headline、副標題、CTA；右邊放 product visual",
+      "Headline 一定要短 + 有 benefit（唔係 feature）。例：「做多啲」唔係「Pomodoro Timer」",
+      "CTA 至少要兩個：主 CTA（深色或彩色）+ 次 CTA（outline 或 ghost）— 俾「未 ready 直接 sign up」嘅人都有路行",
+      "Social proof（評分、用戶數）放係 CTA 下面 — 降低焦慮",
+      "背景用 subtle radial gradient — 加氣氛但唔 distract"
+    ],
+    "tech": [
+      "CSS Grid 1.1fr 0.9fr — 文字稍大 visual 稍細",
+      "clamp() font-size — 由細到大 viewport 自動 scale",
+      "radial-gradient 用嚟畫氛圍光暈",
+      "transform: rotateY() + perspective — 俾個 mockup 3D 感",
+      "浮動 card 用 @keyframes float — 加生氣"
+    ],
+    "code": "<span class=\"k\">font-size</span>: <span class=\"v\">clamp(40px, 5.5vw, 68px)</span>;\n<span class=\"c\">/* 40px 至 68px 之間，跟住 viewport 變 */</span>\n<span class=\"k\">transform</span>: <span class=\"v\">rotateY(-8deg) rotateX(4deg)</span>;"
+  },
+  "eyebrow": {
+    "cat": "design",
+    "name": "Eyebrow",
+    "zh": "眉標 · 又叫 Kicker / Pre-headline",
+    "hint": "Headline 上面嗰粒細 tag",
+    "plain": "Headline 上面嗰粒細嘅 label。畀 context 用嘅。",
+    "checklist": [
+      "字夠細（13px 左右）？",
+      "字距夠開（letter-spacing 大）？",
+      "有冇用 uppercase？",
+      "配品牌色 pill bg？有冇 dot indicator？"
+    ],
+    "quickFix": [
+      {
+        "problem": "Eyebrow 太搶眼蓋過 headline",
+        "say": "Eyebrow font-size 13px，letter-spacing 0.12em，淺色 rgba 背景 + 品牌色文字 — 一定要細過 H1。"
+      },
+      {
+        "problem": "想加生氣",
+        "say": "Eyebrow 前面加一粒 6px 圓點，加 @keyframes pulse 2s ease-in-out infinite。"
+      },
+      {
+        "problem": "想做 pill 樣",
+        "say": "border-radius: 999px; padding: 6px 14px; background: rgba(brand, 0.08)。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "字大過 H1 搶風頭",
+        "冇 letter-spacing 似普通字",
+        "冇 pill / 冇 dot"
+      ],
+      "good": [
+        "13px UPPERCASE + 0.12em",
+        "Pill 圓邊 + 品牌色淡背景",
+        "前面 6px pulse dot"
+      ]
+    },
+    "purpose": "Eyebrow 係 hero h1 上面嗰粒細嘅 label，作用係俾 context — 「呢個係咩類型嘅嘢」、「新功能定 case study」。",
+    "design": [
+      "用 uppercase + 字距大（letter-spacing）— 同 headline 對比",
+      "通常配品牌色，吸引眼球但唔搶風頭",
+      "加一粒會 pulse 嘅圓點，視覺上似「LIVE」、「新」嘅 indicator"
+    ],
+    "tech": [
+      "text-transform: uppercase + letter-spacing: 0.12em",
+      "border-radius: 999px 整 pill shape",
+      "@keyframes pulse — 圓點呼吸動畫"
+    ],
+    "code": "<span class=\"k\">letter-spacing</span>: <span class=\"v\">0.12em</span>;\n<span class=\"k\">text-transform</span>: <span class=\"v\">uppercase</span>;\n<span class=\"k\">animation</span>: <span class=\"v\">pulse 2s ease-in-out infinite</span>;"
+  },
+  "herocta": {
+    "cat": "structure",
+    "name": "Primary CTA",
+    "zh": "Call to Action · 主要轉換按鈕",
+    "hint": "網站最重要嘅一粒掣",
+    "plain": "叫人撳嘅主掣。網頁最重要嗰粒按鈕。",
+    "checklist": [
+      "Copy 寫 benefit 唔寫動作？（「免費試 14 日」唔好寫「Sign Up」）",
+      "Hover 有冇浮起 + 加陰影？",
+      "主 CTA + 次 CTA 兩粒（最忌 3 粒並排）？",
+      "CTA 同周圍對比夠強（背景中性 / CTA 品牌色）？"
+    ],
+    "quickFix": [
+      {
+        "problem": "CTA 唔夠搶眼",
+        "say": "主 CTA 用品牌色實底 + box-shadow: 0 8px 20px rgba(brand, 0.35)，hover translateY(-2px) 加深 shadow。"
+      },
+      {
+        "problem": "CTA 文字太硬太 generic",
+        "say": "Copy 改 benefit-focused：「免費開始 — 永遠免費」、「14 日免費試 — 唔使俾卡」。"
+      },
+      {
+        "problem": "一定要兩粒 CTA",
+        "say": "主 CTA 品牌色實底，次 CTA outline / ghost（例如「▶ 睇 2 分鐘 demo」）— 兩粒對比要強。"
+      },
+      {
+        "problem": "CTA 太硬太 sharp",
+        "say": "border-radius: 999px 做完全圓 pill — 現代 SaaS 標配，感覺更 friendly。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "寫「Sign Up」純動作",
+        "3 粒 CTA 視覺平均",
+        "Outline / solid 唔分"
+      ],
+      "good": [
+        "「免費試 14 日 — 唔使俾卡」",
+        "1 主 (實底+陰影) + 1 次 (outline)",
+        "Hover translateY(-2px) 強化點擊感"
+      ]
+    },
+    "purpose": "CTA = Call to Action。係 hero 入面所有設計都係為咗令用戶撳呢粒掣。撳唔到 CTA，個 page 就失敗。",
+    "design": [
+      "用品牌色（呢度係 coral）— 同周圍對比強烈",
+      "Copy 寫 benefit 唔寫動作：「免費開始 — 永遠免費」比「Sign Up」好得多",
+      "配一粒次 CTA（▶ 睇 demo）— 俾未 ready 嘅人有路",
+      "Hover 微微浮起 + 加重 shadow — 暗示「可以撳」",
+      "注意：呢個位最忌 3 粒 CTA 並排 — 用戶會 paralyze"
+    ],
+    "tech": [
+      "box-shadow 配品牌色透明度 — coral 嘅光暈",
+      "transition: all 0.2s — hover 順滑",
+      "transform: translateY(-2px) on hover — 浮起感",
+      "border-radius: 999px 完全圓 — 現代 SaaS 標配"
+    ],
+    "code": "<span class=\"k\">background</span>: <span class=\"v\">var(--coral)</span>;\n<span class=\"k\">box-shadow</span>: <span class=\"v\">0 8px 20px rgba(255,107,71,0.35)</span>;\n<span class=\"k\">transition</span>: <span class=\"v\">all 0.2s cubic-bezier(0.22,1,0.36,1)</span>;"
+  },
+  "modal": {
+    "cat": "structure",
+    "name": "Modal / Dialog",
+    "zh": "彈出視窗 · 又叫 Lightbox",
+    "hint": "Native <dialog> element 嘅 modal",
+    "plain": "蓋住成個畫面嘅 popup。video preview、sign-up、確認 dialog 都係呢個 pattern。",
+    "checklist": [
+      "有冇 backdrop（黑色半透蓋住底）？",
+      "可唔可以 Esc 關 / backdrop click 關？",
+      "Focus 自動入去 modal 入面（focus trap）？",
+      "關咗之後 focus 還原到觸發嘅 button？"
+    ],
+    "quickFix": [
+      {
+        "problem": "自己用 div 砌 modal 唔啱 a11y",
+        "say": "用 native <dialog> element + dialog.showModal()。Browser 自動 focus trap、Esc 關閉、backdrop、role=dialog aria-modal — 唔使自己寫。"
+      },
+      {
+        "problem": "Backdrop 唔識點整",
+        "say": "用 ::backdrop pseudo-element：dialog::backdrop { background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); }"
+      },
+      {
+        "problem": "想加入動畫 entrance",
+        "say": "加 @keyframes pop animation 喺 dialog[open]，scale(0.92) translateY(20px) → scale(1) translateY(0) cubic-bezier 彈出。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "用 div + position:fixed 自己砌",
+        "冇 backdrop（背景仲撳到）",
+        "冇 focus trap / Esc 關"
+      ],
+      "good": [
+        "Native <dialog> + showModal()",
+        "::backdrop pseudo + blur",
+        "自動 focus trap + Esc + aria-modal"
+      ]
+    },
+    "purpose": "Modal / Dialog 係要 user 強制 focus 一件事先繼續嘅 pattern — 例如 sign-up、demo video、destructive 確認、image lightbox。",
+    "design": [
+      "永遠有 backdrop 蓋住底（用戶知背景唔可以操作）",
+      "Close button + Esc 鍵 + backdrop click 三條退路",
+      "彈出有 micro-animation（唔好硬 pop）"
+    ],
+    "tech": [
+      "Native <dialog> element + showModal() / close()",
+      "::backdrop pseudo-element 整 overlay",
+      "Browser 內建 focus trap + Esc 關閉 + role=dialog"
+    ],
+    "code": "<span class=\"k\">&lt;dialog</span> <span class=\"v\">id=\"demo\"</span><span class=\"k\">&gt;</span>...<span class=\"k\">&lt;/dialog&gt;</span>\n<span class=\"c\">// JS</span>\ndemo.showModal();\ndemo.close();"
+  },
+  "socialproof": {
+    "cat": "design",
+    "name": "Social Proof",
+    "zh": "社會證明 · Trust Signal",
+    "hint": "頭像 + 評分 + 用戶數",
+    "plain": "頭像 + 評分 + 用戶數。轉化率最高 ROI 嘅元素之一。",
+    "checklist": [
+      "放係 CTA 下面？（撳之前最後一刻打底）",
+      "評分用 4.9 唔用 5.0？（太完美反而假）",
+      "頭像重疊但有間隙感？",
+      "Stat 數字夠具體（24,000 唔好寫 24k）？"
+    ],
+    "quickFix": [
+      {
+        "problem": "頭像太靠太實",
+        "say": "頭像 28px，margin-left: -8px 重疊，加 2px solid border 同 background 同色（製造視覺間隙）。"
+      },
+      {
+        "problem": "冇真實感",
+        "say": "評分一定唔好 5.0（太假），用 4.8–4.9。Stat 用具體數字 24,000，唔好 round number 25k。"
+      },
+      {
+        "problem": "冇真人相片用",
+        "say": "用 linear-gradient 漸變色做圓形頭像 — 唔需要真人，但有人物 placeholder 感。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "「最好嘅 productivity app」純口號",
+        "評分寫 5.0（太完美似假）",
+        "「many users」唔具體"
+      ],
+      "good": [
+        "4.9 星 + 24,000 真實用戶",
+        "4 個重疊 gradient avatar",
+        "放係 CTA 下面打底"
+      ]
+    },
+    "purpose": "人會跟人。畀用戶見到「24,000 個人已經用緊」會大大降低 sign-up 嘅心理門檻。呢樣嘢屬於「conversion 最高 ROI」嘅元素之一。",
+    "design": [
+      "放係 CTA 下面 — 撳之前最後一刻打底",
+      "用真實感嘅 stat（4.9 唔係 5.0 — 太完美反而假）",
+      "用重疊嘅 avatar — 暗示「真人」",
+      "保持低調 — 唔可以比 CTA 搶眼"
+    ],
+    "tech": [
+      "flex + margin-left: -8px — 頭像重疊",
+      "border: 2px solid var(--bg) — 頭像之間有間隙感",
+      "linear-gradient 做假頭像 — 唔需要真人相"
+    ],
+    "code": "<span class=\"k\">margin-left</span>: <span class=\"v\">-8px</span>;\n<span class=\"k\">border</span>: <span class=\"v\">2px solid var(--bg)</span>;\n<span class=\"c\">/* 重疊但仲見到分隔 */</span>"
+  },
+  "herovisual": {
+    "cat": "design",
+    "name": "Hero Visual / Product Mockup",
+    "zh": "主視覺 · 產品截圖",
+    "hint": "右邊嗰個假 app 截圖",
+    "plain": "右邊嗰個 product mockup。一眼睇明個 app 做咩。",
+    "checklist": [
+      "Mockup 有冇 3D 角度（rotateY 細少少）？",
+      "有冇深陰影將 mockup 由背景抽出嚟？",
+      "旁邊有冇浮動 stat card？",
+      "Hover 有冇 micro-interaction？"
+    ],
+    "quickFix": [
+      {
+        "problem": "Mockup 太平太靜",
+        "say": "父 element 加 perspective: 1200px，mockup transform: rotateY(-8deg) rotateX(4deg)。"
+      },
+      {
+        "problem": "Mockup 同背景太融",
+        "say": "加 box-shadow: 0 24px 60px rgba(0,0,0,0.14) — 大而 soft 嘅陰影。"
+      },
+      {
+        "problem": "想加生氣感",
+        "say": "兩邊絕對位置加 2 個浮動 stat card（連續達標、今日專注時間），@keyframes float 4s ease-in-out infinite。"
+      },
+      {
+        "problem": "冇真 app 用",
+        "say": "用 div + card layout 砌個假 app UI — header dots、task list、stat — 已經夠表達。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "用 stock photo 唔關事",
+        "正面 mockup 平平無 depth",
+        "右邊空白冇嘢撐"
+      ],
+      "good": [
+        "用 div 砌真 app UI",
+        "perspective + rotateY 3D 角度",
+        "加 2 個浮動 stat card"
+      ]
+    },
+    "purpose": "比起寫一萬字，畀個 product screenshot 直接易明。Hero visual 要做到「一眼睇明個 product 做咩」。",
+    "design": [
+      "用 isometric / 微 3D 角度 — 比正面截圖更有質感",
+      "加 floating cards 喺旁邊 — 強調最重要嘅 stat（連續達標、專注時間）",
+      "陰影深一啲 — 將 mockup 由背景「抽出嚟」",
+      "Hover 之後微微轉返正 — interactive 嘅 hint"
+    ],
+    "tech": [
+      "transform: rotateY(-8deg) rotateX(4deg) + perspective on parent",
+      "box-shadow 多層 — 近距離 + 遠距離兩重陰影",
+      "position: absolute 嘅 floating card + @keyframes float",
+      "transition on hover — rotate 角度減細"
+    ],
+    "code": "<span class=\"k\">perspective</span>: <span class=\"v\">1200px</span>; <span class=\"c\">/* on parent */</span>\n<span class=\"k\">transform</span>: <span class=\"v\">rotateY(-8deg) rotateX(4deg)</span>;\n<span class=\"k\">box-shadow</span>: <span class=\"v\">0 24px 60px rgba(0,0,0,0.14)</span>;"
+  },
+  "trust": {
+    "cat": "design",
+    "name": "Trust Bar / Logo Wall",
+    "zh": "信任列 · 客戶 Logo 牆",
+    "hint": "一行公司 logo",
+    "plain": "一行客戶 logo。「呢啲大公司都用緊」借勢借得最直接。",
+    "checklist": [
+      "Logo 全部灰階 / 半透明（避免色彩衝突）？",
+      "至少 5–6 個 logo？",
+      "Label 用「深受 X 公司愛用」呢類 small caps 標題？",
+      "位置喺 hero 之後第一個（剛 hook 完即刻打底）？"
+    ],
+    "quickFix": [
+      {
+        "problem": "Logo 太花搶眼",
+        "say": "所有 logo 改用同一灰色 var(--ink-soft)，opacity: 0.65，hover 變 1。唔好用真實品牌色。"
+      },
+      {
+        "problem": "Logo 太少冇說服力",
+        "say": "至少 5 個，最理想 6–8 個。如果真係少，配文字證據：「800+ 公司用緊」。"
+      },
+      {
+        "problem": "冇真實 logo 用",
+        "say": "用 fictional 公司名（NORDIC、Pixel & Co.、Mango），display font 寫法，當佢哋係 wordmark。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "Logo 用真實品牌色花花",
+        "只有 2-3 個 logo",
+        "冇 label 解釋"
+      ],
+      "good": [
+        "全部統一灰色 opacity 0.65",
+        "6+ logos 或加「800+ 公司」",
+        "上面 small caps「深受 X 公司愛用」"
+      ]
+    },
+    "purpose": "「呢啲大公司都用緊」— 借勢借得最直接嘅方法。新訪客一見到認識嘅 brand，戒心就跌。",
+    "design": [
+      "放係 hero 之後第一個 — 用戶剛剛被 hero hook 住，立即俾佢「呢個係真嘢」嘅證據",
+      "Logo 全部轉灰階 / 半透明 — 避免色彩衝突，亦避免「賣廣告」感",
+      "Label 用 small caps + uppercase — 莊重但唔搶",
+      "至少 5-6 個 logo — 太少冇說服力"
+    ],
+    "tech": [
+      "flex + justify-content: space-around",
+      "opacity: 0.65 + hover 變 1 — 細微互動",
+      "flex-wrap: wrap — 手機自動排返兩行"
+    ],
+    "code": "<span class=\"k\">display</span>: <span class=\"v\">flex</span>;\n<span class=\"k\">opacity</span>: <span class=\"v\">0.65</span>;\n<span class=\"k\">flex-wrap</span>: <span class=\"v\">wrap</span>;"
+  },
+  "featuregrid": {
+    "cat": "tech",
+    "name": "Feature Grid (3-col)",
+    "zh": "功能 3 欄格仔",
+    "hint": "CSS Grid 經典應用",
+    "plain": "3 欄 grid 講 3 個 key feature。「3」係 magic number。",
+    "checklist": [
+      "剛剛好 3 個 card（多過 4 太散）？",
+      "Card 之間 gap 24px 左右？",
+      "每張 card 結構一致（icon → title → desc）？",
+      "Hover 有冇 micro-interaction？"
+    ],
+    "quickFix": [
+      {
+        "problem": "Feature 太多想擠晒",
+        "say": "揀最重要 3 個，其他擺後面 zigzag deep-dive section。Hero 嘅 feature grid 一定唔好超過 3。"
+      },
+      {
+        "problem": "Card 太悶",
+        "say": "Hover translateY(-6px) + 上方出現一條 3px coral 細線（::before scaleX 0 → 1，transform-origin: left）。"
+      },
+      {
+        "problem": "手機 layout 散晒",
+        "say": "@media 880px 改 grid-template-columns: 1fr，gap 改細少少。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "5-6 個 feature 擠一行",
+        "Card 之間冇 gap",
+        "Static 冇 hover 反饋"
+      ],
+      "good": [
+        "正好 3 個（magic number）",
+        "Gap 24px + 統一 padding",
+        "Hover translateY + shadow + 出現頂部 coral 線"
+      ]
+    },
+    "purpose": "一次過介紹 3 個 key benefit。「3」係 magic number — 多過 3 個資訊量太大、少過 3 個又似唔夠豐富。",
+    "design": [
+      "Card 之間留 24px gap — 唔可以太擠",
+      "每張 card 結構一樣：Icon → Title → Description（保持節奏感）",
+      "Icon 用 soft gradient bg — 唔似 emoji 咁童趣，但有色彩",
+      "Hover 浮起 + 上面出現一條 coral 線 — accent 提示"
+    ],
+    "tech": [
+      "display: grid; grid-template-columns: repeat(3, 1fr) — 一行寫晒",
+      "::before pseudo 加 hover 線條 + transform: scaleX(0) → scaleX(1)",
+      "transform-origin: left — 由左向右展開",
+      "響應式：@media 800px 變單欄"
+    ],
+    "code": "<span class=\"k\">display</span>: <span class=\"v\">grid</span>;\n<span class=\"k\">grid-template-columns</span>: <span class=\"v\">repeat(3, 1fr)</span>;\n<span class=\"k\">gap</span>: <span class=\"v\">24px</span>;"
+  },
+  "featurecard": {
+    "cat": "design",
+    "name": "Feature Card",
+    "zh": "功能卡",
+    "hint": "單一張功能介紹卡",
+    "plain": "單一張功能卡。Card 係而家 web design 嘅基本單位。",
+    "checklist": [
+      "Border-radius 大啲（20–24px）？",
+      "Padding 夠（30–36px）？",
+      "Icon 有冇 soft gradient background？",
+      "Hover 浮起 + shadow + 邊框消失？"
+    ],
+    "quickFix": [
+      {
+        "problem": "Card 太硬太 sharp",
+        "say": "border-radius: 24px; padding: 32px; 用 cubic-bezier(0.22, 1, 0.36, 1) 嘅 transition，比 ease 更「彈」。"
+      },
+      {
+        "problem": "Icon 太細太單調",
+        "say": "Icon 用 52×52px 圓角方塊，soft linear-gradient 漸變背景，emoji 24px 居中。"
+      },
+      {
+        "problem": "Card 太靜",
+        "say": "Hover: transform translateY(-6px) + shadow 變 lg + border-color: transparent — 視覺反饋強。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "border-radius 8px 工程感",
+        "Padding 細擠",
+        "Icon 純文字 emoji"
+      ],
+      "good": [
+        "border-radius 24px + padding 32px",
+        "Soft gradient icon 52px",
+        "Cubic-bezier transition 有彈性"
+      ]
+    },
+    "purpose": "Card 係呢個時代 web design 嘅基本單位。一張 card = 一個 self-contained 訊息塊。",
+    "design": [
+      "Border-radius 大啲（呢度 24px）— 顯得 modern + friendly",
+      "Padding 32px — 內容唔擠",
+      "預設 1px 細邊（白底 card 上面要有微微分隔感）",
+      "Hover 浮起 + 邊框消失 + shadow 出現 — 強調「可以互動」"
+    ],
+    "tech": [
+      "transform: translateY(-6px) on hover",
+      "transition 用 cubic-bezier(0.22, 1, 0.36, 1) — 比 ease 更「彈」",
+      "overflow: hidden — 等 ::before 線條唔會超出 card"
+    ],
+    "code": "<span class=\"k\">border-radius</span>: <span class=\"v\">24px</span>;\n<span class=\"k\">transition</span>: <span class=\"v\">all 0.3s cubic-bezier(0.22,1,0.36,1)</span>;\n<span class=\"c\">/* hover */</span>\n<span class=\"k\">transform</span>: <span class=\"v\">translateY(-6px)</span>;"
+  },
+  "zigzag": {
+    "cat": "design",
+    "name": "Zigzag / Alternating Layout",
+    "zh": "交錯排版",
+    "hint": "圖文左右交錯",
+    "plain": "深入講 feature 用嘅交錯 layout — 一行圖+文，下一行文+圖。",
+    "checklist": [
+      "每行只講一個 feature（避免擠）？",
+      "左右交替（視線會 zigzag 落底）？",
+      "50/50 分配（視覺平衡）？",
+      "背景同上面 section 唔同色（分區）？"
+    ],
+    "quickFix": [
+      {
+        "problem": "Layout 太靜止",
+        "say": "zigzag-row 用 grid-template-columns: 1fr 1fr，每行 .reverse 用 order: 2 將文字反到對面。"
+      },
+      {
+        "problem": "太多 row 太悶",
+        "say": "2–3 個 zigzag 已經足夠。多過建議拆做 tabbed feature comparison 或 bento grid。"
+      },
+      {
+        "problem": "同上面 feature grid 太似",
+        "say": "Zigzag section 整個轉淺色背景（var(--soft)），同上面 section 視覺分開。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "每行塞 2-3 個 feature",
+        "全部圖同一邊",
+        "同上面同色冇分區"
+      ],
+      "good": [
+        "每行只一個 feature",
+        "左右交替（順視線）",
+        "背景轉 var(--soft) 分隔"
+      ]
+    },
+    "purpose": "當你想深入介紹幾個 feature 但又唔想用 boring 嘅 list — zigzag 係 SaaS landing page 嘅黃金 pattern。一行圖+文，下一行文+圖。",
+    "design": [
+      "每行只講一個 feature — 避免一次過資訊太多",
+      "交替方向 — 視覺節奏 + 視線會 zigzag 落到底",
+      "左右兩邊 50/50 — 視覺平衡",
+      "背景轉淺色 (var(--soft)) — 同上面 feature grid 分區"
+    ],
+    "tech": [
+      "grid-template-columns: 1fr 1fr — 平分兩欄",
+      ".reverse 用 order: 2 — 唔需要重寫 HTML",
+      "@media 800px 全部變單欄 — 文喺上、圖喺下"
+    ],
+    "code": "<span class=\"k\">grid-template-columns</span>: <span class=\"v\">1fr 1fr</span>;\n<span class=\"c\">/* reverse row 用 order 反轉 */</span>\n<span class=\"k\">.reverse .text</span> { <span class=\"k\">order</span>: <span class=\"v\">2</span> }"
+  },
+  "ringtimer": {
+    "cat": "tech",
+    "name": "SVG Progress Ring",
+    "zh": "SVG 環狀進度條",
+    "hint": "中間個 timer 圓圈",
+    "plain": "SVG 整圓形進度。比 PNG 細、retina 清，可以即時改色。",
+    "checklist": [
+      "兩層 circle（背景灰 + 前景品牌色）？",
+      "Stroke 夠厚（10–12px）？",
+      "stroke-linecap: round（端點圓滑）？",
+      "SVG 旋轉 -90deg（由 12 點開始）？"
+    ],
+    "quickFix": [
+      {
+        "problem": "進度條太細嘢",
+        "say": "stroke-width 改 12px，r=90，stroke-dasharray = 2πr ≈ 565。"
+      },
+      {
+        "problem": "想 animate 進度",
+        "say": "加 transition: stroke-dashoffset 1s cubic-bezier(0.22, 1, 0.36, 1)，updating dashoffset 即係改進度。"
+      },
+      {
+        "problem": "想加中間數字",
+        "say": "svg 外層 position: relative，中間放 .timer-num position: absolute inset: 0 + flex column 居中。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "用 PNG image（rasterize 唔清）",
+        "Stroke 4px 太幼",
+        "冇 animation 死寂"
+      ],
+      "good": [
+        "SVG 兩層 circle stroke 12px",
+        "-90deg rotate 由 12 點開始",
+        "stroke-dashoffset 1s transition"
+      ]
+    },
+    "purpose": "純 SVG + CSS 整圓形進度。比 PNG / image 細好多、retina 清晰、可以即時改色。",
+    "design": [
+      "用厚 stroke（12px）— 易見、有 weight",
+      "兩層 circle：背景灰圈 + 前景彩圈",
+      "前景圈用 stroke-dasharray + stroke-dashoffset 表示百分比"
+    ],
+    "tech": [
+      "svg transform: rotate(-90deg) — 由 12 點開始而唔係 3 點",
+      "stroke-dasharray = 2πr ≈ 565 (r=90)",
+      "stroke-dashoffset 控制顯示幾多 — 0 = 滿、565 = 空",
+      "stroke-linecap: round — 端點圓滑"
+    ],
+    "code": "<span class=\"c\">// 圓周長 = 2π × 90 ≈ 565</span>\n<span class=\"k\">stroke-dasharray</span>: <span class=\"v\">565</span>;\n<span class=\"k\">stroke-dashoffset</span>: <span class=\"v\">170</span>; <span class=\"c\">// 顯示 ~70%</span>\n<span class=\"k\">transition</span>: <span class=\"v\">stroke-dashoffset 1s</span>;"
+  },
+  "bento": {
+    "cat": "design",
+    "name": "Bento Grid",
+    "zh": "便當格 · 大小拼接 layout",
+    "hint": "Apple-style 大小唔同 cell 拼出嘅 grid",
+    "plain": "Apple keynote 嘅大小 cell 拼接 layout。一塊大配兩塊細，視覺有節奏。",
+    "checklist": [
+      "至少一個 cell 大過其他（focal point）？",
+      "大小有 rhythm（唔好全部一樣 size）？",
+      "每個 cell 一個 idea，唔好擠？",
+      "至少一個 cell 反色（深底 / 漸變）做對比？"
+    ],
+    "quickFix": [
+      {
+        "problem": "Layout 太平太悶",
+        "say": "用 grid-template-columns: repeat(4, 1fr) + grid-template-rows: auto auto，再俾一個 cell 用 grid-column: span 2 + grid-row: span 2 變大。"
+      },
+      {
+        "problem": "冇視覺 rhythm",
+        "say": "其中一個 cell 反色（var(--ink) bg + 白字），另一個用 linear-gradient soft 漸變底 — 等視線喺幾個 cell 之間跳。"
+      },
+      {
+        "problem": "想加 chart / streak 內容",
+        "say": "用純 div + flex 砌 mini chart（bento-bars / streak-day），CSS-only 唔 import library。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "4 個 cell 等size 似 grid-card",
+        "全部白底冇對比",
+        "每 cell 塞 3-4 個 stat"
+      ],
+      "good": [
+        "大細 mix（1×big + 2×wide + 2×small）",
+        "一個反深色 + 一個漸變",
+        "每 cell 一個 hero stat"
+      ]
+    },
+    "purpose": "Bento grid（取自日本便當盒嘅大小拼接）係 Apple keynote 之後幾年最 hot 嘅 layout。用嚟一次過 show 多個 stat / mini feature 而唔似 boring grid。",
+    "design": [
+      "至少一個 cell 大過其他，視線有 focal point",
+      "大小要有 rhythm — 唔好全部一樣（變返普通 grid）",
+      "反色 / 漸變 cell 製造節奏"
+    ],
+    "tech": [
+      "CSS Grid + grid-column: span / grid-row: span",
+      "linear-gradient 漸變底 + var(--ink) 反色 cell",
+      "純 div + flex 砌 mini chart / streak"
+    ],
+    "code": "<span class=\"k\">grid-template-columns</span>: <span class=\"v\">repeat(4, 1fr)</span>;\n<span class=\"k\">grid-column</span>: <span class=\"v\">span 2</span>;\n<span class=\"k\">grid-row</span>: <span class=\"v\">span 2</span>;"
+  },
+  "steps": {
+    "cat": "structure",
+    "name": "How It Works (Steps)",
+    "zh": "操作流程 · 3 步教學",
+    "hint": "1 → 2 → 3 嘅流程",
+    "plain": "1 → 2 → 3 流程教學。降低「我用唔嚟啩」嘅心理 barrier。",
+    "checklist": [
+      "剛剛好 3 步（多過就唔係「簡單」）？",
+      "中間有冇虛線連起（順序感）？",
+      "每步描述夠短（一兩句）？",
+      "正中對齊？"
+    ],
+    "quickFix": [
+      {
+        "problem": "步驟太多",
+        "say": "一定要壓縮到 3 步。超過嘅 detail 放 deep-dive section 或 documentation page。"
+      },
+      {
+        "problem": "步驟之間冇連接感",
+        "say": "用 ::before pseudo 喺 grid container 上畫虛線（repeating-linear-gradient 90deg），由 step 1 連到 step 3。"
+      },
+      {
+        "problem": "手機虛線變死位",
+        "say": "@media 880px 將 ::before display: none — 垂直排冇必要虛線。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "5+ 步太多（不如睇 docs）",
+        "冇連接視覺（3 個獨立 card）",
+        "每步講太長太多 detail"
+      ],
+      "good": [
+        "正好 3 步",
+        "中間虛線連 1 → 2 → 3",
+        "一步一兩句 + 大粒數字圓"
+      ]
+    },
+    "purpose": "降低用戶嘅「我用唔嚟啩」心理 barrier。畀佢知「原來咁簡單」。",
+    "design": [
+      "用大粒數字圓 — 即刻睇得明係流程",
+      "中間用虛線連起 — 暗示「順序」",
+      "每步嘅 description 都要短（一兩句）— 太長就違背「易」嘅本意",
+      "正中對齊 — 對稱有秩序感"
+    ],
+    "tech": [
+      "::before pseudo 喺 grid container 上畫虛線",
+      "repeating-linear-gradient 整虛線（比 dashed border 更可控）",
+      "z-index 控制虛線喺 number 底下",
+      "@media 細螢幕：display: none 隱藏虛線（垂直排冇意義）"
+    ],
+    "code": "<span class=\"k\">background</span>: <span class=\"v\">repeating-linear-gradient(\n  90deg,\n  var(--line) 0 8px,\n  transparent 8px 16px\n)</span>;"
+  },
+  "testimonial": {
+    "cat": "design",
+    "name": "Testimonial Section",
+    "zh": "客戶評價",
+    "hint": "深色嗰段大引言",
+    "plain": "深色 section + 一句客戶引言。真人證言勝過萬字 marketing。",
+    "checklist": [
+      "深色背景同前後 section 反色？",
+      "有冇巨大 quote mark 做背景裝飾？",
+      "引言用 serif italic 字體？",
+      "署名齊全（名 + 職位 + 公司）？"
+    ],
+    "quickFix": [
+      {
+        "problem": "Testimonial 太靜",
+        "say": "::before 加巨大 watermark：content: '\\\"'; font-size: 360px; color: rgba(brand, 0.15); position: absolute。"
+      },
+      {
+        "problem": "冇個人感",
+        "say": "加 avatar（linear-gradient 漸變色圓形）、名（粗）、職位 + 公司（細灰）— 越具體越可信。"
+      },
+      {
+        "problem": "引言太長悶",
+        "say": "剪到一句最有力嗰句，原引言可以放 case study page。長 quote 等於冇 quote。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "引言 3 段長文",
+        "冇 author（純 quote）",
+        "冇大 quote mark 視覺 anchor"
+      ],
+      "good": [
+        "一句最有力嗰句",
+        "名 + 職位 + 公司齊",
+        "::before 360px 透明 quote mark"
+      ]
+    },
+    "purpose": "一句真實用家嘅引言，比公司講一千句 marketing copy 都更有說服力。",
+    "design": [
+      "同前後 section 反色 — 深色背景 + 白字 — 視覺上「停一停，聽佢講」",
+      "巨大嘅 quote mark 做背景裝飾 — 視覺 anchor",
+      "引言用 serif italic — 似手寫感，「真人講」",
+      "引言入面用品牌色 highlight 一個 key phrase",
+      "署名要齊全：名 + 職位 + 公司 — 越詳細越可信"
+    ],
+    "tech": [
+      "::before pseudo 放巨大 `\"` — font-size 360px",
+      "pointer-events: none 等個大 quote 唔阻擋互動",
+      "overflow: hidden 等 quote 超出邊界唔搞亂 layout"
+    ],
+    "code": "<span class=\"k\">.testimonial::before</span> {\n  <span class=\"k\">content</span>: <span class=\"v\">'\"'</span>;\n  <span class=\"k\">font-size</span>: <span class=\"v\">360px</span>;\n  <span class=\"k\">color</span>: <span class=\"v\">rgba(255,107,71,0.15)</span>;\n}"
+  },
+  "pricing": {
+    "cat": "design",
+    "name": "Pricing Table",
+    "zh": "收費表",
+    "hint": "3 個訂閱 plan",
+    "plain": "收費表。設計目標：引導人揀你最想佢揀嗰個 plan（通常中間）。",
+    "checklist": [
+      "中間 plan highlight 咗（深色 + scale 大少少）？",
+      "中間有冇「最多人揀」badge？",
+      "Feature list 用 ✓ 唔用 ·？",
+      "價錢字大、單位（/月）細？"
+    ],
+    "quickFix": [
+      {
+        "problem": "3 個 plan 一樣大冇焦點",
+        "say": "中間 featured plan：transform: scale(1.04) + 反深色（var(--ink) bg + 白字）— 視覺即刻跳出嚟。"
+      },
+      {
+        "problem": "冇推薦提示",
+        "say": "Featured plan position: relative + ::before absolute badge「最多人揀」coral 背景 + uppercase。"
+      },
+      {
+        "problem": "Button 高度唔齊",
+        "say": "price-card 用 flex column + .price-features flex: 1，等 button 永遠 stick 喺 card 底。"
+      },
+      {
+        "problem": "價錢字太細",
+        "say": "price-amount font-size: 48px + display font + bold。span 入面嘅「/月」改 16px regular。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "3 個 plan 一樣大冇焦點",
+        "冇「最多人揀」badge",
+        "Button 高低不齊"
+      ],
+      "good": [
+        "中間 plan scale(1.04) + 反深色",
+        "Featured 加 coral badge",
+        ".price-features flex:1 等 button 對齊"
+      ]
+    },
+    "purpose": "用戶到呢度通常已經被說服 — 而家係問「咁幾錢」。Pricing 設計目標：引導去你最想佢揀嗰個 plan（通常係中間）。",
+    "design": [
+      "永遠 highlight 中間 plan — anchoring + decoy effect",
+      "中間 plan 反深色 + 微微大過旁邊（scale 1.04）— 視覺上跳出嚟",
+      "「最多人揀」badge — 社會證明 + 引導",
+      "Feature list 用 ✓ — 列出價值唔係 feature",
+      "價錢字夠大、單位（/月）夠細 — 視覺心理：先見大字"
+    ],
+    "tech": [
+      "grid-template-columns: repeat(3, 1fr) + align-items: stretch — 三 card 等高",
+      "transform: scale(1.04) — 中間 card 微凸",
+      "position: absolute badge — 突出於 card 邊界",
+      "flex: 1 喺 feature list — 等 button 永遠 sticky 喺底"
+    ],
+    "code": "<span class=\"k\">.featured</span> {\n  <span class=\"k\">transform</span>: <span class=\"v\">scale(1.04)</span>;\n  <span class=\"k\">background</span>: <span class=\"v\">var(--ink)</span>;\n  <span class=\"k\">color</span>: <span class=\"v\">#fff</span>;\n}"
+  },
+  "faq": {
+    "cat": "tech",
+    "name": "FAQ Accordion",
+    "zh": "常見問題 · 摺合式",
+    "hint": "Click 一下展開答案",
+    "plain": "摺合式常見問題。SEO 加分 + 解最後疑慮。",
+    "checklist": [
+      "一條 Q 一條細線分隔？",
+      "+ icon 開咗變 ×（旋轉 45 度）？",
+      "答案 2–3 句就夠，唔好長篇？",
+      "問題用 user 嘅原話，唔係 marketing 語？"
+    ],
+    "quickFix": [
+      {
+        "problem": "Accordion animation 唔順 / 長答案 cut 親",
+        "say": "CSS max-height 由 0 開始，JS 開時設成 element.scrollHeight + 'px'，transition: max-height 0.4s ease。"
+      },
+      {
+        "problem": "答案太長太悶",
+        "say": "剪到 2–3 句最精華。Detail 寫去 documentation page，FAQ 只係解最常問。"
+      },
+      {
+        "problem": "+ icon 唔識變",
+        "say": ".faq-q::after content: '+'; .open .faq-q::after transform: rotate(45deg) — 自動變 ×。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "每條 Q 答 5 段似 docs",
+        "Static 永遠開晒（冇 accordion）",
+        "Marketing 語言寫問題"
+      ],
+      "good": [
+        "每條答 2-3 句",
+        "+ → × rotate + max-height scrollHeight",
+        "用戶原話（「咁幾錢？」）"
+      ]
+    },
+    "purpose": "解決最後嘅疑慮。同時：搜尋引擎好鍾意 FAQ section（SEO 加分）。",
+    "design": [
+      "每條 Q 一條細線分隔 — 簡潔",
+      "+ icon 旋轉成 × — 視覺 feedback 開咗",
+      "答案最多 2-3 句 — 太長嘅問題 = 應該整 documentation 唔係 FAQ",
+      "問題用 user 嘅原話，唔係 marketing 語言"
+    ],
+    "tech": [
+      "純 CSS animation — 用 max-height 0 → 200px",
+      "注意：height: auto 唔可以 transition，所以用 max-height 做 trick",
+      "transform: rotate(45deg) 將 + 變成 ×",
+      "JS 只需要 toggle .open class"
+    ],
+    "code": "<span class=\"k\">.faq-a</span> {\n  <span class=\"k\">max-height</span>: <span class=\"v\">0</span>;\n  <span class=\"k\">overflow</span>: <span class=\"v\">hidden</span>;\n  <span class=\"k\">transition</span>: <span class=\"v\">max-height 0.4s</span>;\n}\n<span class=\"k\">.open .faq-a</span> { <span class=\"k\">max-height</span>: <span class=\"v\">200px</span> }"
+  },
+  "finalcta": {
+    "cat": "structure",
+    "name": "Final CTA Section",
+    "zh": "結尾 CTA · 又叫 Closing Pitch",
+    "hint": "Footer 之前最後嗰幅",
+    "plain": "Footer 之前嗰大幅。最後一次叫人撳。",
+    "checklist": [
+      "極簡（一 headline + 一 CTA）？",
+      "CTA 消除最後 objection（「唔使俾卡」、「永遠免費」）？",
+      "背景同 hero 呼應（形成 page 嘅 visual bracket）？",
+      "正中對齊，焦點單一？"
+    ],
+    "quickFix": [
+      {
+        "problem": "太多嘢分散注意",
+        "say": "Final CTA 一定要極簡 — 一個 H2，一句副文，一粒掣。其他嘢全部移走，包括 nav links。"
+      },
+      {
+        "problem": "Copy 同 hero 重複",
+        "say": "寫總結式 + 召喚行動：「每一日，認真做番一啲嘢」配 CTA 加 micro-copy 消 objection。"
+      },
+      {
+        "problem": "同上面 section 太靜止",
+        "say": "加 radial-gradient 從頂部落（rgba 品牌色 0.18 → transparent）— 視線自然落去 CTA。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "加埋 form / nav / 其他 link",
+        "Copy 重複 hero",
+        "冇消除最後 objection"
+      ],
+      "good": [
+        "極簡：一 H2 + 一句 + 一掣",
+        "寫總結 + 召喚行動",
+        "CTA 加「唔使俾卡」消 objection"
+      ]
+    },
+    "purpose": "用戶睇到呢度，要嘛 sign up，要嘛走人。最後一次機會 — 所以呢度淨係剩返一個訊息 + 一粒掣，唔好俾任何嘢分散注意。",
+    "design": [
+      "極簡 — 一句 headline、一句副文、一粒 CTA。完。",
+      "CTA copy 要消除最後一個 objection（「唔使俾卡」、「永遠免費」）",
+      "背景用淡淡 gradient — 同 hero 呼應，形成 page 嘅 visual bracket"
+    ],
+    "tech": [
+      "radial-gradient 從上方落 — 視線自然落去 CTA",
+      "text-align: center — 對稱、單一焦點"
+    ],
+    "code": "<span class=\"k\">background</span>:\n  <span class=\"v\">radial-gradient(ellipse at 50% 0%,\n    rgba(255,107,71,0.18), transparent 60%)</span>,\n  <span class=\"v\">linear-gradient(180deg, var(--bg), var(--soft))</span>;"
+  },
+  "tooltip": {
+    "cat": "tech",
+    "name": "Info Tooltip",
+    "zh": "懸停提示 · 又叫 Popover",
+    "hint": "Pricing 入面個 ⓘ 圖標 hover 出嗰個",
+    "plain": "Hover ⓘ icon 出嘅小提示。畀額外 detail 而唔擠 layout。",
+    "checklist": [
+      "Trigger 用 ⓘ icon（universal「more info」signal）？",
+      "Hover + keyboard focus 都 trigger 到？",
+      "有箭嘴 indicator 指返 trigger？",
+      "4-5 句句子內，唔好寫成段？"
+    ],
+    "quickFix": [
+      {
+        "problem": "只係 mouse hover work",
+        "say": "用 :focus-within 而唔係 :focus — etrigger 同 bubble 都 visible 喺 focus-within 範圍內。加 aria-describedby 等 screen reader 讀到。"
+      },
+      {
+        "problem": "Tooltip 跑出 viewport",
+        "say": "CSS Anchor Positioning（新）或者 JS Floating UI library。簡單版用 transform translateX(-50%) 居中 + 加箭嘴 ::after。"
+      },
+      {
+        "problem": "Bubble 太細睇唔清",
+        "say": "min-width 220px，font-size 12.5px，line-height 1.5，padding 10px 12px。深色背景 + 白字對比清楚。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "Hover 即時硬 pop 出",
+        "冇 keyboard / focus 支援",
+        "冇箭嘴指返 trigger"
+      ],
+      "good": [
+        "opacity + translateY 漸入",
+        ":focus-within 鍵盤支援",
+        "::after 三角箭嘴 indicator"
+      ]
+    },
+    "purpose": "畀 user 解釋一個 feature / 圖標係咩，但唔想擠晒個 main layout。常見：feature list 旁、form input、icon-only button、abbreviation。",
+    "design": [
+      "Trigger 用標準化 ⓘ icon，避免創新 — user 一眼識",
+      "深色背景 + 白字，視覺 stand out",
+      "箭嘴 ::after 連返 trigger，視覺 anchor"
+    ],
+    "tech": [
+      ":hover + :focus-within 同時 trigger",
+      "aria-describedby 連 trigger 同 bubble",
+      "opacity + transform 漸入唔好 display: none",
+      "(新) CSS Anchor Positioning / Popover API"
+    ],
+    "code": "<span class=\"k\">aria-describedby</span>=<span class=\"v\">\"tip\"</span>\n<span class=\"c\">/* :hover, :focus-within 一齊 trigger */</span>"
+  },
+  "toast": {
+    "cat": "design",
+    "name": "Toast Notification",
+    "zh": "Toast 通知 · 又叫 Snackbar",
+    "hint": "頂部彈出嗰個通知",
+    "plain": "上面 slide 入嚟、3-6 秒自動消失嘅 mini 通知。Save 成功、welcome back 都用。",
+    "checklist": [
+      "夠細，唔擋 main content？",
+      "Auto-dismiss（4-6 秒）+ 可以手動 ✕ 關？",
+      "aria-live=\"polite\"，screen reader 讀得到？",
+      "一次只 show 一個（多個會排隊）？"
+    ],
+    "quickFix": [
+      {
+        "problem": "同 modal 搞錯",
+        "say": "Toast = 通知性、唔阻斷、auto dismiss。Modal = 強制 focus、要 user 行動。完全唔同 pattern，唔好混用。"
+      },
+      {
+        "problem": "Toast 卡死冇消失",
+        "say": "加 setTimeout 6000ms 自動 hide + clear timer on close。用 transform + opacity transition 入出，唔好 display: none。"
+      },
+      {
+        "problem": "Screen reader 唔讀",
+        "say": "加 role=\"status\" + aria-live=\"polite\"。重要錯誤用 role=\"alert\" + aria-live=\"assertive\"。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "冇 auto-dismiss 卡死",
+        "塞長段文字",
+        "冇 ✕ 關 button"
+      ],
+      "good": [
+        "6 秒自動消失",
+        "一句 + sub-text 兩行",
+        "icon + body + close 三段 grid"
+      ]
+    },
+    "purpose": "畀 user 反饋而唔打斷流程。最 common：「儲存成功」、「複製咗」、「新訊息」。Modal 太重，inline message 太細 — toast 啱啱好。",
+    "design": [
+      "頂部或底部固定 position，唔擋 hero",
+      "Auto-dismiss 4-6 秒；用戶 hover 時 pause（高級）",
+      "Icon + 標題 + 副文 + close — 但永遠保持 compact"
+    ],
+    "tech": [
+      "position: fixed + transform: translateY 由負位 slide 入",
+      "role=\"status\" + aria-live=\"polite\" 自動 announce",
+      "setTimeout 自動 hide + clearTimeout on close"
+    ],
+    "code": "<span class=\"k\">role</span>=<span class=\"v\">\"status\"</span>\n<span class=\"k\">aria-live</span>=<span class=\"v\">\"polite\"</span>\n<span class=\"c\">/* setTimeout(hide, 6000) */</span>"
+  },
+  "cookie": {
+    "cat": "design",
+    "name": "Cookie Banner",
+    "zh": "Cookie 通知條",
+    "hint": "底部嗰條 cookie 通知",
+    "plain": "底部浮起嘅 cookie consent。GDPR 同 ePrivacy 要求。",
+    "checklist": [
+      "預設係咪「淨係必要嘅」（唔好預設 accept all）？",
+      "兩個 button：「接受全部」+「淨係必要」（一級選擇）？",
+      "訊息 2-3 句，講清楚用咩 cookie？",
+      "記住用戶選擇（localStorage），下次唔再 show？"
+    ],
+    "quickFix": [
+      {
+        "problem": "Banner 蓋住底部 CTA",
+        "say": "Position: fixed; bottom: 16px; max-width 720px 居中。Layout 用 grid: icon | body | actions 三欄，手機降做兩列。"
+      },
+      {
+        "problem": "Banner 太硬太嚇人",
+        "say": "用 emoji 🍪 起頭 + 友好 copy「我哋用 cookie 改善體驗」，唔好成段法律術語。"
+      },
+      {
+        "problem": "冇分清「必要」同「全部」",
+        "say": "兩個 button：「淨係用必要嘅」outline + 「全部接受」實底。要平等視覺權重，唔好整到 accept 大過 reject。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "預設「Accept all」prominent",
+        "一長段法律文件",
+        "冇記低，每次都彈"
+      ],
+      "good": [
+        "Reject / Accept 平等視覺",
+        "兩三句 + emoji + friendly",
+        "localStorage 記住 + 下次唔再 show"
+      ]
+    },
+    "purpose": "GDPR / ePrivacy 法律要求。設計目標：合規 + 唔嚇親 user + 唔阻 conversion。最差嘅 cookie banner 會令 bounce rate 升 10%+。",
+    "design": [
+      "預設 reject all（GDPR 真正要求 — 唔可以預先 tick accept）",
+      "Reject 同 Accept button 平等視覺權重",
+      "Copy 友好唔法律化，emoji + 短句子"
+    ],
+    "tech": [
+      "position: fixed bottom + max-width 居中",
+      "localStorage 記用戶選擇，已選就 remove banner",
+      "@keyframes slide-up entrance、slide-down dismiss"
+    ],
+    "code": "<span class=\"k\">position</span>: <span class=\"v\">fixed</span>;\n<span class=\"k\">bottom</span>: <span class=\"v\">16px</span>;\n<span class=\"k\">animation</span>: <span class=\"v\">cookie-slide-up 0.4s</span>;"
+  },
+  "footer": {
+    "cat": "structure",
+    "name": "Footer",
+    "zh": "頁腳",
+    "hint": "網站最底",
+    "plain": "網站最底嘅「萬能備胎」。揾唔到嘢嘅人會 scroll 到底揾。",
+    "checklist": [
+      "4 columns：brand + 3 組 links？",
+      "深色背景同 page 結束有明確分隔？",
+      "Copyright + made-in 喺最底，細字？",
+      "所有「冇地方放」嘅 link 都齊（私隱、條款、招聘、聯絡）？"
+    ],
+    "quickFix": [
+      {
+        "problem": "Footer 視覺太重",
+        "say": "Footer 深色背景（var(--ink)），所有字 rgba(255,255,255,0.7)，h5 標題白色 — 視覺重量自然下沉。"
+      },
+      {
+        "problem": "手機 layout 亂",
+        "say": "@media 880px 改 grid-template-columns: 1fr 1fr，brand column 用 grid-column: 1 / -1 佔 full row。"
+      },
+      {
+        "problem": "Link 太多揾唔到",
+        "say": "分 3 組：產品 / 公司 / 支援。每組 4–5 條 link 已經夠 — 多過就要諗下要唔要全部放。"
+      }
+    ],
+    "beforeAfter": {
+      "bad": [
+        "只有 copyright 一行",
+        "深色但對比唔夠",
+        "Mobile 4 columns 擠死"
+      ],
+      "good": [
+        "4 columns：brand + 3 組 link",
+        "h5 純白 + body rgba(255,255,255,0.7)",
+        "@media 880 變 1fr 1fr"
+      ]
+    },
+    "purpose": "Footer 係用戶嘅「萬能備胎」— 揾唔到嘢嘅時候會 scroll 到底揾。重要：所有「冇地方放」嘅 link 都應該齊全咁放呢度。",
+    "design": [
+      "4 columns：1 columns 係 brand + tagline，其他 3 columns 分類 links",
+      "深色背景 — 同 page 結束有明確分隔",
+      "Copyright + tagline 喺 bottom，細字"
+    ],
+    "tech": [
+      "grid-template-columns: 1.4fr 1fr 1fr 1fr — brand column 闊啲",
+      "@media 細螢幕：1fr 1fr 2 欄 — 唔好太擠"
+    ],
+    "code": "<span class=\"k\">grid-template-columns</span>: <span class=\"v\">1.4fr 1fr 1fr 1fr</span>;\n<span class=\"c\">/* brand 區大啲，links 等寬 */</span>"
+  }
+}

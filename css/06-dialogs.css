@@ -1,0 +1,332 @@
+/* =========================================================
+   Demo Dialog — native <dialog> element 教學
+   ========================================================= */
+.demo-dialog {
+  /* 用 fixed + inset auto + margin auto 強制居中（破返 [data-annotate] position: relative）*/
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  border: none;
+  border-radius: 24px;
+  padding: 0;
+  background: var(--card);
+  color: var(--ink);
+  max-width: 560px;
+  width: 92vw;
+  height: fit-content;
+  max-height: 90vh;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+.demo-dialog:not([open]) { display: none; }
+.demo-dialog::backdrop {
+  background: rgba(15, 15, 26, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.demo-dialog[open] {
+  animation: dialog-pop 0.28s var(--ease);
+}
+@keyframes dialog-pop {
+  from { transform: scale(0.92) translateY(20px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+.demo-dialog-close {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.85);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  color: var(--ink);
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+}
+.demo-dialog-video {
+  aspect-ratio: 16 / 9;
+  background:
+    radial-gradient(ellipse at center, color-mix(in srgb, var(--coral) 22%, transparent), transparent 60%),
+    linear-gradient(135deg, #1A1A2E 0%, #2A1B4A 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  position: relative;
+}
+.demo-dialog-play {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  color: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  padding-left: 4px;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  animation: dialog-play-pulse 2s ease-in-out infinite;
+}
+@keyframes dialog-play-pulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,0.3), 0 0 0 0 rgba(255,255,255,0.4); }
+  50% { box-shadow: 0 8px 24px rgba(0,0,0,0.3), 0 0 0 18px rgba(255,255,255,0); }
+}
+.demo-dialog-poster {
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.04em;
+}
+.demo-dialog-body { padding: 24px 28px 26px; }
+.demo-dialog-body h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.demo-dialog-body p {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.demo-dialog-meta {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted);
+  align-items: center;
+}
+
+/* Celebration modal */
+.celebration-modal { z-index: 2200; }
+.celebrate-card {
+  max-width: 520px;
+  position: relative;
+  padding: 44px 36px 32px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,107,71,0.12), transparent 50%),
+    var(--card);
+}
+.celebrate-emoji {
+  font-size: 56px;
+  margin-bottom: 12px;
+  animation: celebrate-bounce 1.6s ease-in-out;
+}
+@keyframes celebrate-bounce {
+  0% { transform: scale(0.3) rotate(-20deg); opacity: 0; }
+  60% { transform: scale(1.15) rotate(10deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+.celebrate-card h2 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+.celebrate-lead {
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+.celebrate-bullets {
+  list-style: none;
+  text-align: left;
+  margin: 0 auto 22px;
+  padding: 16px 18px;
+  background: var(--soft);
+  border-radius: 14px;
+  max-width: 380px;
+}
+.celebrate-bullets li {
+  font-size: 14px;
+  color: var(--ink-soft);
+  padding: 6px 0 6px 26px;
+  position: relative;
+  line-height: 1.5;
+}
+.celebrate-bullets li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  color: var(--mint);
+  font-weight: 700;
+}
+.celebrate-bullets strong { color: var(--ink); font-weight: 600; margin-right: 2px; }
+.celebrate-tip {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 22px;
+  line-height: 1.55;
+}
+.celebrate-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.celebrate-actions .btn { width: 100%; justify-content: center; }
+@media (min-width: 480px) {
+  .celebrate-actions { flex-direction: row; }
+  .celebrate-actions .btn { flex: 1; }
+}
+.celebrate-share {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.celebrate-share.copied { color: var(--mint); }
+.celebrate-card .close {
+  position: absolute;
+  top: 16px; right: 16px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--soft);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  color: var(--ink-soft);
+  border: none;
+  cursor: pointer;
+}
+.celebrate-card .close:hover { background: var(--line); }
+
+/* About modal */
+.about-modal { z-index: 2100; }
+.about-card { max-width: 540px; text-align: left; position: relative; padding: 36px 36px 32px; }
+.about-card h2 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+  text-align: left;
+}
+.about-card h3 {
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+  margin-top: 22px;
+  margin-bottom: 10px;
+}
+.about-card p {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  margin-bottom: 12px;
+  text-align: left;
+}
+.about-card p strong { color: var(--ink); font-weight: 600; }
+.about-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+  text-align: left;
+}
+.about-bullets li {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  padding: 6px 0 6px 22px;
+  position: relative;
+}
+.about-bullets li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  color: var(--coral);
+  font-weight: 700;
+}
+.about-card .btn {
+  margin-top: 20px;
+  width: 100%;
+  justify-content: center;
+}
+.about-card .close {
+  position: absolute;
+  top: 16px; right: 16px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--soft);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  color: var(--ink-soft);
+  border: none;
+  cursor: pointer;
+}
+.about-card .close:hover { background: var(--line); }
+.intro-actions {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  margin-top: 8px;
+}
+.intro-actions .btn { width: 100%; justify-content: center; }
+@media (min-width: 480px) {
+  .intro-actions { flex-direction: row; }
+  .intro-actions .btn { flex: 1; }
+}
+.code-block .k { color: #FFB199; }
+.code-block .v { color: #8EE0C7; }
+.code-block .c { color: #8B8B9A; }
+
+/* Intro overlay */
+.intro {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,26,46,0.6);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.4s;
+}
+.intro.hidden { opacity: 0; pointer-events: none; }
+.intro-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  max-width: 480px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+.intro-card .emoji { font-size: 44px; margin-bottom: 16px; }
+.intro-card h2 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+.intro-card p {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+.intro-card .legend-row {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 24px;
+  font-size: 12px;
+}
+.intro-card .legend-row .legend-item .legend-swatch {
+  width: 14px; height: 14px;
+}
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+

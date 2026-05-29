@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FAF7F2"/>
+      <stop offset="1" stop-color="#FFE4DC"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.2" cy="0.3" r="0.5">
+      <stop offset="0" stop-color="#FF6B47" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#FF6B47" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.8" cy="0.7" r="0.5">
+      <stop offset="0" stop-color="#4A6CF7" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- Magnifying glass icon -->
+  <g transform="translate(90, 90)">
+    <circle cx="40" cy="40" r="34" fill="#FAF7F2" stroke="#1A1A2E" stroke-width="6"/>
+    <circle cx="40" cy="40" r="34" fill="none" stroke-width="6"/>
+    <line x1="64" y1="64" x2="92" y2="92" stroke="#1A1A2E" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="40" cy="40" r="12" fill="#FF6B47"/>
+  </g>
+
+  <!-- Headline -->
+  <text x="90" y="290"
+        font-family="Noto Serif HK, Songti TC, Georgia, serif"
+        font-size="92" font-weight="700"
+        fill="#1A1A2E" letter-spacing="-2">
+    同 AI 講設計
+  </text>
+
+  <!-- Subtitle -->
+  <text x="90" y="370"
+        font-family="-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+        font-size="34" fill="#4A4A5E">
+    18 個 web design pattern · 識指 · 識睇 · 識叫 AI 改
+  </text>
+
+  <!-- Tags pills -->
+  <g transform="translate(90, 440)">
+    <g>
+      <rect x="0" y="0" width="170" height="46" rx="23" fill="rgba(74,108,247,0.12)"/>
+      <text x="85" y="30" font-family="-apple-system, sans-serif" font-size="20"
+            fill="#4A6CF7" text-anchor="middle" font-weight="600">
+        結構 Structure
+      </text>
+    </g>
+    <g transform="translate(190, 0)">
+      <rect x="0" y="0" width="170" height="46" rx="23" fill="rgba(157,78,221,0.12)"/>
+      <text x="85" y="30" font-family="-apple-system, sans-serif" font-size="20"
+            fill="#9D4EDD" text-anchor="middle" font-weight="600">
+        設計 Design
+      </text>
+    </g>
+    <g transform="translate(380, 0)">
+      <rect x="0" y="0" width="180" height="46" rx="23" fill="rgba(6,167,125,0.12)"/>
+      <text x="90" y="30" font-family="-apple-system, sans-serif" font-size="20"
+            fill="#06A77D" text-anchor="middle" font-weight="600">
+        技術 Technique
+      </text>
+    </g>
+  </g>
+
+  <!-- URL / Brand bottom right -->
+  <text x="1110" y="580"
+        font-family="-apple-system, sans-serif" font-size="22"
+        fill="#8B8B9A" text-anchor="end" letter-spacing="2">
+    互動 · 粵語 · 開源
+  </text>
+</svg>

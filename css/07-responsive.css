@@ -1,0 +1,80 @@
+/* =========================================================
+   Touch 裝置 — 隱藏 tooltip（mouseenter 喺 touch 上會 flash）
+   ========================================================= */
+@media (hover: none) {
+  .ann-tip { display: none !important; }
+  body.inspect-on [data-annotate] { cursor: pointer; }
+}
+
+/* Inspector hint — pointer vs touch 切換 */
+.hint-touch { display: none; }
+@media (hover: none) {
+  .hint-pointer { display: none; }
+  .hint-touch { display: inline; }
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 880px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-visual { margin-top: 40px; }
+  .hero-float.f1 { right: 0; }
+  .hero-float.f2 { left: 0; }
+  .feature-grid, .pricing-grid, .steps-grid { grid-template-columns: 1fr; }
+  .steps-grid::before { display: none; }
+  .zigzag-row { grid-template-columns: 1fr; gap: 32px; }
+  .zigzag-row.reverse .zigzag-text { order: 0; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+
+  /* Inspector 變底部浮動 pill - 唔再 hide */
+  .inspector {
+    top: auto;
+    bottom: 16px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+    max-width: 380px;
+    margin: 0 auto;
+    padding: 10px 12px;
+  }
+  .inspector h6 { display: none; }
+  .inspector-hint { font-size: 10px; padding-top: 8px; margin-top: 8px; }
+  .inspector-toggle { margin-bottom: 8px; }
+  .legend { flex-direction: row; gap: 14px; flex-wrap: wrap; }
+
+  /* Detail panel 變底部 sheet — 留 25vh 喺頂俾 element 可見 */
+  .detail-panel {
+    width: 100vw;
+    max-width: 100vw;
+    top: auto;
+    bottom: 0;
+    height: 75vh;
+    border-left: none;
+    border-top: 1px solid var(--line);
+    border-radius: 20px 20px 0 0;
+    transform: translateY(100%);
+    box-shadow: 0 -20px 60px rgba(26,26,46,0.18);
+    padding-top: 40px;
+  }
+  .detail-panel.open { transform: translateY(0); }
+  /* 加 drag handle 視覺提示 */
+  .detail-panel::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background: var(--line);
+    border-radius: 999px;
+  }
+}
+
+/* 細螢幕：再壓縮 inspector */
+@media (max-width: 480px) {
+  .inspector-hint { display: none; }
+  .inspector { padding: 8px 12px; }
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- maskable: 確保所有重要內容喺 80% 中心 safe zone -->
+  <rect width="512" height="512" fill="#FAF7F2"/>
+  <circle cx="232" cy="232" r="80" fill="none" stroke="#1A1A2E" stroke-width="26"/>
+  <line x1="288" y1="288" x2="360" y2="360" stroke="#1A1A2E" stroke-width="34" stroke-linecap="round"/>
+  <circle cx="232" cy="232" r="30" fill="#FF6B47"/>
+</svg>

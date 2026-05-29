@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>同 AI 講設計 — 網頁拆解互動教學</title>
+
+<meta name="description" content="叫 AI 寫 web 但唔識指、唔識睇好壞？呢個互動 tutorial 用一個假 SaaS landing page 拆解 18 個 web design pattern，教你識指、識睇、識叫 AI 改 — 連抄返畀 AI 嘅 short prompts 都齊。">
+<meta name="theme-color" content="#FF6B47">
+<meta name="color-scheme" content="light">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="同 AI 講設計 — 網頁拆解互動教學">
+<meta property="og:description" content="互動式拆解 18 個 web design pattern，教你識指、識睇、識叫 AI 改。粵語、免費、開源。">
+<meta property="og:locale" content="zh_HK">
+<meta property="og:image" content="og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="同 AI 講設計 — 網頁設計互動教學">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="同 AI 講設計 — 網頁拆解互動教學">
+<meta name="twitter:description" content="互動式拆解 18 個 web design pattern，教你同 AI 講設計。">
+<meta name="twitter:image" content="og-image.png">
+
+<!-- Favicon + PWA -->
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
+
+<link rel="stylesheet" href="css/01-tokens.css?v=11">
+<link rel="stylesheet" href="css/02-layout.css?v=11">
+<link rel="stylesheet" href="css/03-sections.css?v=11">
+<link rel="stylesheet" href="css/04-annotations.css?v=11">
+<link rel="stylesheet" href="css/05-panels.css?v=11">
+<link rel="stylesheet" href="css/06-dialogs.css?v=11">
+<link rel="stylesheet" href="css/07-responsive.css?v=11">
+
+<!-- JSON-LD structured data (HowTo + WebSite) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "同 AI 講設計",
+      "alternateName": "網頁拆解互動教學",
+      "description": "粵語互動教學 — 用一個假 SaaS landing page 拆解 18 個常見 web design pattern。教叫 AI 寫網頁嘅人識指、識睇、識叫 AI 改。",
+      "inLanguage": "zh-HK"
+    },
+    {
+      "@type": "HowTo",
+      "name": "點同 AI 講設計：3 步學識評估 AI 寫出嚟嘅 landing page",
+      "description": "識指（叫得出每個 section 嘅名）、識睇（對住 screenshot 用 4 點 checklist 評估）、識叫 AI 改（抄返合適嘅短句畀 AI）。",
+      "inLanguage": "zh-HK",
+      "step": [
+        { "@type": "HowToStep", "name": "識指", "text": "認識每個 section 嘅標準叫法 — Hero、CTA、Social Proof、Eyebrow 等。Cap 圖時可以指住話「呢個 Hero⋯⋯」" },
+        { "@type": "HowToStep", "name": "識睇", "text": "每個 pattern 配 4 點 checklist。對住 AI 寫出嚟嘅 screenshot 逐點 check。" },
+        { "@type": "HowToStep", "name": "識叫 AI 改", "text": "常見問題對應抄返畀 AI 嘅一句短 prompt。一鍵 copy。" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- Scroll progress bar -->
+<div class="scroll-progress" aria-hidden="true"><div class="scroll-progress-fill" id="scrollProgressFill"></div></div>
+
+<!-- Skip to content link -->
+<a href="#main-content" class="skip-link">跳到主內容</a>
+
+<!-- aria-live region for tour announcements (screen reader only) -->
+<div id="tourLive" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+<!-- ====== INSPECTOR PANEL ====== -->
+<aside class="inspector" id="inspector" aria-label="標註模式控制台">
+  <div class="inspector-toggle">
+    <div>
+      <h6 id="toggleLabel" style="margin:0;">標註模式</h6>
+      <div style="font-size:11px; color: var(--muted); margin-top: 2px;" id="modeLabel">Hover 睇講解</div>
+    </div>
+    <button type="button" class="toggle-switch" id="toggle" role="switch" aria-checked="true" aria-labelledby="toggleLabel"></button>
+  </div>
+  <button type="button" class="theme-toggle" id="themeToggle" aria-label="切換深色 / 淺色主題">
+    <span class="theme-icon theme-icon-light" aria-hidden="true">☀︎</span>
+    <span class="theme-icon theme-icon-dark" aria-hidden="true">☾</span>
+  </button>
+  <div class="inspector-progress">
+    <div class="inspector-progress-row">
+      <span>已學 <strong id="progressCount">0</strong> / <span id="progressTotal">24</span></span>
+      <button type="button" id="progressReset" class="inspector-reset" aria-label="重置學習進度">重置</button>
+    </div>
+    <div class="inspector-progress-bar" aria-hidden="true">
+      <div class="inspector-progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+  <label class="inspector-search">
+    <span class="sr-only">搜尋 lesson</span>
+    <input type="search" id="annSearch" placeholder="🔎 搜尋 lesson…" autocomplete="off">
+  </label>
+  <div class="inspector-filters" role="group" aria-label="分類過濾">
+    <button type="button" class="cat-chip cat-chip-structure" data-cat-filter="structure" aria-pressed="true">結構</button>
+    <button type="button" class="cat-chip cat-chip-design" data-cat-filter="design" aria-pressed="true">設計</button>
+    <button type="button" class="cat-chip cat-chip-tech" data-cat-filter="tech" aria-pressed="true">技術</button>
+  </div>
+  <div class="inspector-hint">
+    <span class="hint-pointer">🖱 Hover / Tab 任何方塊 → 即時講解<br>👆 Click / Enter → 開啟詳細</span>
+    <span class="hint-touch">👆 撳任何方塊 → 開講解</span>
+  </div>
+</aside>
+
+<!-- ====== INTRO OVERLAY ====== -->
+<div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="introTitle" aria-describedby="introBody">
+  <div class="intro-card">
+    <div class="emoji" aria-hidden="true">🔍</div>
+    <h2 id="introTitle">教你同 AI 講設計</h2>
+    <p id="introBody" class="intro-lead">你叫 AI 寫網頁，但唔知點樣判斷寫得好唔好、唔知點樣同佢講要改咩？</p>
+    <p class="intro-sub">呢個 tutorial 用一個假 SaaS landing page 做例子，教你三樣嘢：</p>
+    <ul class="intro-bullets">
+      <li><strong>識指</strong> — 呢個叫咩名（Hero、CTA、Social Proof⋯⋯）</li>
+      <li><strong>識睇</strong> — 對住 screenshot 點 check 寫得好唔好</li>
+      <li><strong>識叫 AI 改</strong> — 抄返短句直接畀 AI</li>
+    </ul>
+    <div class="legend-row" aria-hidden="true">
+      <div class="legend-item"><div class="legend-swatch"></div><span>結構</span></div>
+      <div class="legend-item"><div class="legend-swatch"></div><span>設計</span></div>
+      <div class="legend-item"><div class="legend-swatch"></div><span>技術</span></div>
+    </div>
+    <div class="intro-actions">
+      <button type="button" class="btn btn-coral btn-lg" id="introStartTour">跟住 Tour 行一次 →</button>
+      <button type="button" class="btn btn-outline btn-lg" id="introClose">自由探索</button>
+    </div>
+    <p class="intro-hint"><span class="hint-pointer">Tour 用 ← → 切換 · Esc 退出 · Hover 任何方塊睇講解</span><span class="hint-touch">Tour 用底部按鈕切換 · 撳任何方塊睇講解</span></p>
+    <p class="intro-credit">
+      粵語 · 免費開源 · 一個假 SaaS landing page · 純教學用 ·
+      <button type="button" class="link-button" id="introAbout">關於</button>
+    </p>
+  </div>
+</div>
+
+<!-- ====== TOAST NOTIFICATION ====== -->
+<aside class="toast" id="toast" data-annotate data-id="toast" data-cat="design" role="status" aria-live="polite" hidden>
+  <div class="toast-icon" aria-hidden="true">✨</div>
+  <div class="toast-body">
+    <strong>歡迎返嚟，Sarah</strong>
+    <span class="toast-sub">你已經連續用咗 Lumo 12 日 — 繼續加油！</span>
+  </div>
+  <button type="button" class="toast-close" id="toastClose" aria-label="關閉通知">✕</button>
+</aside>
+
+<!-- ====== COOKIE BANNER ====== -->
+<aside class="cookie-banner" id="cookieBanner" data-annotate data-id="cookie" data-cat="design" role="dialog" aria-label="Cookie 通知" aria-describedby="cookieMsg">
+  <div class="cookie-icon" aria-hidden="true">🍪</div>
+  <div class="cookie-body">
+    <strong>我哋用 cookie 改善體驗</strong>
+    <p id="cookieMsg">只用 essential cookie 同少量匿名 analytics。冇 tracking、冇 ads。</p>
+  </div>
+  <div class="cookie-actions">
+    <button type="button" class="btn btn-outline" id="cookieReject">淨係用必要嘅</button>
+    <button type="button" class="btn btn-coral" id="cookieAccept">全部接受</button>
+  </div>
+</aside>
+
+<!-- ====== DEMO DIALOG (Native <dialog> element 教學) ====== -->
+<dialog class="demo-dialog" id="demoDialog" data-annotate data-id="modal" data-cat="structure" aria-labelledby="demoDialogTitle">
+  <button type="button" class="close demo-dialog-close" id="demoDialogClose" aria-label="關閉 demo">✕</button>
+  <div class="demo-dialog-video" aria-hidden="true">
+    <div class="demo-dialog-play">▶</div>
+    <div class="demo-dialog-poster">Lumo 2 分鐘 quick tour</div>
+  </div>
+  <div class="demo-dialog-body">
+    <h3 id="demoDialogTitle">Lumo 2 分鐘 quick tour</h3>
+    <p>呢個係一個假 video 預覽，示範緊 native &lt;dialog&gt; element 嘅 modal pattern — 自動 focus trap、Esc 關閉、backdrop click 關閉。</p>
+    <div class="demo-dialog-meta">
+      <span>🎬 Modal demo</span>
+      <span>·</span>
+      <span>純 HTML &lt;dialog&gt;</span>
+    </div>
+  </div>
+</dialog>
+
+<!-- ====== CELEBRATION MODAL (Tour 完成) ====== -->
+<div class="intro celebration-modal hidden" id="celebrate" role="dialog" aria-modal="true" aria-labelledby="celebrateTitle" aria-hidden="true">
+  <div class="intro-card celebrate-card">
+    <button type="button" class="close" id="celebrateClose" aria-label="關閉慶祝">✕</button>
+    <div class="celebrate-emoji" aria-hidden="true">🎉</div>
+    <h2 id="celebrateTitle">完成 Tour！</h2>
+    <p class="celebrate-lead" id="celebrateLead">你睇晒 24 個 pattern。對住任何一個 AI 寫出嚟嘅 landing page，你而家識：</p>
+    <ul class="celebrate-bullets">
+      <li><strong>指</strong>出每個 section 嘅標準叫法</li>
+      <li><strong>用 4 點 checklist</strong> 對住 screenshot 評估</li>
+      <li><strong>抄返合適嘅短句</strong>叫 AI 改</li>
+    </ul>
+    <p class="celebrate-tip">想再過一次鞏固，或者試下對住你自己 AI 出嘅 page 用呢套方法。</p>
+    <div class="celebrate-actions">
+      <button type="button" class="btn btn-coral btn-lg" id="celebrateRestart">重新行一次</button>
+      <button type="button" class="btn btn-outline btn-lg" id="celebrateExplore">自由探索</button>
+    </div>
+    <button type="button" class="link-button celebrate-share" id="celebrateShare">📎 複製分享 URL</button>
+  </div>
+</div>
+
+<!-- ====== ABOUT MODAL ====== -->
+<div class="intro about-modal hidden" id="about" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" aria-hidden="true">
+  <div class="intro-card about-card">
+    <button type="button" class="close" id="aboutClose" aria-label="關閉關於">✕</button>
+    <h2 id="aboutTitle">關於呢個 tutorial</h2>
+    <p>呢個係一個<strong>互動式 web design 教學</strong>。目標受眾係<strong>叫 AI 寫網頁但唔識同 AI 講設計</strong>嘅人 — 例如 PM、創業者、design 新手、又或者係識少少 code 但唔識設計嘅 engineer。</p>
+    <h3>點解整呢個？</h3>
+    <p>而家好多人用 AI 寫網頁，但出嚟嘅嘢自己睇唔出好壞、唔識指住改。呢個 tutorial 想填呢個 gap — 用一個真實 landing page 例子，拆解 18 個常見設計 pattern，教三樣嘢：</p>
+    <ul class="about-bullets">
+      <li><strong>識指</strong> — 呢個元素叫咩名（你可以指住個 Hero 直接同 AI 講「呢個 Hero⋯⋯」）</li>
+      <li><strong>識睇</strong> — 對住 screenshot 用 4 點 checklist check 寫得好唔好</li>
+      <li><strong>識叫 AI 改</strong> — 常見問題對應抄返畀 AI 嘅短句</li>
+    </ul>
+    <h3>注意</h3>
+    <p>頁面入面個 Lumo 係<strong>虛構嘅產品</strong>，純粹示範用。所有圖、客戶、評價、收費、stat 都係假嘅。</p>
+    <h3>License</h3>
+    <p>純教學用，免費，開源。技術細節同 code 可以參考 README。</p>
+    <button type="button" class="btn btn-primary btn-lg" id="aboutDone">明白晒 →</button>
+  </div>
+</div>
+
+<!-- ====== TOOLTIP (single, reused) ====== -->
+<div class="ann-tip" id="annTip" role="tooltip" aria-hidden="true">
+  <div class="ann-cat">Structure</div>
+  <div class="ann-name">Section Name</div>
+  <div class="ann-zh">中文名</div>
+  <div class="ann-hint">Click 睇詳細</div>
+</div>
+
+<!-- ====== DETAIL PANEL ====== -->
+<div class="detail-panel" id="detail" role="dialog" aria-modal="true" aria-labelledby="detailName" aria-hidden="true" tabindex="-1">
+  <button type="button" class="close" id="detailClose" aria-label="關閉詳細 panel">✕</button>
+  <div class="detail-cat">Structure</div>
+  <h2 class="detail-name" id="detailName">Section Name</h2>
+  <div class="detail-zh">中文名 · 英文標準叫法</div>
+
+  <!-- 白話一句 -->
+  <div class="detail-plain">
+    <span class="detail-plain-icon" aria-hidden="true">📌</span>
+    <p id="dPlain"></p>
+  </div>
+
+  <!-- 對住 screenshot check -->
+  <div class="detail-section">
+    <h4><span aria-hidden="true">✅</span> 對住 screenshot 點 check</h4>
+    <ul class="checklist" id="dChecklist"></ul>
+  </div>
+
+  <!-- 抄呢句畀 AI -->
+  <div class="detail-section">
+    <h4><span aria-hidden="true">✂️</span> 想叫 AI 改？抄呢句</h4>
+    <div class="quickfix-list" id="dQuickFix"></div>
+  </div>
+
+  <!-- Before / After 對比 -->
+  <div class="detail-section" id="dBeforeAfterWrap">
+    <h4><span aria-hidden="true">🔍</span> 差版 vs 好版</h4>
+    <div class="before-after">
+      <div class="ba-side ba-bad">
+        <h5>差版</h5>
+        <ul id="dBaBad"></ul>
+      </div>
+      <div class="ba-side ba-good">
+        <h5>好版</h5>
+        <ul id="dBaGood"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 深入啲(摺起) -->
+  <details class="detail-deep">
+    <summary>深入啲 — 設計原則同技術細節</summary>
+    <div class="detail-section">
+      <h4>作用 Purpose</h4>
+      <p id="dPurpose"></p>
+    </div>
+    <div class="detail-section">
+      <h4>設計原則 Why It Works</h4>
+      <ul id="dDesign"></ul>
+    </div>
+    <div class="detail-section">
+      <h4>用咗咩技術 Techniques</h4>
+      <ul id="dTech"></ul>
+    </div>
+    <div class="detail-section" id="dCodeWrap">
+      <h4>關鍵 CSS（AI 寫嘅大概係咁）</h4>
+      <div class="code-block" id="dCode"></div>
+    </div>
+  </details>
+
+  <!-- 導航：上一個 / 下一個 (Phase C 會 enable) -->
+  <nav class="detail-nav" id="detailNav" hidden aria-label="Tour 導航">
+    <button type="button" class="btn btn-outline detail-nav-prev" id="detailPrev">← 上一個</button>
+    <div class="detail-nav-progress" id="detailProgress">1 / 18</div>
+    <button type="button" class="btn btn-primary detail-nav-next" id="detailNext">下一個 →</button>
+  </nav>
+</div>
+
+<!-- ===================================================
+     開始：實際 landing page
+     =================================================== -->
+
+<!-- 1. Announcement Bar -->
+<div class="announce" id="main-content" data-annotate data-id="announce" data-cat="structure">
+  ⚡️ <strong>新功能</strong> · Lumo 3.0 已上線 — AI 助你排日程
+  <a href="#">睇下有咩新嘢 →</a>
+</div>
+
+<!-- 2. Navigation -->
+<nav class="nav" id="nav" data-annotate data-id="nav" data-cat="structure">
+  <div class="nav-inner">
+    <div class="logo"><span class="logo-dot"></span>Lumo</div>
+    <div class="nav-links">
+      <div class="nav-dropdown" data-annotate data-id="dropdown" data-cat="structure">
+        <button type="button" class="nav-dropdown-trigger" id="dropdownTrigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdownPanel">
+          功能 <span class="caret" aria-hidden="true">▾</span>
+        </button>
+        <div class="nav-dropdown-panel" id="dropdownPanel" role="menu" aria-labelledby="dropdownTrigger" hidden>
+          <a role="menuitem" href="#features"><span class="dm-emoji">⏱</span><span><strong>25 分鐘 Timer</strong><span class="dm-sub">Pomodoro + ambient sound</span></span></a>
+          <a role="menuitem" href="#features"><span class="dm-emoji">🧠</span><span><strong>AI 自動排程</strong><span class="dm-sub">講一句就拆好日程</span></span></a>
+          <a role="menuitem" href="#features"><span class="dm-emoji">📊</span><span><strong>每週反思報告</strong><span class="dm-sub">逢星期日送到 inbox</span></span></a>
+          <a role="menuitem" href="#features"><span class="dm-emoji">🎯</span><span><strong>連續達標 streak</strong><span class="dm-sub">解鎖 badge 同里程碑</span></span></a>
+        </div>
+      </div>
+      <a href="#how">點用</a>
+      <a href="#pricing">收費</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <button class="btn btn-ghost">登入</button>
+      <button class="btn btn-primary">免費試</button>
+    </div>
+  </div>
+</nav>
+
+<!-- 3. Hero -->
+<section class="hero" data-annotate data-id="hero" data-cat="structure">
+  <div class="hero-bg"></div>
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <div class="eyebrow" data-annotate data-id="eyebrow" data-cat="design">
+        <span class="eyebrow-dot"></span>新一代專注 App
+      </div>
+      <h1>專注一啲，<em>做多啲</em>，活好啲</h1>
+      <p class="sub">Lumo 用 AI 幫你規劃每一日，將大目標拆成可以即刻動手嘅 25 分鐘專注時段。</p>
+      <div class="hero-ctas" data-annotate data-id="herocta" data-cat="structure">
+        <button class="btn btn-coral btn-lg">免費開始 — 永遠免費</button>
+        <button type="button" class="btn btn-outline btn-lg" id="openDemoDialog">▶ 睇 2 分鐘 demo</button>
+      </div>
+      <div class="hero-meta" data-annotate data-id="socialproof" data-cat="design">
+        <div class="avatars"><div></div><div></div><div></div><div></div></div>
+        <div>★★★★★ 4.9 · 超過 24,000 人喺度專注緊</div>
+      </div>
+    </div>
+    <div class="hero-visual" data-annotate data-id="herovisual" data-cat="design">
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="hero-card-title">今日 · 5 月 26</span>
+        </div>
+        <div class="task-item done">
+          <div class="check"></div>
+          <div class="task-text">寫今季 OKR 大綱</div>
+          <span class="task-tag">已完成</span>
+        </div>
+        <div class="task-item">
+          <div class="check"></div>
+          <div class="task-text">準備星期三 design review</div>
+          <span class="task-tag urgent">急</span>
+        </div>
+        <div class="task-item">
+          <div class="check"></div>
+          <div class="task-text">寫部落格新 post — 第 1 稿</div>
+          <span class="task-tag focus">深度</span>
+        </div>
+        <div class="task-item">
+          <div class="check"></div>
+          <div class="task-text">同 Sarah catch-up</div>
+          <span class="task-tag">25 min</span>
+        </div>
+      </div>
+      <div class="hero-float f1">
+        <div class="hero-float-emoji">🎯</div>
+        <div class="hero-float-text"><strong>連續 12 日</strong><span>每日達標</span></div>
+      </div>
+      <div class="hero-float f2">
+        <div class="hero-float-emoji">⏱</div>
+        <div class="hero-float-text"><strong>2 小時 40 分</strong><span>今日專注時間</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Trust Bar -->
+<section class="trust" data-annotate data-id="trust" data-cat="design">
+  <div class="container">
+    <p class="trust-label">深受 800+ 公司同團隊愛用</p>
+    <div class="trust-logos">
+      <div>NORDIC</div><div>Pixel & Co.</div><div>Mango</div><div>FORMA</div><div>Linewise</div><div>Solar•</div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Feature Grid -->
+<section class="section reveal" id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>功能</div>
+      <h2>三樣嘢，搞掂你成日嘅生產力問題</h2>
+      <p>唔需要學一堆方法論。Lumo 將最 work 嘅三件事，做到簡單到唔可以再簡單。</p>
+    </div>
+    <div class="feature-grid" data-annotate data-id="featuregrid" data-cat="tech">
+      <div class="feature-card" data-annotate data-id="featurecard" data-cat="design">
+        <div class="feature-icon">🧠</div>
+        <h3>AI 自動排日程</h3>
+        <p>講低你今日想做嘅嘢，Lumo 識自動排入時間表，將「做唔晒」變「邊樣最緊要」。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⏱</div>
+        <h3>25 分鐘專注 Timer</h3>
+        <p>用番經典 Pomodoro，再加 ambient sound、自動 block 手機 notification。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>每週反思報告</h3>
+        <p>逢星期日自動 generate：邊段時間最 productive、邊類工作偷你最多時間。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Zigzag deep-dive -->
+<section class="zigzag" data-annotate data-id="zigzag" data-cat="design">
+  <div class="container">
+    <div class="zigzag-row">
+      <div class="zigzag-text">
+        <div class="eyebrow"><span class="eyebrow-dot"></span>專注 Timer</div>
+        <h3>一個按鈕，世界靜哂落嚟</h3>
+        <p>撳一下開始 25 分鐘 deep work。Lumo 會幫你 mute notification、開白噪音、最後送你一個小儀式 — 唞 5 分鐘。</p>
+        <ul class="feature-list">
+          <li>14 款 ambient sound（咖啡店、海浪、雨聲⋯）</li>
+          <li>自動同 Mac/iOS 嘅 Focus mode 連線</li>
+          <li>結束後自動記低做咗咩</li>
+        </ul>
+      </div>
+      <div class="zigzag-visual" data-annotate data-id="ringtimer" data-cat="tech">
+        <div class="timer-ring">
+          <svg width="200" height="200">
+            <circle class="bg" cx="100" cy="100" r="90" stroke-width="12" fill="none"/>
+            <circle class="fg" cx="100" cy="100" r="90" stroke-width="12" fill="none"/>
+          </svg>
+          <div class="timer-num">
+            <div class="big">17:32</div>
+            <div class="small">Deep Focus</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="zigzag-row reverse">
+      <div class="zigzag-text">
+        <div class="eyebrow"><span class="eyebrow-dot"></span>反思報告</div>
+        <h3>數據話你知，你嘅一週去咗邊</h3>
+        <p>唔係單純記時間 — Lumo 會分析你嘅 pattern，講你聽邊類工作做得最有效率、邊類偷時間最多。</p>
+        <ul class="feature-list">
+          <li>逢星期日朝早送到你 inbox</li>
+          <li>可以 export 做 PDF / Notion</li>
+          <li>連續記錄會解鎖 badge</li>
+        </ul>
+      </div>
+      <div class="zigzag-visual">
+        <div style="display:flex; justify-content: space-between; align-items: center;">
+          <strong>本週專注時間</strong>
+          <span style="font-size: 13px; color: var(--muted);">5 月 19 – 25</span>
+        </div>
+        <div class="mini-chart">
+          <div class="bar" style="height: 40%;"></div>
+          <div class="bar" style="height: 62%;"></div>
+          <div class="bar" style="height: 78%;"></div>
+          <div class="bar" style="height: 55%;"></div>
+          <div class="bar" style="height: 90%;"></div>
+          <div class="bar" style="height: 30%;"></div>
+          <div class="bar" style="height: 12%;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 11px; color: var(--muted);">
+          <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6.5 Bento Grid — Apple-style 大小拼接 -->
+<section class="section reveal bento-section" id="bento">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>用 Lumo 之後</div>
+      <h2>啲嘢開始唔同</h2>
+    </div>
+    <div class="bento-grid" data-annotate data-id="bento" data-cat="design">
+      <div class="bento-cell bento-cell-big">
+        <div class="bento-stat">12.4<span>hrs</span></div>
+        <div class="bento-label">每週節省嘅時間</div>
+        <div class="bento-sub">由用家自己 report，係用 Lumo 4 週嘅平均數</div>
+      </div>
+      <div class="bento-cell bento-cell-wide bento-cell-dark">
+        <div class="bento-label" style="color: rgba(255,255,255,0.6);">本週連續達標</div>
+        <div class="bento-streak">
+          <span class="streak-day active">一</span>
+          <span class="streak-day active">二</span>
+          <span class="streak-day active">三</span>
+          <span class="streak-day active">四</span>
+          <span class="streak-day active">五</span>
+          <span class="streak-day"></span>
+          <span class="streak-day"></span>
+        </div>
+        <div class="bento-stat" style="font-size: 28px; color: var(--coral);">5 <span style="color: rgba(255,255,255,0.6);">日</span></div>
+      </div>
+      <div class="bento-cell">
+        <div class="bento-icon">🎯</div>
+        <div class="bento-stat-small">84<span>%</span></div>
+        <div class="bento-label">日程完成率</div>
+      </div>
+      <div class="bento-cell">
+        <div class="bento-icon">⚡️</div>
+        <div class="bento-stat-small">3.2<span>x</span></div>
+        <div class="bento-label">深度專注時間</div>
+      </div>
+      <div class="bento-cell bento-cell-wide">
+        <div class="bento-label">最 productive 時段</div>
+        <div class="bento-bars">
+          <div class="bento-bar" style="height: 30%"></div>
+          <div class="bento-bar" style="height: 55%"></div>
+          <div class="bento-bar" style="height: 78%"></div>
+          <div class="bento-bar" style="height: 95%"></div>
+          <div class="bento-bar" style="height: 88%"></div>
+          <div class="bento-bar" style="height: 62%"></div>
+          <div class="bento-bar" style="height: 40%"></div>
+          <div class="bento-bar" style="height: 25%"></div>
+        </div>
+        <div class="bento-sub">9am – 11am · 你嘅 deep work zone</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. How it works -->
+<section class="section reveal" id="how">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>點用</div>
+      <h2>3 步開始，由今日做起</h2>
+    </div>
+    <div class="steps-grid" data-annotate data-id="steps" data-cat="structure">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>講低想做嘅嘢</h4>
+        <p>用一句說話，講低今日要搞掂咩。例如：「寫好 design proposal」。</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Lumo 幫你拆</h4>
+        <p>AI 自動拆成 3-5 個 25 分鐘嘅小任務，排入你日程。</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>撳開始</h4>
+        <p>一段段做，到夜晚自動 review。明日繼續。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Testimonial -->
+<section class="testimonial" data-annotate data-id="testimonial" data-cat="design">
+  <div class="testimonial-inner">
+    <blockquote>
+      「以前每日開咗 20 個 tab，乜都做緊但乜都做唔晒。用咗 Lumo 兩個月，<em>第一次覺得做完一日，係真係做完</em>。」
+    </blockquote>
+    <div class="testimonial-author">
+      <div class="testimonial-avatar"></div>
+      <div class="testimonial-author-text">
+        <strong>陳家俊 Ken</strong>
+        <span>Product Designer · Mango</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. Pricing -->
+<section class="section reveal" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>收費</div>
+      <h2>由免費開始，隨時升級</h2>
+      <p>所有 plan 都有 14 日全功能試用。隨時 cancel，唔問點解。</p>
+    </div>
+    <div class="pricing-grid" data-annotate data-id="pricing" data-cat="design">
+      <div class="price-card">
+        <div class="price-tier">Starter</div>
+        <div class="price-amount">$0<span>/月</span></div>
+        <p class="price-desc">啱啱試水、淨係要個 timer。</p>
+        <ul class="price-features">
+          <li>基本 Pomodoro timer</li>
+          <li>3 個 ambient sound</li>
+          <li>每日最多 5 個任務</li>
+        </ul>
+        <button class="btn btn-outline">免費開始</button>
+      </div>
+      <div class="price-card featured">
+        <span class="price-badge">最多人揀</span>
+        <div class="price-tier">Pro</div>
+        <div class="price-amount">$58<span>/月</span></div>
+        <p class="price-desc">每日認真做嘢嘅你。</p>
+        <ul class="price-features">
+          <li>
+            AI 自動排日程
+            <span class="info-tooltip" data-annotate data-id="tooltip" data-cat="tech">
+              <button type="button" class="info-trigger" aria-describedby="tooltipBubble">ⓘ</button>
+              <span class="info-bubble" id="tooltipBubble" role="tooltip">講低「我要寫 docs、開 standup、回 email」，Lumo AI 自動拆成 25 分鐘小任務排晒入時間表。</span>
+            </span>
+          </li>
+          <li>無限任務 + 全部 14 款聲音</li>
+          <li>每週反思報告</li>
+          <li>Mac / iOS Focus mode 整合</li>
+        </ul>
+        <button class="btn btn-coral">14 日免費試</button>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">Team</div>
+        <div class="price-amount">$148<span>/月 / 5 人</span></div>
+        <p class="price-desc">細 team 一齊專注。</p>
+        <ul class="price-features">
+          <li>Pro 全部功能</li>
+          <li>Team focus session</li>
+          <li>Admin dashboard</li>
+          <li>專屬 onboarding</li>
+        </ul>
+        <button class="btn btn-outline">聯絡銷售</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. FAQ -->
+<section class="section reveal" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>常見問題</div>
+      <h2>不如先問清楚先</h2>
+    </div>
+    <div class="faq-wrap" data-annotate data-id="faq" data-cat="tech">
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-1">Lumo 識唔識中文？</button>
+        <div class="faq-a" id="faq-a-1" role="region">識。Lumo 完全支援繁體中文、英文。AI 接受你打中文輸入任務，內部直接理解，唔需要 translate。</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-2">免費版同 Pro 版差幾遠？</button>
+        <div class="faq-a" id="faq-a-2" role="region">最大分別係 AI 自動排日程 — 免費版要你自己手動排，Pro 版講一句就搞掂。另外無限任務、反思報告呢啲都係 Pro only。</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-3">取消之後 data 會唔會無哂？</button>
+        <div class="faq-a" id="faq-a-3" role="region">取消之後 data 會保留 90 日，期間你可以隨時 export 做 CSV / Notion / Markdown。90 日後正式刪除，唔留底。</div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-4">支援咩裝置？</button>
+        <div class="faq-a" id="faq-a-4" role="region">Mac、Windows、iOS、Android 都有 native app。亦有 web app，瀏覽器都用得。所有平台 data 即時同步。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. Final CTA -->
+<section class="final-cta" data-annotate data-id="finalcta" data-cat="structure">
+  <div class="container">
+    <h2>每一日，認真做番一啲嘢</h2>
+    <p>由今日嘅 25 分鐘開始。</p>
+    <button class="btn btn-coral btn-lg">免費開始 — 唔使俾卡</button>
+  </div>
+</section>
+
+<!-- 12. Footer -->
+<footer class="footer" data-annotate data-id="footer" data-cat="structure">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><span class="logo-dot"></span>Lumo</div>
+        <p>專注、深度、可持續地做嘢。喺香港，由細 team 做出嚟。</p>
+      </div>
+      <div>
+        <h5>產品</h5>
+        <ul>
+          <li><a href="#">功能</a></li><li><a href="#">收費</a></li>
+          <li><a href="#">下載</a></li><li><a href="#">更新記錄</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>公司</h5>
+        <ul>
+          <li><a href="#">關於我哋</a></li><li><a href="#">部落格</a></li>
+          <li><a href="#">招聘</a></li><li><a href="#">聯絡</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>支援</h5>
+        <ul>
+          <li><a href="#">幫助中心</a></li><li><a href="#">私隱政策</a></li>
+          <li><a href="#">條款</a></li><li><a href="#">狀態</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Lumo — 一個用嚟示範嘅虛構產品</span>
+      <span>Made in Hong Kong</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/main.js?v=11"></script>
+</body>
+</html>

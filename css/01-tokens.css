@@ -1,0 +1,432 @@
+/* =========================================================
+   Typed custom properties (@property) — 等 CSS 可以 transition 顏色
+   Chrome 85+ / Safari 16.4+ / Firefox 128+
+   ========================================================= */
+@property --bg          { syntax: '<color>'; initial-value: #FAF7F2; inherits: true; }
+@property --ink         { syntax: '<color>'; initial-value: #1A1A2E; inherits: true; }
+@property --ink-soft    { syntax: '<color>'; initial-value: #4A4A5E; inherits: true; }
+@property --muted       { syntax: '<color>'; initial-value: #6B6B7A; inherits: true; }
+@property --line        { syntax: '<color>'; initial-value: #E8E2D8; inherits: true; }
+@property --card        { syntax: '<color>'; initial-value: #FFFFFF; inherits: true; }
+@property --soft        { syntax: '<color>'; initial-value: #F0EBE3; inherits: true; }
+@property --coral       { syntax: '<color>'; initial-value: #FF6B47; inherits: true; }
+@property --coral-text  { syntax: '<color>'; initial-value: #A8351B; inherits: true; }
+
+/* =========================================================
+   設計 Tokens (CSS Variables) — 全站統一色 / 字 / 間距
+   ========================================================= */
+:root {
+  --bg: #FAF7F2;
+  --ink: #1A1A2E;
+  --ink-soft: #4A4A5E;
+  --muted: #6B6B7A;          /* darkened from #8B8B9A — passes 4.5:1 on white & --bg */
+  --line: #E8E2D8;
+  --card: #FFFFFF;
+  --soft: #F0EBE3;
+
+  --coral: #FF6B47;           /* keep for accent / borders / decorative */
+  --coral-text: #A8351B;      /* darker — passes 4.5:1 even on tinted bg (e.g. zigzag) */
+  --coral-dark: #8B2A12;      /* hover state for coral buttons */
+  --indigo: #4A6CF7;
+  --plum: #9D4EDD;
+  --mint: #06A77D;
+
+  --cat-structure: #4A6CF7;
+  --cat-design: #9D4EDD;
+  --cat-tech: #06A77D;
+  --cat-structure-text: #3858D4;  /* darker variants for text on tinted bg */
+  --cat-design-text: #7C3DB2;
+  --cat-tech-text: #04634A;
+
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 24px;
+
+  --shadow-sm: 0 1px 3px rgba(26,26,46,0.06), 0 1px 2px rgba(26,26,46,0.04);
+  --shadow: 0 10px 30px rgba(26,26,46,0.08), 0 2px 6px rgba(26,26,46,0.04);
+  --shadow-lg: 0 24px 60px rgba(26,26,46,0.14), 0 6px 16px rgba(26,26,46,0.06);
+
+  --font-display: 'Noto Serif HK', 'Source Han Serif HK', 'Songti TC', Georgia, serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang HK', 'Noto Sans HK', 'Microsoft JhengHei', Helvetica, Arial, sans-serif;
+
+  --max-w: 1180px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* 同 browser 講「我支援兩個 mode」— form controls / scrollbars 跟住變色 */
+  color-scheme: light dark;
+}
+
+/* Display P3 wide gamut colors — Apple device 上更鮮豔。Fallback 自動用 sRGB。 */
+@supports (color: color(display-p3 1 0 0)) {
+  :root {
+    --coral:     color(display-p3 0.992 0.430 0.298);
+    --indigo:    color(display-p3 0.310 0.435 0.965);
+    --plum:      color(display-p3 0.605 0.318 0.855);
+    --mint:      color(display-p3 0.071 0.651 0.490);
+  }
+}
+
+/* Dark theme — toggle via [data-theme="dark"] on <html> */
+[data-theme="dark"] {
+  --bg: #0F0F1A;
+  --ink: #F0EBE3;
+  --ink-soft: #C2BDB3;
+  --muted: #8F8FA0;
+  --line: #2A2A40;
+  --card: #1A1A2E;
+  --soft: #14141F;
+
+  --coral: #FF8A6E;            /* lighter brand on dark */
+  --coral-text: #FFAB91;       /* enough contrast on dark bg */
+  --coral-dark: #FFC9B5;
+
+  --cat-structure: #6F8DFF;
+  --cat-design: #BC81E8;
+  --cat-tech: #4BD9B0;
+  --cat-structure-text: #A5B6FF;
+  --cat-design-text: #D0A0F0;
+  --cat-tech-text: #6FE5C2;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow: 0 10px 30px rgba(0,0,0,0.5), 0 2px 6px rgba(0,0,0,0.3);
+  --shadow-lg: 0 24px 60px rgba(0,0,0,0.6), 0 6px 16px rgba(0,0,0,0.4);
+}
+
+/* Smooth theme transition — 用 @property typed vars 等所有 var(--x) 自動 interpolate */
+:root {
+  transition:
+    --bg 0.35s var(--ease),
+    --ink 0.35s var(--ease),
+    --ink-soft 0.35s var(--ease),
+    --muted 0.35s var(--ease),
+    --line 0.35s var(--ease),
+    --card 0.35s var(--ease),
+    --soft 0.35s var(--ease),
+    --coral 0.35s var(--ease),
+    --coral-text 0.35s var(--ease);
+}
+html { transition: background-color 0.3s var(--ease); }
+body, .inspector, .detail-panel, .ann-tip,
+.feature-card, .price-card, .intro-card {
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+/* Dark mode overrides for elements 用咗 hard-coded 顏色 */
+[data-theme="dark"] .nav {
+  background: rgba(15, 15, 26, 0.75);
+}
+[data-theme="dark"] .nav.scrolled {
+  background: rgba(15, 15, 26, 0.92);
+}
+[data-theme="dark"] .testimonial {
+  background: var(--card);
+  color: var(--ink);
+}
+[data-theme="dark"] .testimonial blockquote em { color: var(--coral); }
+[data-theme="dark"] .testimonial-author-text span { color: var(--muted); }
+[data-theme="dark"] .footer {
+  background: var(--card);
+  color: var(--ink-soft);
+}
+[data-theme="dark"] .footer-grid h5 { color: var(--ink); }
+[data-theme="dark"] .footer-grid ul a:hover { color: var(--ink); }
+[data-theme="dark"] .footer-bottom { color: var(--muted); }
+[data-theme="dark"] .footer-brand .logo { color: var(--ink); }
+[data-theme="dark"] .btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+}
+[data-theme="dark"] .btn-primary:hover { background: var(--coral-text); color: var(--bg); }
+[data-theme="dark"] .btn-coral {
+  background: var(--coral);
+  color: var(--bg);
+}
+[data-theme="dark"] .btn-coral:hover { background: var(--coral-text); color: var(--bg); }
+[data-theme="dark"] .price-card.featured {
+  background: var(--card);
+  color: var(--ink);
+  border-color: var(--coral-text);
+}
+[data-theme="dark"] .price-card.featured .price-tier,
+[data-theme="dark"] .price-card.featured .price-desc,
+[data-theme="dark"] .price-card.featured .price-amount span {
+  color: var(--muted);
+}
+[data-theme="dark"] .price-card.featured .price-features li::before { color: var(--coral); }
+[data-theme="dark"] .step-num {
+  background: var(--coral-text);
+  color: var(--bg);
+  border-color: var(--bg);
+}
+[data-theme="dark"] .code-block {
+  background: #08080F;
+  color: #C2BDB3;
+  border: 1px solid var(--line);
+}
+[data-theme="dark"] .announce { background: linear-gradient(90deg, #08080F 0%, #1A1531 100%); }
+[data-theme="dark"] .hero-bg {
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(255,138,110,0.10), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 70%, rgba(111,141,255,0.10), transparent 60%);
+}
+[data-theme="dark"] .final-cta {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,138,110,0.14), transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, var(--card) 100%);
+}
+[data-theme="dark"] .avatars > div { border-color: var(--card); }
+[data-theme="dark"] .hero-card { background: var(--card); border: 1px solid var(--line); }
+[data-theme="dark"] .hero-float { background: var(--card); border: 1px solid var(--line); }
+[data-theme="dark"] .feature-icon { filter: brightness(0.85); }
+
+/* Annotate pin in dark */
+[data-theme="dark"] .annotate-pin {
+  background: rgba(26,26,46,0.85);
+  border-color: rgba(255,255,255,0.18);
+}
+[data-theme="dark"] .annotate-pin:hover,
+[data-theme="dark"] .annotate-pin:focus-visible { background: var(--card); }
+[data-theme="dark"] .btn-outline {
+  background: rgba(26,26,46,0.5);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+[data-theme="dark"] .btn-outline:hover { border-color: var(--ink); background: var(--card); }
+[data-theme="dark"] .btn-ghost { color: var(--ink-soft); }
+[data-theme="dark"] .btn-ghost:hover { color: var(--ink); }
+[data-theme="dark"] .nav-links { color: var(--ink-soft); }
+[data-theme="dark"] .trust-logos > div { color: var(--ink-soft); }
+[data-theme="dark"] .hero h1 em { color: var(--coral); }
+[data-theme="dark"] .hero h1 em::after { background: rgba(255,138,110,0.18); }
+[data-theme="dark"] .price-card { background: var(--card); border-color: var(--line); }
+[data-theme="dark"] .price-card .price-features li::before { color: var(--mint); }
+[data-theme="dark"] .price-amount { color: var(--ink); }
+[data-theme="dark"] .feature-card { background: var(--card); border-color: var(--line); }
+[data-theme="dark"] .feature-card::before { background: var(--coral); }
+[data-theme="dark"] .zigzag { background: var(--soft); }
+[data-theme="dark"] .zigzag-visual { background: var(--card); border: 1px solid var(--line); }
+[data-theme="dark"] .testimonial::before { color: rgba(255,138,110,0.10); }
+[data-theme="dark"] .ann-tip { background: var(--card); border-color: var(--line); }
+[data-theme="dark"] .detail-panel { background: var(--card); }
+[data-theme="dark"] .detail-section ul li { color: var(--ink-soft); }
+[data-theme="dark"] .quickfix-item { background: var(--soft); }
+[data-theme="dark"] .quickfix-say { background: var(--bg); border-color: var(--line); color: var(--ink); }
+[data-theme="dark"] .detail-plain {
+  background: linear-gradient(135deg, rgba(255,138,110,0.12), rgba(255,138,110,0.05));
+  border-color: rgba(255,138,110,0.25);
+}
+[data-theme="dark"] .ba-bad {
+  background: rgba(255,107,71,0.10);
+  border-color: rgba(255,107,71,0.25);
+}
+[data-theme="dark"] .ba-bad h5 { color: var(--coral); }
+[data-theme="dark"] .ba-bad li::before { color: var(--coral); }
+[data-theme="dark"] .ba-good {
+  background: rgba(75,217,176,0.08);
+  border-color: rgba(75,217,176,0.25);
+}
+[data-theme="dark"] .ba-good h5 { color: var(--cat-tech-text); }
+[data-theme="dark"] .ba-good li::before { color: var(--cat-tech-text); }
+[data-theme="dark"] .intro-card { background: var(--card); }
+[data-theme="dark"] .celebrate-bullets { background: var(--bg); }
+[data-theme="dark"] .checklist-toggle:hover { background: rgba(255,255,255,0.04); }
+[data-theme="dark"] .checklist-toggle::before { background: var(--card); }
+[data-theme="dark"] .cat-chip {
+  background: var(--card);
+  color: var(--muted);
+  border-color: var(--line);
+}
+[data-theme="dark"] .inspector-search input {
+  background: var(--card);
+  border-color: var(--line);
+  color: var(--ink);
+}
+[data-theme="dark"] .skip-link { background: var(--ink); color: var(--bg); }
+[data-theme="dark"] .inspector-reset { background: transparent; color: var(--muted); border-color: var(--line); }
+[data-theme="dark"] .inspector-reset:hover { color: var(--ink); border-color: var(--ink-soft); }
+
+[data-theme="dark"] .inspector {
+  background: rgba(20, 20, 31, 0.92);
+  border-color: var(--line);
+}
+[data-theme="dark"] .inspector h6,
+[data-theme="dark"] #modeLabel { color: var(--muted); }
+[data-theme="dark"] .legend-item { color: var(--ink-soft); }
+[data-theme="dark"] .toggle-switch { background: var(--line); }
+[data-theme="dark"] body.inspect-on .toggle-switch { background: var(--coral); }
+[data-theme="dark"] .theme-toggle { background: var(--bg); border-color: var(--line); color: var(--ink-soft); }
+[data-theme="dark"] .theme-toggle:hover { color: var(--ink); border-color: var(--ink-soft); }
+
+/* =========================================================
+   Reset & 基礎
+   ========================================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+/* Apple-quality typography — text-wrap balance/pretty (CSS Text 4) */
+/* Headlines 自動平衡每行 */
+h1, h2, h3, .hero h1, .section-head h2, .zigzag-text h3,
+.final-cta h2, .testimonial blockquote, .detail-name,
+.intro-card h2, .about-card h2, .celebrate-card h2 {
+  text-wrap: balance;
+}
+/* Long paragraph 避免 last line 孤兒字 */
+p, .quickfix-say, .detail-section ul li {
+  text-wrap: pretty;
+}
+
+/* =========================================================
+   View Transitions API — Apple-style 元素 morph
+   Safari 18+ / Chrome 124+
+   ========================================================= */
+@supports (view-transition-name: none) {
+  /* 全域過渡參數 */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.35s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  /* 命名 morph：detail panel 嘅 cat badge、name、zh */
+  .detail-cat   { view-transition-name: detail-cat; }
+  .detail-name  { view-transition-name: detail-name; }
+  .detail-zh    { view-transition-name: detail-zh; }
+  /* Tour navigation: progress 同 next/prev 都跟住 morph */
+  .detail-nav-progress { view-transition-name: tour-progress; }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 1500;
+  background: transparent;
+  pointer-events: none;
+}
+.scroll-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--coral-text) 0%, var(--coral) 50%, var(--cat-tech-text) 100%);
+  transform-origin: left;
+  transition: width 0.1s linear;
+}
+/* Scroll-driven animation — Safari 17.4+ / Chrome 115+。冇支援時 fallback JS */
+@supports (animation-timeline: scroll()) {
+  @keyframes scroll-progress-grow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+  .scroll-progress-fill {
+    width: 100%;
+    animation: scroll-progress-grow linear both;
+    animation-timeline: scroll(root block);
+    transition: none;
+  }
+}
+
+/* Visually hidden — for screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip-to-content link — 鍵盤 Tab 第一下出現 */
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 3000;
+  background: var(--ink);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(calc(-100% - 16px));
+  transition: transform 0.2s var(--ease);
+}
+.skip-link:focus { transform: translateY(0); }
+
+/* Keyboard focus — 統一 outline，永遠睇得到 */
+:focus { outline: none; }
+:focus-visible {
+  outline: 3px solid var(--coral-text);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+/* Section 唔再係 focusable，由 .annotate-pin 接手 keyboard focus */
+
+/* prefers-reduced-motion — 對動畫敏感嘅用家全部關 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .hero-card { transform: none; }
+  .hero-float { animation: none; }
+  .eyebrow-dot { animation: none; }
+}
+
+/* prefers-contrast: more — Apple a11y「Increase Contrast」自動跟 */
+@media (prefers-contrast: more) {
+  :root {
+    --muted: #404050;
+    --line: #888;
+    --ink-soft: #2A2A40;
+  }
+  [data-theme="dark"] {
+    --muted: #C5C5D0;
+    --line: #7A7A90;
+    --ink-soft: #E0DDD3;
+  }
+  /* 強化 border / outline */
+  .feature-card, .price-card, .quickfix-item, .ann-tip,
+  .detail-panel, .intro-card, .annotate-pin, .cat-chip {
+    border-width: 2px;
+  }
+}
+
+/* prefers-reduced-transparency: reduce — 對玻璃效果敏感嘅 macOS / iOS 用家 */
+@media (prefers-reduced-transparency: reduce) {
+  .nav, .inspector, .ann-tip, .annotate-pin {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .nav { background: var(--bg); }
+  .inspector { background: var(--card); }
+  .ann-tip { background: var(--card); }
+  .annotate-pin { background: var(--card); }
+}
+
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
