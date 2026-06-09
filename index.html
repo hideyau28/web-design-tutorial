@@ -286,6 +286,22 @@
 .detail-anchor-note{font-size:13px;color:var(--coral-text);background:color-mix(in srgb,var(--coral-text) 8%,transparent);border-radius:var(--radius-sm);padding:8px 12px;margin:0 0 4px}
 /* 手機：cookie banner 仲喺度時，inspector pill 升高唔好同佢疊 */
 @media(max-width:880px){body.cookie-active .inspector{bottom:84px}}
+
+/* ---- 作者 CTA / 接 job 入口 ---- */
+.hire-cta{background:linear-gradient(180deg,var(--soft),var(--bg));border-top:1px solid var(--line);padding:72px 0;text-align:center}
+.hire-eyebrow{display:inline-block;font-size:13px;letter-spacing:.06em;color:var(--coral-text);background:color-mix(in srgb,var(--coral-text) 10%,transparent);padding:6px 14px;border-radius:999px;margin-bottom:18px}
+.hire-cta h2{font-family:var(--font-display);font-size:clamp(28px,4.5vw,44px);line-height:1.12;margin-bottom:16px}
+.hire-pitch{max-width:56ch;margin:0 auto 28px;color:var(--ink-soft);font-size:17px;line-height:1.65}
+.hire-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.hire-by{margin-top:22px;font-size:14px;color:var(--muted)}
+.author-credit{background:var(--bg);border-top:1px solid var(--line);padding:20px 0;text-align:center;font-size:14px;color:var(--muted)}
+.author-credit a{color:var(--coral-text);font-weight:600}
+.hire-badge{position:fixed;left:16px;bottom:16px;z-index:1200;display:flex;align-items:center;gap:8px;background:var(--ink);color:var(--bg);border-radius:999px;padding:8px 8px 8px 16px;box-shadow:var(--shadow-lg);font-size:14px;font-weight:600;animation:hireIn .4s var(--ease)}
+.hire-badge a{color:var(--bg);text-decoration:none}
+.hire-badge button{background:rgba(255,255,255,.16);color:var(--bg);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;line-height:1;flex-shrink:0}
+.hire-badge button:hover{background:rgba(255,255,255,.3)}
+@keyframes hireIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(max-width:880px){.hire-badge{display:none}}  /* 手機唔出 badge，靠 CTA section + 頁尾署名 */
 </style>
 </head>
 <body>
@@ -449,6 +465,8 @@
     </ul>
     <h3>注意</h3>
     <p>頁面入面個 Lumo 係<strong>虛構嘅產品</strong>，純粹示範用。所有圖、客戶、評價、收費、stat 都係假嘅。</p>
+    <h3>邊個整呢個？</h3>
+    <p><strong>你個名</strong> — 我用 AI 幫人砌收得到 lead 嘅網頁。鍾意呢個拆解嘅話，<a href="mailto:你嘅email">搵我傾 →</a>。</p>
     <h3>License</h3>
     <p>純教學用，免費，開源。技術細節同 code 可以參考 README。</p>
     <button type="button" class="btn btn-primary btn-lg" id="aboutDone">明白晒 →</button>
@@ -958,6 +976,20 @@
     </div>
   </div>
 </footer>
+
+<!-- ====== 作者 CTA（接 job 入口）— 將 placeholder 改成你真資料 ====== -->
+<section class="hire-cta" id="hire" aria-labelledby="hireTitle">
+  <div class="container">
+    <p class="hire-eyebrow">🙌 唔係 Lumo 整 — 係我整</p>
+    <h2 id="hireTitle">鍾意呢個拆解？等我幫你個網生意</h2>
+    <p class="hire-pitch">我用 AI 幫你由零砌、或者執靚你 AI 出嘅版本 — 做到一個睇得明、收得到 lead 嘅 landing page。識指、識睇、識改，先做得出令客戶撳得落手嘅嘢。</p>
+    <div class="hire-actions">
+      <a class="btn btn-coral btn-lg" href="mailto:你嘅email">搵我傾 →</a>
+      <a class="btn btn-outline btn-lg" href="你嘅作品集連結" target="_blank" rel="noopener">睇我嘅作品</a>
+    </div>
+    <p class="hire-by">由 <strong>你個名</strong> 設計同製作 · 你嘅 handle</p>
+  </div>
+</section>
 
 <!-- ALL-LESSONS:START — 由 scripts/build-static.mjs 生成，唔好手改 -->
 
@@ -1768,6 +1800,13 @@
   </div>
 </section>
 <!-- ALL-LESSONS:END -->
+
+<!-- 頁尾真署名 + 浮動 badge（接 job）— placeholder 改成你真資料 -->
+<div class="author-credit"><div class="container">呢個互動拆解由 <strong>你個名</strong> 設計同製作 · <a href="mailto:你嘅email">搵我整網頁 →</a></div></div>
+<div class="hire-badge" id="hireBadge" hidden>
+  <a href="#hire">💼 搵我整網頁</a>
+  <button type="button" id="hireBadgeClose" aria-label="收起呢個提示">✕</button>
+</div>
 
 <!-- 安全網：如果 main.js 因任何原因 load 唔到 / boot 失敗，2 秒後強制顯示所有 section，唔會成版空白 -->
 <script>addEventListener('load',function(){setTimeout(function(){if(!window.__revealReady){document.querySelectorAll('.reveal').forEach(function(e){e.style.opacity='1';e.style.transform='none';});}},2000);});</script>

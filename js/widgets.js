@@ -150,6 +150,24 @@ function initReveal() {
   window.__revealReady = true;   // 畀 end-of-body 安全網知道 reveal 系統正常啟動咗
 }
 
+/* ---------- Hire badge（接 job 浮動提示）— 滾過 hero 先出，可 ✕ 收起 ---------- */
+function initHireBadge() {
+  const badge = dom.hireBadge;
+  if (!badge) return;
+  let dismissed = false;
+  try { dismissed = localStorage.getItem('wdt.hire') === 'x'; } catch (e) {}
+  if (dismissed) return;
+  const reveal = () => {
+    if (window.scrollY > 600) { badge.hidden = false; window.removeEventListener('scroll', reveal); }
+  };
+  window.addEventListener('scroll', reveal, { passive: true });
+  reveal();
+  dom.hireBadgeClose && dom.hireBadgeClose.addEventListener('click', () => {
+    badge.hidden = true;
+    try { localStorage.setItem('wdt.hire', 'x'); } catch (e) {}
+  });
+}
+
 export function initWidgets() {
   initToast();
   initCookie();
@@ -157,4 +175,5 @@ export function initWidgets() {
   initFaq();
   initScroll();
   initReveal();
+  initHireBadge();
 }

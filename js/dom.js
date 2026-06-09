@@ -63,6 +63,8 @@ export const dom = {
   dropdownPanel: $('dropdownPanel'),
   navEl: $('nav'),
   scrollProgressFill: $('scrollProgressFill'),
+  hireBadge: $('hireBadge'),
+  hireBadgeClose: $('hireBadgeClose'),
 
   // Collections
   annotateEls: Array.from(document.querySelectorAll('[data-annotate]')),
