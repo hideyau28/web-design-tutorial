@@ -5,38 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>同 AI 講設計 — 網頁拆解互動教學</title>
 
-<meta name="description" content="叫 AI 寫 web 但唔識指、唔識睇好壞？呢個互動 tutorial 用一個假 SaaS landing page 拆解 18 個 web design pattern，教你識指、識睇、識叫 AI 改 — 連抄返畀 AI 嘅 short prompts 都齊。">
+<meta name="description" content="叫 AI 寫 web 但唔識指、唔識睇好壞？呢個互動 tutorial 用一個假 SaaS landing page 拆解 24 個 web design pattern，教你識指、識睇、識叫 AI 改 — 連抄返畀 AI 嘅 short prompts 都齊。">
 <meta name="theme-color" content="#FF6B47">
 <meta name="color-scheme" content="light">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="同 AI 講設計 — 網頁拆解互動教學">
-<meta property="og:description" content="互動式拆解 18 個 web design pattern，教你識指、識睇、識叫 AI 改。粵語、免費、開源。">
+<meta property="og:description" content="互動式拆解 24 個 web design pattern，教你識指、識睇、識叫 AI 改。粵語、免費、開源。">
 <meta property="og:locale" content="zh_HK">
-<meta property="og:image" content="og-image.png">
+<meta property="og:image" content="https://web-design-tutorial.vercel.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="同 AI 講設計 — 網頁設計互動教學">
+<meta property="og:url" content="https://web-design-tutorial.vercel.app/">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="同 AI 講設計 — 網頁拆解互動教學">
-<meta name="twitter:description" content="互動式拆解 18 個 web design pattern，教你同 AI 講設計。">
-<meta name="twitter:image" content="og-image.png">
+<meta name="twitter:description" content="互動式拆解 24 個 web design pattern，教你同 AI 講設計。">
+<meta name="twitter:image" content="https://web-design-tutorial.vercel.app/og-image.png">
 
 <!-- Favicon + PWA -->
 <link rel="icon" type="image/svg+xml" href="icon.svg">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="manifest" href="manifest.json">
 
-<link rel="stylesheet" href="css/01-tokens.css?v=11">
-<link rel="stylesheet" href="css/02-layout.css?v=11">
-<link rel="stylesheet" href="css/03-sections.css?v=11">
-<link rel="stylesheet" href="css/04-annotations.css?v=11">
-<link rel="stylesheet" href="css/05-panels.css?v=11">
-<link rel="stylesheet" href="css/06-dialogs.css?v=11">
-<link rel="stylesheet" href="css/07-responsive.css?v=11">
+<!-- 標記 JS 可用：.reveal 只喺有 JS 時先 hide，冇 JS / JS 掛咗都唔會成版空白 -->
+<script>document.documentElement.classList.add('js')</script>
+
+<!-- Canonical — 所有 ?lesson=xxx 變體都歸主 URL -->
+<link rel="canonical" href="https://web-design-tutorial.vercel.app/">
+
+<!-- Serif display webfont（標題）— Windows / Android 都有真 serif，唔會 fallback 落黑體 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+HK:wght@400;700;900&display=swap">
+
+<link rel="stylesheet" href="css/01-tokens.css?v=12">
+<link rel="stylesheet" href="css/02-layout.css?v=12">
+<link rel="stylesheet" href="css/03-sections.css?v=12">
+<link rel="stylesheet" href="css/04-annotations.css?v=12">
+<link rel="stylesheet" href="css/05-panels.css?v=12">
+<link rel="stylesheet" href="css/06-dialogs.css?v=12">
+<link rel="stylesheet" href="css/07-responsive.css?v=12">
 
 <!-- JSON-LD structured data (HowTo + WebSite) -->
 <script type="application/ld+json">
@@ -47,7 +59,8 @@
       "@type": "WebSite",
       "name": "同 AI 講設計",
       "alternateName": "網頁拆解互動教學",
-      "description": "粵語互動教學 — 用一個假 SaaS landing page 拆解 18 個常見 web design pattern。教叫 AI 寫網頁嘅人識指、識睇、識叫 AI 改。",
+      "url": "https://web-design-tutorial.vercel.app/",
+      "description": "粵語互動教學 — 用一個假 SaaS landing page 拆解 24 個常見 web design pattern。教叫 AI 寫網頁嘅人識指、識睇、識叫 AI 改。",
       "inLanguage": "zh-HK"
     },
     {
@@ -64,6 +77,216 @@
   ]
 }
 </script>
+
+<!-- ItemList of all 24 lessons（由 scripts/build-static.mjs 生成）-->
+<!-- LESSONS-JSONLD:START -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "24 個 web design pattern",
+  "numberOfItems": 24,
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Announcement Bar（公告條 · 又叫 Promo Bar / Top Bar）",
+      "description": "網頁最頂嗰條細條，用嚟推新嘢嘅 banner。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-announce"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Navigation Bar（導覽列 · Nav / Header）",
+      "description": "永遠黐喺最頂嗰條導覽列，幫人跳去任何地方。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-nav"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Dropdown / Mega Menu（下拉選單 · 又叫 Flyout / Mega Menu）",
+      "description": "Hover / Click trigger 出嚟嘅 panel。Nav 想 expand 多嘢就用呢個。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-dropdown"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "Hero Section（Hero 區 · 又叫 Above the Fold）",
+      "description": "網頁最頂、最大、最搶眼嗰幅。一打開第一眼睇到嘅嘢。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-hero"
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "name": "Eyebrow（眉標 · 又叫 Kicker / Pre-headline）",
+      "description": "Headline 上面嗰粒細嘅 label。畀 context 用嘅。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-eyebrow"
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "name": "Primary CTA（Call to Action · 主要轉換按鈕）",
+      "description": "叫人撳嘅主掣。網頁最重要嗰粒按鈕。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-herocta"
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "name": "Social Proof（社會證明 · Trust Signal）",
+      "description": "頭像 + 評分 + 用戶數。轉化率最高 ROI 嘅元素之一。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-socialproof"
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "name": "Hero Visual / Product Mockup（主視覺 · 產品截圖）",
+      "description": "右邊嗰個 product mockup。一眼睇明個 app 做咩。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-herovisual"
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "name": "Info Tooltip（懸停提示 · 又叫 Popover）",
+      "description": "Hover ⓘ icon 出嘅小提示。畀額外 detail 而唔擠 layout。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-tooltip"
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "name": "Modal / Dialog（彈出視窗 · 又叫 Lightbox）",
+      "description": "蓋住成個畫面嘅 popup。video preview、sign-up、確認 dialog 都係呢個 pattern。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-modal"
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "name": "Trust Bar / Logo Wall（信任列 · 客戶 Logo 牆）",
+      "description": "一行客戶 logo。「呢啲大公司都用緊」借勢借得最直接。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-trust"
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "name": "Feature Grid (3-col)（功能 3 欄格仔）",
+      "description": "3 欄 grid 講 3 個 key feature。「3」係 magic number。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-featuregrid"
+    },
+    {
+      "@type": "ListItem",
+      "position": 13,
+      "name": "Feature Card（功能卡）",
+      "description": "單一張功能卡。Card 係而家 web design 嘅基本單位。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-featurecard"
+    },
+    {
+      "@type": "ListItem",
+      "position": 14,
+      "name": "Zigzag / Alternating Layout（交錯排版）",
+      "description": "深入講 feature 用嘅交錯 layout — 一行圖+文，下一行文+圖。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-zigzag"
+    },
+    {
+      "@type": "ListItem",
+      "position": 15,
+      "name": "SVG Progress Ring（SVG 環狀進度條）",
+      "description": "SVG 整圓形進度。比 PNG 細、retina 清，可以即時改色。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-ringtimer"
+    },
+    {
+      "@type": "ListItem",
+      "position": 16,
+      "name": "Bento Grid（便當格 · 大小拼接 layout）",
+      "description": "Apple keynote 嘅大小 cell 拼接 layout。一塊大配兩塊細，視覺有節奏。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-bento"
+    },
+    {
+      "@type": "ListItem",
+      "position": 17,
+      "name": "How It Works (Steps)（操作流程 · 3 步教學）",
+      "description": "1 → 2 → 3 流程教學。降低「我用唔嚟啩」嘅心理 barrier。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-steps"
+    },
+    {
+      "@type": "ListItem",
+      "position": 18,
+      "name": "Testimonial Section（客戶評價）",
+      "description": "深色 section + 一句客戶引言。真人證言勝過萬字 marketing。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-testimonial"
+    },
+    {
+      "@type": "ListItem",
+      "position": 19,
+      "name": "Pricing Table（收費表）",
+      "description": "收費表。設計目標：引導人揀你最想佢揀嗰個 plan（通常中間）。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-pricing"
+    },
+    {
+      "@type": "ListItem",
+      "position": 20,
+      "name": "FAQ Accordion（常見問題 · 摺合式）",
+      "description": "摺合式常見問題。SEO 加分 + 解最後疑慮。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-faq"
+    },
+    {
+      "@type": "ListItem",
+      "position": 21,
+      "name": "Final CTA Section（結尾 CTA · 又叫 Closing Pitch）",
+      "description": "Footer 之前嗰大幅。最後一次叫人撳。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-finalcta"
+    },
+    {
+      "@type": "ListItem",
+      "position": 22,
+      "name": "Footer（頁腳）",
+      "description": "網站最底嘅「萬能備胎」。揾唔到嘢嘅人會 scroll 到底揾。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-footer"
+    },
+    {
+      "@type": "ListItem",
+      "position": 23,
+      "name": "Toast Notification（Toast 通知 · 又叫 Snackbar）",
+      "description": "上面 slide 入嚟、3-6 秒自動消失嘅 mini 通知。Save 成功、welcome back 都用。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-toast"
+    },
+    {
+      "@type": "ListItem",
+      "position": 24,
+      "name": "Cookie Banner（Cookie 通知條）",
+      "description": "底部浮起嘅 cookie consent。GDPR 同 ePrivacy 要求。",
+      "url": "https://web-design-tutorial.vercel.app/#lesson-cookie"
+    }
+  ]
+}
+</script>
+<!-- LESSONS-JSONLD:END -->
+
+<style>
+/* 文字速查 section — 畀搜尋引擎 / AI / no-JS 讀，亦方便 Ctrl/⌘+F */
+.lessons-ref{border-top:1px solid var(--line);background:var(--soft);padding:64px 0}
+.lessons-ref-intro{color:var(--muted);max-width:62ch;margin-bottom:8px}
+.lesson-ref{border-top:1px solid var(--line);padding:24px 0}
+.lesson-ref h3{font-family:var(--font-display);font-size:22px;margin-bottom:8px}
+.lesson-ref h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:16px 0 8px}
+.lesson-ref-plain{color:var(--ink-soft);margin-bottom:8px}
+.lesson-ref ul{margin:0;padding-left:1.2em}
+.lesson-ref li{margin:4px 0}
+.lesson-ref-fix{margin:0}
+.lesson-ref-fix dt{font-weight:600;margin-top:10px}
+.lesson-ref-fix dd{margin:4px 0 0;padding:8px 12px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm)}
+.lesson-ref-ba{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+@media(max-width:680px){.lesson-ref-ba{grid-template-columns:1fr}}
+
+/* ---- review 修正 patches ---- */
+/* info tooltip ⓘ：視覺維持細，但撳得到嘅範圍擴到 44px（touch target AA）*/
+.info-trigger{position:relative}
+.info-trigger::before{content:'';position:absolute;inset:-13px;border-radius:50%}
+/* Inspector 搜尋／分類冇結果時嘅 empty state */
+.inspector-empty{font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.5}
+/* Tour：toast / modal / cookie 站嘅 anchor 提示 */
+.detail-anchor-note{font-size:13px;color:var(--coral-text);background:color-mix(in srgb,var(--coral-text) 8%,transparent);border-radius:var(--radius-sm);padding:8px 12px;margin:0 0 4px}
+/* 手機：cookie banner 仲喺度時，inspector pill 升高唔好同佢疊 */
+@media(max-width:880px){body.cookie-active .inspector{bottom:84px}}
+</style>
 </head>
 <body>
 
@@ -72,6 +295,12 @@
 
 <!-- Skip to content link -->
 <a href="#main-content" class="skip-link">跳到主內容</a>
+
+<noscript>
+  <p style="padding:12px 24px;background:#F0EBE3;color:#1A1A2E;text-align:center;font:14px/1.5 system-ui;margin:0;">
+    呢個互動教學需要開啟 JavaScript 先用到完整版。所有 24 個 pattern 嘅文字版喺頁面底部「全部 24 個 web design pattern · 文字速查」，可以直接睇。
+  </p>
+</noscript>
 
 <!-- aria-live region for tour announcements (screen reader only) -->
 <div id="tourLive" class="sr-only" aria-live="polite" aria-atomic="true"></div>
@@ -107,6 +336,7 @@
     <button type="button" class="cat-chip cat-chip-design" data-cat-filter="design" aria-pressed="true">設計</button>
     <button type="button" class="cat-chip cat-chip-tech" data-cat-filter="tech" aria-pressed="true">技術</button>
   </div>
+  <p class="inspector-empty" id="inspectorEmpty" hidden>冇 lesson 對應你嘅搜尋／分類。<button type="button" class="link-button" id="inspectorReset">清除全部</button></p>
   <div class="inspector-hint">
     <span class="hint-pointer">🖱 Hover / Tab 任何方塊 → 即時講解<br>👆 Click / Enter → 開啟詳細</span>
     <span class="hint-touch">👆 撳任何方塊 → 開講解</span>
@@ -161,7 +391,7 @@
   </div>
   <div class="cookie-actions">
     <button type="button" class="btn btn-outline" id="cookieReject">淨係用必要嘅</button>
-    <button type="button" class="btn btn-coral" id="cookieAccept">全部接受</button>
+    <button type="button" class="btn btn-outline" id="cookieAccept">全部接受</button>
   </div>
 </aside>
 
@@ -211,7 +441,7 @@
     <h2 id="aboutTitle">關於呢個 tutorial</h2>
     <p>呢個係一個<strong>互動式 web design 教學</strong>。目標受眾係<strong>叫 AI 寫網頁但唔識同 AI 講設計</strong>嘅人 — 例如 PM、創業者、design 新手、又或者係識少少 code 但唔識設計嘅 engineer。</p>
     <h3>點解整呢個？</h3>
-    <p>而家好多人用 AI 寫網頁，但出嚟嘅嘢自己睇唔出好壞、唔識指住改。呢個 tutorial 想填呢個 gap — 用一個真實 landing page 例子，拆解 18 個常見設計 pattern，教三樣嘢：</p>
+    <p>而家好多人用 AI 寫網頁，但出嚟嘅嘢自己睇唔出好壞、唔識指住改。呢個 tutorial 想填呢個 gap — 用一個真實 landing page 例子，拆解 24 個常見設計 pattern，教三樣嘢：</p>
     <ul class="about-bullets">
       <li><strong>識指</strong> — 呢個元素叫咩名（你可以指住個 Hero 直接同 AI 講「呢個 Hero⋯⋯」）</li>
       <li><strong>識睇</strong> — 對住 screenshot 用 4 點 checklist check 寫得好唔好</li>
@@ -239,6 +469,9 @@
   <div class="detail-cat">Structure</div>
   <h2 class="detail-name" id="detailName">Section Name</h2>
   <div class="detail-zh">中文名 · 英文標準叫法</div>
+
+  <!-- Tour：toast / modal / cookie 站嘅 anchor 提示（平時 hidden）-->
+  <p class="detail-anchor-note" id="dAnchorNote" hidden></p>
 
   <!-- 白話一句 -->
   <div class="detail-plain">
@@ -297,7 +530,7 @@
   <!-- 導航：上一個 / 下一個 (Phase C 會 enable) -->
   <nav class="detail-nav" id="detailNav" hidden aria-label="Tour 導航">
     <button type="button" class="btn btn-outline detail-nav-prev" id="detailPrev">← 上一個</button>
-    <div class="detail-nav-progress" id="detailProgress">1 / 18</div>
+    <div class="detail-nav-progress" id="detailProgress">1 / 24</div>
     <button type="button" class="btn btn-primary detail-nav-next" id="detailNext">下一個 →</button>
   </nav>
 </div>
@@ -307,7 +540,7 @@
      =================================================== -->
 
 <!-- 1. Announcement Bar -->
-<div class="announce" id="main-content" data-annotate data-id="announce" data-cat="structure">
+<div class="announce" data-annotate data-id="announce" data-cat="structure">
   ⚡️ <strong>新功能</strong> · Lumo 3.0 已上線 — AI 助你排日程
   <a href="#">睇下有咩新嘢 →</a>
 </div>
@@ -318,14 +551,14 @@
     <div class="logo"><span class="logo-dot"></span>Lumo</div>
     <div class="nav-links">
       <div class="nav-dropdown" data-annotate data-id="dropdown" data-cat="structure">
-        <button type="button" class="nav-dropdown-trigger" id="dropdownTrigger" aria-expanded="false" aria-haspopup="true" aria-controls="dropdownPanel">
+        <button type="button" class="nav-dropdown-trigger" id="dropdownTrigger" aria-expanded="false" aria-controls="dropdownPanel">
           功能 <span class="caret" aria-hidden="true">▾</span>
         </button>
-        <div class="nav-dropdown-panel" id="dropdownPanel" role="menu" aria-labelledby="dropdownTrigger" hidden>
-          <a role="menuitem" href="#features"><span class="dm-emoji">⏱</span><span><strong>25 分鐘 Timer</strong><span class="dm-sub">Pomodoro + ambient sound</span></span></a>
-          <a role="menuitem" href="#features"><span class="dm-emoji">🧠</span><span><strong>AI 自動排程</strong><span class="dm-sub">講一句就拆好日程</span></span></a>
-          <a role="menuitem" href="#features"><span class="dm-emoji">📊</span><span><strong>每週反思報告</strong><span class="dm-sub">逢星期日送到 inbox</span></span></a>
-          <a role="menuitem" href="#features"><span class="dm-emoji">🎯</span><span><strong>連續達標 streak</strong><span class="dm-sub">解鎖 badge 同里程碑</span></span></a>
+        <div class="nav-dropdown-panel" id="dropdownPanel" aria-labelledby="dropdownTrigger" hidden>
+          <a href="#features"><span class="dm-emoji">⏱</span><span><strong>25 分鐘 Timer</strong><span class="dm-sub">Pomodoro + ambient sound</span></span></a>
+          <a href="#features"><span class="dm-emoji">🧠</span><span><strong>AI 自動排程</strong><span class="dm-sub">講一句就拆好日程</span></span></a>
+          <a href="#features"><span class="dm-emoji">📊</span><span><strong>每週反思報告</strong><span class="dm-sub">逢星期日送到 inbox</span></span></a>
+          <a href="#features"><span class="dm-emoji">🎯</span><span><strong>連續達標 streak</strong><span class="dm-sub">解鎖 badge 同里程碑</span></span></a>
         </div>
       </div>
       <a href="#how">點用</a>
@@ -338,6 +571,8 @@
     </div>
   </div>
 </nav>
+
+<main id="main-content">
 
 <!-- 3. Hero -->
 <section class="hero" data-annotate data-id="hero" data-cat="structure">
@@ -658,19 +893,19 @@
     <div class="faq-wrap" data-annotate data-id="faq" data-cat="tech">
       <div class="faq-item">
         <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-1">Lumo 識唔識中文？</button>
-        <div class="faq-a" id="faq-a-1" role="region">識。Lumo 完全支援繁體中文、英文。AI 接受你打中文輸入任務，內部直接理解，唔需要 translate。</div>
+        <div class="faq-a" id="faq-a-1">識。Lumo 完全支援繁體中文、英文。AI 接受你打中文輸入任務，內部直接理解，唔需要 translate。</div>
       </div>
       <div class="faq-item">
         <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-2">免費版同 Pro 版差幾遠？</button>
-        <div class="faq-a" id="faq-a-2" role="region">最大分別係 AI 自動排日程 — 免費版要你自己手動排，Pro 版講一句就搞掂。另外無限任務、反思報告呢啲都係 Pro only。</div>
+        <div class="faq-a" id="faq-a-2">最大分別係 AI 自動排日程 — 免費版要你自己手動排，Pro 版講一句就搞掂。另外無限任務、反思報告呢啲都係 Pro only。</div>
       </div>
       <div class="faq-item">
         <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-3">取消之後 data 會唔會無哂？</button>
-        <div class="faq-a" id="faq-a-3" role="region">取消之後 data 會保留 90 日，期間你可以隨時 export 做 CSV / Notion / Markdown。90 日後正式刪除，唔留底。</div>
+        <div class="faq-a" id="faq-a-3">取消之後 data 會保留 90 日，期間你可以隨時 export 做 CSV / Notion / Markdown。90 日後正式刪除，唔留底。</div>
       </div>
       <div class="faq-item">
         <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a-4">支援咩裝置？</button>
-        <div class="faq-a" id="faq-a-4" role="region">Mac、Windows、iOS、Android 都有 native app。亦有 web app，瀏覽器都用得。所有平台 data 即時同步。</div>
+        <div class="faq-a" id="faq-a-4">Mac、Windows、iOS、Android 都有 native app。亦有 web app，瀏覽器都用得。所有平台 data 即時同步。</div>
       </div>
     </div>
   </div>
@@ -684,6 +919,8 @@
     <button class="btn btn-coral btn-lg">免費開始 — 唔使俾卡</button>
   </div>
 </section>
+
+</main>
 
 <!-- 12. Footer -->
 <footer class="footer" data-annotate data-id="footer" data-cat="structure">
@@ -722,6 +959,818 @@
   </div>
 </footer>
 
-<script type="module" src="js/main.js?v=11"></script>
+<!-- ALL-LESSONS:START — 由 scripts/build-static.mjs 生成，唔好手改 -->
+
+<section class="lessons-ref" id="all-lessons" aria-labelledby="lessonsRefTitle">
+  <div class="container">
+    <h2 id="lessonsRefTitle">全部 24 個 web design pattern · 文字速查</h2>
+    <p class="lessons-ref-intro">上面互動教學嘅文字版 — 每個 pattern 嘅白話解釋、4 點檢查清單、同抄畀 AI 嘅 prompt。方便 Ctrl / ⌘ + F 搜尋，亦等搜尋引擎同 AI 助手讀得到呢啲內容。</p>
+    <article class="lesson-ref" id="lesson-announce">
+      <h3>Announcement Bar · 公告條 · 又叫 Promo Bar / Top Bar</h3>
+      <p class="lesson-ref-plain">網頁最頂嗰條細條，用嚟推新嘢嘅 banner。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>訊息夠唔夠短？一行內講完？</li>
+        <li>有冇 emoji 同 strong 突出 keyword？</li>
+        <li>結尾有冇 inline link 引人撳？</li>
+        <li>背景深色 / 中性色，唔搶 hero？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>Banner 太搶眼，蓋過 hero</dt>
+        <dd>將 announce bar 改用深色 gradient 背景 + 13px 細字 + 白色文字，唔好用品牌色實底。</dd>
+        <dt>想加 emoji 同 highlight keyword</dt>
+        <dd>Emoji 放最前，用 &lt;strong&gt; 標出最重要嗰個 keyword，再加 inline 連結 →。</dd>
+        <dt>想用戶可以關閉</dt>
+        <dd>右邊加 ✕ 細掣，撳咗用 localStorage 記低 dismissed 之後唔再 show。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>用品牌色實底蓋過 hero</li>
+          <li>一段長文 / 冇 highlight</li>
+          <li>冇 inline link 引人撳</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>深色 gradient + 13px 細白字</li>
+          <li>1 emoji + 1 strong keyword</li>
+          <li>結尾 inline →</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-nav">
+      <h3>Navigation Bar · 導覽列 · Nav / Header</h3>
+      <p class="lesson-ref-plain">永遠黐喺最頂嗰條導覽列，幫人跳去任何地方。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>左 logo / 中 nav links / 右 CTA — 3 段式 layout？</li>
+        <li>Scroll 落去 nav 仲跟住喺度（sticky）？</li>
+        <li>有冇玻璃模糊感（透明 + backdrop-filter）？</li>
+        <li>CTA 同 nav links 視覺對比夠大？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>Nav scroll 唔到時消失</dt>
+        <dd>Nav 加 position: sticky; top: 0; z-index: 50。</dd>
+        <dt>Nav 同 page 顏色撞</dt>
+        <dd>Nav 加 backdrop-filter: blur(14px) saturate(180%) + rgba 半透明背景，scroll 之後再加細邊框。</dd>
+        <dt>Nav 入面太擠</dt>
+        <dd>中間 links gap 28px，logo 同 CTA 兩邊各 32px gap，padding 16px 24px。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>Scroll 之後消失</li>
+          <li>Logo 同 links 攝晒一齊</li>
+          <li>CTA 太細混入 links</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>Sticky + backdrop blur + 半透明</li>
+          <li>左 logo / 中 nav / 右 CTA</li>
+          <li>CTA 用實底突圍</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-dropdown">
+      <h3>Dropdown / Mega Menu · 下拉選單 · 又叫 Flyout / Mega Menu</h3>
+      <p class="lesson-ref-plain">Hover / Click trigger 出嚟嘅 panel。Nav 想 expand 多嘢就用呢個。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>Hover + Click 兩個都 trigger 到？</li>
+        <li>Esc 鍵可以關 + focus 還原到 trigger？</li>
+        <li>Caret ▾ 隨開合自動旋轉提示狀態？</li>
+        <li>Panel 入面每個 item 有 icon + 標題 + 副文？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>Dropdown 太硬 pop 出 / 消失</dt>
+        <dd>Panel 用 opacity + transform translateY 漸入，唔好用 display: none / block — 加 transition: 0.2s cubic-bezier。</dd>
+        <dt>Hover 容易誤觸</dt>
+        <dd>Trigger 同 panel 之間留 12px gap + 大個 hover region。Mouse enter dropdown container 而唔係 trigger 本身。</dd>
+        <dt>冇 a11y</dt>
+        <dd>Trigger 加 aria-expanded + aria-controls 指住 panel；Esc 關、撳完還原 focus。啲連結唔使加 role=menu / role=menuitem（除非你真係寫齊上下鍵導航）。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>得文字 link 冇 icon</li>
+          <li>Hover 立即消失冇 buffer</li>
+          <li>冇 aria 屬性</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>Icon + title + sub 三層資訊</li>
+          <li>opacity + translate 漸入</li>
+          <li>aria-expanded + Esc + focus 還原</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-hero">
+      <h3>Hero Section · Hero 區 · 又叫 Above the Fold</h3>
+      <p class="lesson-ref-plain">網頁最頂、最大、最搶眼嗰幅。一打開第一眼睇到嘅嘢。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>Headline 短唔短？一句、講 benefit（唔係 feature）？</li>
+        <li>有冇主 CTA + 次 CTA 兩粒掣？</li>
+        <li>CTA 下面有冇 social proof（評分 / 用戶數 / 頭像）？</li>
+        <li>右邊有冇 visual / mockup 撐住個畫面？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>Headline 太長太硬</dt>
+        <dd>Headline 改成一句講 benefit，例如「做多啲、做好啲」，次要訊息放副標題。</dd>
+        <dt>CTA 唔夠突出</dt>
+        <dd>主 CTA 用品牌色實底 + 大陰影，次 CTA 改 outline / ghost — 一定要視覺有主次。</dd>
+        <dt>個 hero 平平無起伏</dt>
+        <dd>右邊加 product mockup，加 perspective + rotateY(-8deg) + 大陰影，再喺旁邊加 2 個浮動 stats card。</dd>
+        <dt>冇 social proof</dt>
+        <dd>CTA 下面加：4 個重疊頭像 + ★★★★★ 4.9 + 用戶數（24,000 唔好寫 24k）。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>Headline 一大段講 feature</li>
+          <li>3 粒 CTA 並排令人 paralyze</li>
+          <li>冇 social proof / 冇 visual</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>Headline 一句講 benefit</li>
+          <li>1 主 (實底) + 1 次 (outline)</li>
+          <li>CTA 下加 4.9 + 24,000 + 右邊 mockup</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-eyebrow">
+      <h3>Eyebrow · 眉標 · 又叫 Kicker / Pre-headline</h3>
+      <p class="lesson-ref-plain">Headline 上面嗰粒細嘅 label。畀 context 用嘅。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>字夠細（13px 左右）？</li>
+        <li>字距夠開（letter-spacing 大）？</li>
+        <li>有冇用 uppercase？</li>
+        <li>配品牌色 pill bg？有冇 dot indicator？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>Eyebrow 太搶眼蓋過 headline</dt>
+        <dd>Eyebrow font-size 13px，letter-spacing 0.12em，淺色 rgba 背景 + 品牌色文字 — 一定要細過 H1。</dd>
+        <dt>想加生氣</dt>
+        <dd>Eyebrow 前面加一粒 6px 圓點，加 @keyframes pulse 2s ease-in-out infinite。</dd>
+        <dt>想做 pill 樣</dt>
+        <dd>border-radius: 999px; padding: 6px 14px; background: rgba(brand, 0.08)。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>字大過 H1 搶風頭</li>
+          <li>冇 letter-spacing 似普通字</li>
+          <li>冇 pill / 冇 dot</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>13px UPPERCASE + 0.12em</li>
+          <li>Pill 圓邊 + 品牌色淡背景</li>
+          <li>前面 6px pulse dot</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-herocta">
+      <h3>Primary CTA · Call to Action · 主要轉換按鈕</h3>
+      <p class="lesson-ref-plain">叫人撳嘅主掣。網頁最重要嗰粒按鈕。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>Copy 寫 benefit 唔寫動作？（「免費試 14 日」唔好寫「Sign Up」）</li>
+        <li>Hover 有冇浮起 + 加陰影？</li>
+        <li>主 CTA + 次 CTA 兩粒（最忌 3 粒並排）？</li>
+        <li>CTA 同周圍對比夠強（背景中性 / CTA 品牌色）？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>CTA 唔夠搶眼</dt>
+        <dd>主 CTA 用品牌色實底 + box-shadow: 0 8px 20px rgba(brand, 0.35)，hover translateY(-2px) 加深 shadow。</dd>
+        <dt>CTA 文字太硬太 generic</dt>
+        <dd>Copy 改 benefit-focused：「免費開始 — 永遠免費」、「14 日免費試 — 唔使俾卡」。</dd>
+        <dt>一定要兩粒 CTA</dt>
+        <dd>主 CTA 品牌色實底，次 CTA outline / ghost（例如「▶ 睇 2 分鐘 demo」）— 兩粒對比要強。</dd>
+        <dt>CTA 太硬太 sharp</dt>
+        <dd>border-radius: 999px 做完全圓 pill — 現代 SaaS 標配，感覺更 friendly。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>寫「Sign Up」純動作</li>
+          <li>3 粒 CTA 視覺平均</li>
+          <li>Outline / solid 唔分</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>「免費試 14 日 — 唔使俾卡」</li>
+          <li>1 主 (實底+陰影) + 1 次 (outline)</li>
+          <li>Hover translateY(-2px) 強化點擊感</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-socialproof">
+      <h3>Social Proof · 社會證明 · Trust Signal</h3>
+      <p class="lesson-ref-plain">頭像 + 評分 + 用戶數。轉化率最高 ROI 嘅元素之一。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>放係 CTA 下面？（撳之前最後一刻打底）</li>
+        <li>評分同數字用真實值（唔好作大、唔好砌假）？</li>
+        <li>頭像重疊但有間隙感？</li>
+        <li>Stat 數字夠具體（24,000 唔好寫 24k）？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>頭像太靠太實</dt>
+        <dd>頭像 28px，margin-left: -8px 重疊，加 2px solid border 同 background 同色（製造視覺間隙）。</dd>
+        <dt>冇真實感</dt>
+        <dd>用真實評分同具體用戶數（例如寫 24,000 唔好寫 25k）。⚠️ 唔好作大，亦唔好為咗「睇落真啲」而改細真實評分 — 嗰個係作假。</dd>
+        <dt>冇真人相片用</dt>
+        <dd>用 linear-gradient 漸變色做圓形頭像 — 唔需要真人，但有人物 placeholder 感。⚠️ 淨係 demo / 未有真客戶嘅 wireframe 先用 placeholder；真網站一定要用真客戶、真評價、真數字 — 作假 social proof 喺好多地方屬違法廣告。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>「最好嘅 productivity app」純口號</li>
+          <li>作大或砌假評分／數字</li>
+          <li>「many users」唔具體</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>4.9 星 + 24,000 真實用戶</li>
+          <li>4 個重疊 gradient avatar</li>
+          <li>放係 CTA 下面打底</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-herovisual">
+      <h3>Hero Visual / Product Mockup · 主視覺 · 產品截圖</h3>
+      <p class="lesson-ref-plain">右邊嗰個 product mockup。一眼睇明個 app 做咩。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>Mockup 有冇 3D 角度（rotateY 細少少）？</li>
+        <li>有冇深陰影將 mockup 由背景抽出嚟？</li>
+        <li>旁邊有冇浮動 stat card？</li>
+        <li>Hover 有冇 micro-interaction？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>Mockup 太平太靜</dt>
+        <dd>父 element 加 perspective: 1200px，mockup transform: rotateY(-8deg) rotateX(4deg)。</dd>
+        <dt>Mockup 同背景太融</dt>
+        <dd>加 box-shadow: 0 24px 60px rgba(0,0,0,0.14) — 大而 soft 嘅陰影。</dd>
+        <dt>想加生氣感</dt>
+        <dd>兩邊絕對位置加 2 個浮動 stat card（連續達標、今日專注時間），@keyframes float 4s ease-in-out infinite。</dd>
+        <dt>冇真 app 用</dt>
+        <dd>用 div + card layout 砌個假 app UI — header dots、task list、stat — 已經夠表達。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>用 stock photo 唔關事</li>
+          <li>正面 mockup 平平無 depth</li>
+          <li>右邊空白冇嘢撐</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>用 div 砌真 app UI</li>
+          <li>perspective + rotateY 3D 角度</li>
+          <li>加 2 個浮動 stat card</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-tooltip">
+      <h3>Info Tooltip · 懸停提示 · 又叫 Popover</h3>
+      <p class="lesson-ref-plain">Hover ⓘ icon 出嘅小提示。畀額外 detail 而唔擠 layout。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>Trigger 用 ⓘ icon（universal「more info」signal）？</li>
+        <li>Hover + keyboard focus 都 trigger 到？</li>
+        <li>有箭嘴 indicator 指返 trigger？</li>
+        <li>4-5 句句子內，唔好寫成段？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>只係 mouse hover work</dt>
+        <dd>用 :focus-within 而唔係 :focus — etrigger 同 bubble 都 visible 喺 focus-within 範圍內。加 aria-describedby 等 screen reader 讀到。</dd>
+        <dt>Tooltip 跑出 viewport</dt>
+        <dd>CSS Anchor Positioning（新）或者 JS Floating UI library。簡單版用 transform translateX(-50%) 居中 + 加箭嘴 ::after。</dd>
+        <dt>Bubble 太細睇唔清</dt>
+        <dd>min-width 220px，font-size 12.5px，line-height 1.5，padding 10px 12px。深色背景 + 白字對比清楚。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>Hover 即時硬 pop 出</li>
+          <li>冇 keyboard / focus 支援</li>
+          <li>冇箭嘴指返 trigger</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>opacity + translateY 漸入</li>
+          <li>:focus-within 鍵盤支援</li>
+          <li>::after 三角箭嘴 indicator</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-modal">
+      <h3>Modal / Dialog · 彈出視窗 · 又叫 Lightbox</h3>
+      <p class="lesson-ref-plain">蓋住成個畫面嘅 popup。video preview、sign-up、確認 dialog 都係呢個 pattern。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>有冇 backdrop（黑色半透蓋住底）？</li>
+        <li>可唔可以 Esc 關 / backdrop click 關？</li>
+        <li>Focus 自動入去 modal 入面（focus trap）？</li>
+        <li>關咗之後 focus 還原到觸發嘅 button？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>自己用 div 砌 modal 唔啱 a11y</dt>
+        <dd>用 native &lt;dialog&gt; element + dialog.showModal()。Browser 自動 focus trap、Esc 關閉、backdrop、role=dialog aria-modal — 唔使自己寫。</dd>
+        <dt>Backdrop 唔識點整</dt>
+        <dd>用 ::backdrop pseudo-element：dialog::backdrop { background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); }</dd>
+        <dt>想加入動畫 entrance</dt>
+        <dd>加 @keyframes pop animation 喺 dialog[open]，scale(0.92) translateY(20px) → scale(1) translateY(0) cubic-bezier 彈出。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>用 div + position:fixed 自己砌</li>
+          <li>冇 backdrop（背景仲撳到）</li>
+          <li>冇 focus trap / Esc 關</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>Native &lt;dialog&gt; + showModal()</li>
+          <li>::backdrop pseudo + blur</li>
+          <li>自動 focus trap + Esc + aria-modal</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-trust">
+      <h3>Trust Bar / Logo Wall · 信任列 · 客戶 Logo 牆</h3>
+      <p class="lesson-ref-plain">一行客戶 logo。「呢啲大公司都用緊」借勢借得最直接。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>Logo 全部灰階 / 半透明（避免色彩衝突）？</li>
+        <li>至少 5–6 個 logo？</li>
+        <li>Label 用「深受 X 公司愛用」呢類 small caps 標題？</li>
+        <li>位置喺 hero 之後第一個（剛 hook 完即刻打底）？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>Logo 太花搶眼</dt>
+        <dd>所有 logo 改用同一灰色 var(--ink-soft)，opacity: 0.65，hover 變 1。唔好用真實品牌色。</dd>
+        <dt>Logo 太少冇說服力</dt>
+        <dd>至少 5 個，最理想 6–8 個。如果真係少，配文字證據：「800+ 公司用緊」。</dd>
+        <dt>冇真實 logo 用</dt>
+        <dd>用 fictional 公司名（NORDIC、Pixel &amp; Co.、Mango），display font 寫法，當佢哋係 wordmark。⚠️ 淨係 demo / wireframe 先咁做；真網站要用真客戶 logo（攞咗授權），作假客戶 logo 喺好多地方屬違法廣告。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>Logo 用真實品牌色花花</li>
+          <li>只有 2-3 個 logo</li>
+          <li>冇 label 解釋</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>全部統一灰色 opacity 0.65</li>
+          <li>6+ logos 或加「800+ 公司」</li>
+          <li>上面 small caps「深受 X 公司愛用」</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-featuregrid">
+      <h3>Feature Grid (3-col) · 功能 3 欄格仔</h3>
+      <p class="lesson-ref-plain">3 欄 grid 講 3 個 key feature。「3」係 magic number。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>剛剛好 3 個 card（多過 4 太散）？</li>
+        <li>Card 之間 gap 24px 左右？</li>
+        <li>每張 card 結構一致（icon → title → desc）？</li>
+        <li>Hover 有冇 micro-interaction？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>Feature 太多想擠晒</dt>
+        <dd>揀最重要 3 個，其他擺後面 zigzag deep-dive section。Hero 嘅 feature grid 一定唔好超過 3。</dd>
+        <dt>Card 太悶</dt>
+        <dd>Hover translateY(-6px) + 上方出現一條 3px coral 細線（::before scaleX 0 → 1，transform-origin: left）。</dd>
+        <dt>手機 layout 散晒</dt>
+        <dd>@media 880px 改 grid-template-columns: 1fr，gap 改細少少。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>5-6 個 feature 擠一行</li>
+          <li>Card 之間冇 gap</li>
+          <li>Static 冇 hover 反饋</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>正好 3 個（magic number）</li>
+          <li>Gap 24px + 統一 padding</li>
+          <li>Hover translateY + shadow + 出現頂部 coral 線</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-featurecard">
+      <h3>Feature Card · 功能卡</h3>
+      <p class="lesson-ref-plain">單一張功能卡。Card 係而家 web design 嘅基本單位。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>Border-radius 大啲（20–24px）？</li>
+        <li>Padding 夠（30–36px）？</li>
+        <li>Icon 有冇 soft gradient background？</li>
+        <li>Hover 浮起 + shadow + 邊框消失？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>Card 太硬太 sharp</dt>
+        <dd>border-radius: 24px; padding: 32px; 用 cubic-bezier(0.22, 1, 0.36, 1) 嘅 transition，比 ease 更「彈」。</dd>
+        <dt>Icon 太細太單調</dt>
+        <dd>Icon 用 52×52px 圓角方塊，soft linear-gradient 漸變背景，emoji 24px 居中。</dd>
+        <dt>Card 太靜</dt>
+        <dd>Hover: transform translateY(-6px) + shadow 變 lg + border-color: transparent — 視覺反饋強。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>border-radius 8px 工程感</li>
+          <li>Padding 細擠</li>
+          <li>Icon 純文字 emoji</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>border-radius 24px + padding 32px</li>
+          <li>Soft gradient icon 52px</li>
+          <li>Cubic-bezier transition 有彈性</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-zigzag">
+      <h3>Zigzag / Alternating Layout · 交錯排版</h3>
+      <p class="lesson-ref-plain">深入講 feature 用嘅交錯 layout — 一行圖+文，下一行文+圖。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>每行只講一個 feature（避免擠）？</li>
+        <li>左右交替（視線會 zigzag 落底）？</li>
+        <li>50/50 分配（視覺平衡）？</li>
+        <li>背景同上面 section 唔同色（分區）？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>Layout 太靜止</dt>
+        <dd>zigzag-row 用 grid-template-columns: 1fr 1fr，每行 .reverse 用 order: 2 將文字反到對面。</dd>
+        <dt>太多 row 太悶</dt>
+        <dd>2–3 個 zigzag 已經足夠。多過建議拆做 tabbed feature comparison 或 bento grid。</dd>
+        <dt>同上面 feature grid 太似</dt>
+        <dd>Zigzag section 整個轉淺色背景（var(--soft)），同上面 section 視覺分開。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>每行塞 2-3 個 feature</li>
+          <li>全部圖同一邊</li>
+          <li>同上面同色冇分區</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>每行只一個 feature</li>
+          <li>左右交替（順視線）</li>
+          <li>背景轉 var(--soft) 分隔</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-ringtimer">
+      <h3>SVG Progress Ring · SVG 環狀進度條</h3>
+      <p class="lesson-ref-plain">SVG 整圓形進度。比 PNG 細、retina 清，可以即時改色。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>兩層 circle（背景灰 + 前景品牌色）？</li>
+        <li>Stroke 夠厚（10–12px）？</li>
+        <li>stroke-linecap: round（端點圓滑）？</li>
+        <li>SVG 旋轉 -90deg（由 12 點開始）？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>進度條太細嘢</dt>
+        <dd>同 AI 講：「個進度環太幼，整粗啲、由 12 點開始順時針填」。技術版：stroke-width 12px，r=90，stroke-dasharray = 2πr ≈ 565。</dd>
+        <dt>想 animate 進度</dt>
+        <dd>加 transition: stroke-dashoffset 1s cubic-bezier(0.22, 1, 0.36, 1)，updating dashoffset 即係改進度。</dd>
+        <dt>想加中間數字</dt>
+        <dd>svg 外層 position: relative，中間放 .timer-num position: absolute inset: 0 + flex column 居中。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>用 PNG image（rasterize 唔清）</li>
+          <li>Stroke 4px 太幼</li>
+          <li>冇 animation 死寂</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>SVG 兩層 circle stroke 12px</li>
+          <li>-90deg rotate 由 12 點開始</li>
+          <li>stroke-dashoffset 1s transition</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-bento">
+      <h3>Bento Grid · 便當格 · 大小拼接 layout</h3>
+      <p class="lesson-ref-plain">Apple keynote 嘅大小 cell 拼接 layout。一塊大配兩塊細，視覺有節奏。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>至少一個 cell 大過其他（focal point）？</li>
+        <li>大小有 rhythm（唔好全部一樣 size）？</li>
+        <li>每個 cell 一個 idea，唔好擠？</li>
+        <li>至少一個 cell 反色（深底 / 漸變）做對比？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>Layout 太平太悶</dt>
+        <dd>用 grid-template-columns: repeat(4, 1fr) + grid-template-rows: auto auto，再俾一個 cell 用 grid-column: span 2 + grid-row: span 2 變大。</dd>
+        <dt>冇視覺 rhythm</dt>
+        <dd>其中一個 cell 反色（var(--ink) bg + 白字），另一個用 linear-gradient soft 漸變底 — 等視線喺幾個 cell 之間跳。</dd>
+        <dt>想加 chart / streak 內容</dt>
+        <dd>用純 div + flex 砌 mini chart（bento-bars / streak-day），CSS-only 唔 import library。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>4 個 cell 等size 似 grid-card</li>
+          <li>全部白底冇對比</li>
+          <li>每 cell 塞 3-4 個 stat</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>大細 mix（1×big + 2×wide + 2×small）</li>
+          <li>一個反深色 + 一個漸變</li>
+          <li>每 cell 一個 hero stat</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-steps">
+      <h3>How It Works (Steps) · 操作流程 · 3 步教學</h3>
+      <p class="lesson-ref-plain">1 → 2 → 3 流程教學。降低「我用唔嚟啩」嘅心理 barrier。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>剛剛好 3 步（多過就唔係「簡單」）？</li>
+        <li>中間有冇虛線連起（順序感）？</li>
+        <li>每步描述夠短（一兩句）？</li>
+        <li>正中對齊？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>步驟太多</dt>
+        <dd>一定要壓縮到 3 步。超過嘅 detail 放 deep-dive section 或 documentation page。</dd>
+        <dt>步驟之間冇連接感</dt>
+        <dd>用 ::before pseudo 喺 grid container 上畫虛線（repeating-linear-gradient 90deg），由 step 1 連到 step 3。</dd>
+        <dt>手機虛線變死位</dt>
+        <dd>@media 880px 將 ::before display: none — 垂直排冇必要虛線。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>5+ 步太多（不如睇 docs）</li>
+          <li>冇連接視覺（3 個獨立 card）</li>
+          <li>每步講太長太多 detail</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>正好 3 步</li>
+          <li>中間虛線連 1 → 2 → 3</li>
+          <li>一步一兩句 + 大粒數字圓</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-testimonial">
+      <h3>Testimonial Section · 客戶評價</h3>
+      <p class="lesson-ref-plain">深色 section + 一句客戶引言。真人證言勝過萬字 marketing。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>深色背景同前後 section 反色？</li>
+        <li>有冇巨大 quote mark 做背景裝飾？</li>
+        <li>引言用 serif italic 字體？</li>
+        <li>署名齊全（名 + 職位 + 公司）？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>Testimonial 太靜</dt>
+        <dd>::before 加巨大 watermark：content: '\&quot;'; font-size: 360px; color: rgba(brand, 0.15); position: absolute。</dd>
+        <dt>冇個人感</dt>
+        <dd>加 avatar（linear-gradient 漸變色圓形）、名（粗）、職位 + 公司（細灰）— 越具體越可信。⚠️ 真網站要用真實客戶嘅引言同身份（攞咗同意）；作假 testimonial 喺好多地方屬違法廣告。</dd>
+        <dt>引言太長悶</dt>
+        <dd>剪到一句最有力嗰句，原引言可以放 case study page。長 quote 等於冇 quote。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>引言 3 段長文</li>
+          <li>冇 author（純 quote）</li>
+          <li>冇大 quote mark 視覺 anchor</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>一句最有力嗰句</li>
+          <li>名 + 職位 + 公司齊</li>
+          <li>::before 360px 透明 quote mark</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-pricing">
+      <h3>Pricing Table · 收費表</h3>
+      <p class="lesson-ref-plain">收費表。設計目標：引導人揀你最想佢揀嗰個 plan（通常中間）。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>中間 plan highlight 咗（深色 + scale 大少少）？</li>
+        <li>中間有冇「最多人揀」badge？</li>
+        <li>Feature list 用 ✓ 唔用 ·？</li>
+        <li>價錢字大、單位（/月）細？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>3 個 plan 一樣大冇焦點</dt>
+        <dd>中間 featured plan：transform: scale(1.04) + 反深色（var(--ink) bg + 白字）— 視覺即刻跳出嚟。</dd>
+        <dt>冇推薦提示</dt>
+        <dd>Featured plan position: relative + ::before absolute badge「最多人揀」coral 背景 + uppercase。</dd>
+        <dt>Button 高度唔齊</dt>
+        <dd>price-card 用 flex column + .price-features flex: 1，等 button 永遠 stick 喺 card 底。</dd>
+        <dt>價錢字太細</dt>
+        <dd>price-amount font-size: 48px + display font + bold。span 入面嘅「/月」改 16px regular。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>3 個 plan 一樣大冇焦點</li>
+          <li>冇「最多人揀」badge</li>
+          <li>Button 高低不齊</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>中間 plan scale(1.04) + 反深色</li>
+          <li>Featured 加 coral badge</li>
+          <li>.price-features flex:1 等 button 對齊</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-faq">
+      <h3>FAQ Accordion · 常見問題 · 摺合式</h3>
+      <p class="lesson-ref-plain">摺合式常見問題。SEO 加分 + 解最後疑慮。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>一條 Q 一條細線分隔？</li>
+        <li>+ icon 開咗變 ×（旋轉 45 度）？</li>
+        <li>答案 2–3 句就夠，唔好長篇？</li>
+        <li>問題用 user 嘅原話，唔係 marketing 語？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>Accordion animation 唔順 / 長答案 cut 親</dt>
+        <dd>同 AI 講：「FAQ 展開要順滑、長答案唔好 cut 親」。技術版：CSS max-height 由 0 開始，JS 開時設成 element.scrollHeight + 'px'，transition: max-height 0.4s ease。</dd>
+        <dt>答案太長太悶</dt>
+        <dd>剪到 2–3 句最精華。Detail 寫去 documentation page，FAQ 只係解最常問。</dd>
+        <dt>+ icon 唔識變</dt>
+        <dd>.faq-q::after content: '+'; .open .faq-q::after transform: rotate(45deg) — 自動變 ×。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>每條 Q 答 5 段似 docs</li>
+          <li>Static 永遠開晒（冇 accordion）</li>
+          <li>Marketing 語言寫問題</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>每條答 2-3 句</li>
+          <li>+ → × rotate + max-height scrollHeight</li>
+          <li>用戶原話（「咁幾錢？」）</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-finalcta">
+      <h3>Final CTA Section · 結尾 CTA · 又叫 Closing Pitch</h3>
+      <p class="lesson-ref-plain">Footer 之前嗰大幅。最後一次叫人撳。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>極簡（一 headline + 一 CTA）？</li>
+        <li>CTA 消除最後 objection（「唔使俾卡」、「永遠免費」）？</li>
+        <li>背景同 hero 呼應（形成 page 嘅 visual bracket）？</li>
+        <li>正中對齊，焦點單一？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>太多嘢分散注意</dt>
+        <dd>Final CTA 一定要極簡 — 一個 H2，一句副文，一粒掣。其他嘢全部移走，包括 nav links。</dd>
+        <dt>Copy 同 hero 重複</dt>
+        <dd>寫總結式 + 召喚行動：「每一日，認真做番一啲嘢」配 CTA 加 micro-copy 消 objection。</dd>
+        <dt>同上面 section 太靜止</dt>
+        <dd>加 radial-gradient 從頂部落（rgba 品牌色 0.18 → transparent）— 視線自然落去 CTA。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>加埋 form / nav / 其他 link</li>
+          <li>Copy 重複 hero</li>
+          <li>冇消除最後 objection</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>極簡：一 H2 + 一句 + 一掣</li>
+          <li>寫總結 + 召喚行動</li>
+          <li>CTA 加「唔使俾卡」消 objection</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-footer">
+      <h3>Footer · 頁腳</h3>
+      <p class="lesson-ref-plain">網站最底嘅「萬能備胎」。揾唔到嘢嘅人會 scroll 到底揾。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>4 columns：brand + 3 組 links？</li>
+        <li>深色背景同 page 結束有明確分隔？</li>
+        <li>Copyright + made-in 喺最底，細字？</li>
+        <li>所有「冇地方放」嘅 link 都齊（私隱、條款、招聘、聯絡）？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>Footer 視覺太重</dt>
+        <dd>Footer 深色背景（var(--ink)），所有字 rgba(255,255,255,0.7)，h5 標題白色 — 視覺重量自然下沉。</dd>
+        <dt>手機 layout 亂</dt>
+        <dd>@media 880px 改 grid-template-columns: 1fr 1fr，brand column 用 grid-column: 1 / -1 佔 full row。</dd>
+        <dt>Link 太多揾唔到</dt>
+        <dd>分 3 組：產品 / 公司 / 支援。每組 4–5 條 link 已經夠 — 多過就要諗下要唔要全部放。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>只有 copyright 一行</li>
+          <li>深色但對比唔夠</li>
+          <li>Mobile 4 columns 擠死</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>4 columns：brand + 3 組 link</li>
+          <li>h5 純白 + body rgba(255,255,255,0.7)</li>
+          <li>@media 880 變 1fr 1fr</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-toast">
+      <h3>Toast Notification · Toast 通知 · 又叫 Snackbar</h3>
+      <p class="lesson-ref-plain">上面 slide 入嚟、3-6 秒自動消失嘅 mini 通知。Save 成功、welcome back 都用。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>夠細，唔擋 main content？</li>
+        <li>Auto-dismiss（4-6 秒）+ 可以手動 ✕ 關？</li>
+        <li>aria-live=&quot;polite&quot;，screen reader 讀得到？</li>
+        <li>一次只 show 一個（多個會排隊）？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>同 modal 搞錯</dt>
+        <dd>Toast = 通知性、唔阻斷、auto dismiss。Modal = 強制 focus、要 user 行動。完全唔同 pattern，唔好混用。</dd>
+        <dt>Toast 卡死冇消失</dt>
+        <dd>加 setTimeout 6000ms 自動 hide + clear timer on close。用 transform + opacity transition 入出，唔好 display: none。</dd>
+        <dt>Screen reader 唔讀</dt>
+        <dd>加 role=&quot;status&quot; + aria-live=&quot;polite&quot;。重要錯誤用 role=&quot;alert&quot; + aria-live=&quot;assertive&quot;。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>冇 auto-dismiss 卡死</li>
+          <li>塞長段文字</li>
+          <li>冇 ✕ 關 button</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>6 秒自動消失</li>
+          <li>一句 + sub-text 兩行</li>
+          <li>icon + body + close 三段 grid</li>
+        </ul></div>
+      </div>
+    </article>
+    <article class="lesson-ref" id="lesson-cookie">
+      <h3>Cookie Banner · Cookie 通知條</h3>
+      <p class="lesson-ref-plain">底部浮起嘅 cookie consent。GDPR 同 ePrivacy 要求。</p>
+      <h4>對住 screenshot 點 check</h4>
+      <ul>
+        <li>預設係咪「淨係必要嘅」（唔好預設 accept all）？</li>
+        <li>兩個 button：「接受全部」+「淨係必要」（一級選擇）？</li>
+        <li>訊息 2-3 句，講清楚用咩 cookie？</li>
+        <li>記住用戶選擇（localStorage），下次唔再 show？</li>
+      </ul>
+      <h4>想叫 AI 改？抄呢句</h4>
+      <dl class="lesson-ref-fix">
+        <dt>Banner 蓋住底部 CTA</dt>
+        <dd>Position: fixed; bottom: 16px; max-width 720px 居中。Layout 用 grid: icon | body | actions 三欄，手機降做兩列。</dd>
+        <dt>Banner 太硬太嚇人</dt>
+        <dd>用 emoji 🍪 起頭 + 友好 copy「我哋用 cookie 改善體驗」，唔好成段法律術語。</dd>
+        <dt>冇分清「必要」同「全部」</dt>
+        <dd>兩個 button：「淨係用必要嘅」outline + 「全部接受」實底。要平等視覺權重，唔好整到 accept 大過 reject。</dd>
+      </dl>
+      <h4>差版 vs 好版</h4>
+      <div class="lesson-ref-ba">
+        <div><strong>差版</strong><ul>
+          <li>預設「Accept all」prominent</li>
+          <li>一長段法律文件</li>
+          <li>冇記低，每次都彈</li>
+        </ul></div>
+        <div><strong>好版</strong><ul>
+          <li>Reject / Accept 平等視覺</li>
+          <li>兩三句 + emoji + friendly</li>
+          <li>localStorage 記住 + 下次唔再 show</li>
+        </ul></div>
+      </div>
+    </article>
+  </div>
+</section>
+<!-- ALL-LESSONS:END -->
+
+<!-- 安全網：如果 main.js 因任何原因 load 唔到 / boot 失敗，2 秒後強制顯示所有 section，唔會成版空白 -->
+<script>addEventListener('load',function(){setTimeout(function(){if(!window.__revealReady){document.querySelectorAll('.reveal').forEach(function(e){e.style.opacity='1';e.style.transform='none';});}},2000);});</script>
+<script type="module" src="js/main.js?v=12"></script>
 </body>
 </html>

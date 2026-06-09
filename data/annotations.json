@@ -126,7 +126,7 @@
       },
       {
         "problem": "冇 a11y",
-        "say": "Trigger 加 aria-expanded、aria-haspopup=\"true\"、aria-controls；panel role=\"menu\"，每 item role=\"menuitem\"；Esc 關。"
+        "say": "Trigger 加 aria-expanded + aria-controls 指住 panel；Esc 關、撳完還原 focus。啲連結唔使加 role=menu / role=menuitem（除非你真係寫齊上下鍵導航）。"
       }
     ],
     "beforeAfter": {
@@ -149,7 +149,7 @@
     ],
     "tech": [
       "Hover + click 兩個 trigger 路徑",
-      "aria-expanded / aria-haspopup / role=menu / role=menuitem",
+      "aria-expanded / aria-controls（disclosure pattern，唔使 role=menu）",
       "Esc 關 + click outside 關 + focus 還原"
     ],
     "code": "<span class=\"k\">aria-expanded</span>=<span class=\"v\">\"false\"</span>\n<span class=\"k\">aria-haspopup</span>=<span class=\"v\">\"true\"</span>\n<span class=\"k\">aria-controls</span>=<span class=\"v\">\"panel\"</span>"
@@ -193,7 +193,7 @@
       "good": [
         "Headline 一句講 benefit",
         "1 主 (實底) + 1 次 (outline)",
-        "CTA 下加 4.9 + 24k + 右邊 mockup"
+        "CTA 下加 4.9 + 24,000 + 右邊 mockup"
       ]
     },
     "purpose": "Hero 係用戶第一眼睇到嘅嘢。3 秒內要答到：(1) 呢度係咩 (2) 對我有咩用 (3) 我要做咩。如果 hero 唔 work，跌 50% 用戶。",
@@ -381,7 +381,7 @@
     "plain": "頭像 + 評分 + 用戶數。轉化率最高 ROI 嘅元素之一。",
     "checklist": [
       "放係 CTA 下面？（撳之前最後一刻打底）",
-      "評分用 4.9 唔用 5.0？（太完美反而假）",
+      "評分同數字用真實值（唔好作大、唔好砌假）？",
       "頭像重疊但有間隙感？",
       "Stat 數字夠具體（24,000 唔好寫 24k）？"
     ],
@@ -392,17 +392,17 @@
       },
       {
         "problem": "冇真實感",
-        "say": "評分一定唔好 5.0（太假），用 4.8–4.9。Stat 用具體數字 24,000，唔好 round number 25k。"
+        "say": "用真實評分同具體用戶數（例如寫 24,000 唔好寫 25k）。⚠️ 唔好作大，亦唔好為咗「睇落真啲」而改細真實評分 — 嗰個係作假。"
       },
       {
         "problem": "冇真人相片用",
-        "say": "用 linear-gradient 漸變色做圓形頭像 — 唔需要真人，但有人物 placeholder 感。"
+        "say": "用 linear-gradient 漸變色做圓形頭像 — 唔需要真人，但有人物 placeholder 感。⚠️ 淨係 demo / 未有真客戶嘅 wireframe 先用 placeholder；真網站一定要用真客戶、真評價、真數字 — 作假 social proof 喺好多地方屬違法廣告。"
       }
     ],
     "beforeAfter": {
       "bad": [
         "「最好嘅 productivity app」純口號",
-        "評分寫 5.0（太完美似假）",
+        "作大或砌假評分／數字",
         "「many users」唔具體"
       ],
       "good": [
@@ -414,7 +414,7 @@
     "purpose": "人會跟人。畀用戶見到「24,000 個人已經用緊」會大大降低 sign-up 嘅心理門檻。呢樣嘢屬於「conversion 最高 ROI」嘅元素之一。",
     "design": [
       "放係 CTA 下面 — 撳之前最後一刻打底",
-      "用真實感嘅 stat（4.9 唔係 5.0 — 太完美反而假）",
+      "用真實嘅 stat（具體數字最有說服力；唔好作大、唔好砌假）",
       "用重疊嘅 avatar — 暗示「真人」",
       "保持低調 — 唔可以比 CTA 搶眼"
     ],
@@ -505,7 +505,7 @@
       },
       {
         "problem": "冇真實 logo 用",
-        "say": "用 fictional 公司名（NORDIC、Pixel & Co.、Mango），display font 寫法，當佢哋係 wordmark。"
+        "say": "用 fictional 公司名（NORDIC、Pixel & Co.、Mango），display font 寫法，當佢哋係 wordmark。⚠️ 淨係 demo / wireframe 先咁做；真網站要用真客戶 logo（攞咗授權），作假客戶 logo 喺好多地方屬違法廣告。"
       }
     ],
     "beforeAfter": {
@@ -706,7 +706,7 @@
     "quickFix": [
       {
         "problem": "進度條太細嘢",
-        "say": "stroke-width 改 12px，r=90，stroke-dasharray = 2πr ≈ 565。"
+        "say": "同 AI 講：「個進度環太幼，整粗啲、由 12 點開始順時針填」。技術版：stroke-width 12px，r=90，stroke-dasharray = 2πr ≈ 565。"
       },
       {
         "problem": "想 animate 進度",
@@ -866,7 +866,7 @@
       },
       {
         "problem": "冇個人感",
-        "say": "加 avatar（linear-gradient 漸變色圓形）、名（粗）、職位 + 公司（細灰）— 越具體越可信。"
+        "say": "加 avatar（linear-gradient 漸變色圓形）、名（粗）、職位 + 公司（細灰）— 越具體越可信。⚠️ 真網站要用真實客戶嘅引言同身份（攞咗同意）；作假 testimonial 喺好多地方屬違法廣告。"
       },
       {
         "problem": "引言太長悶",
@@ -973,7 +973,7 @@
     "quickFix": [
       {
         "problem": "Accordion animation 唔順 / 長答案 cut 親",
-        "say": "CSS max-height 由 0 開始，JS 開時設成 element.scrollHeight + 'px'，transition: max-height 0.4s ease。"
+        "say": "同 AI 講：「FAQ 展開要順滑、長答案唔好 cut 親」。技術版：CSS max-height 由 0 開始，JS 開時設成 element.scrollHeight + 'px'，transition: max-height 0.4s ease。"
       },
       {
         "problem": "答案太長太悶",

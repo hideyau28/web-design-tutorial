@@ -2,7 +2,7 @@
 
 > 你叫 AI 寫網頁，但唔知點判斷寫得好唔好、唔知點同佢講要改咩？
 
-呢個係一個 **粵語互動教學**，用一個假 SaaS landing page（**Lumo**）做例子，拆解 18 個常見 web design pattern。對住每個元素，教你三樣嘢：
+呢個係一個 **粵語互動教學**，用一個假 SaaS landing page（**Lumo**）做例子，拆解 24 個常見 web design pattern。對住每個元素，教你三樣嘢：
 
 - **識指** — 呢個叫咩名（Hero、CTA、Social Proof⋯⋯），你 cap 圖時識同 AI 講「呢個 Hero⋯⋯」
 - **識睇** — 對住 screenshot 用 4 點 checklist 即時 check 寫得好唔好
@@ -34,7 +34,7 @@ https://your-domain/?lesson=herocta
 https://your-domain/?lesson=pricing
 ```
 
-合法 `lesson` 值（同 `data-id` 一樣）：`announce`、`nav`、`hero`、`eyebrow`、`herocta`、`socialproof`、`herovisual`、`trust`、`featuregrid`、`featurecard`、`zigzag`、`ringtimer`、`steps`、`testimonial`、`pricing`、`faq`、`finalcta`、`footer`。
+合法 `lesson` 值（同 `data-id` 一樣，共 24 個）：`announce`、`nav`、`dropdown`、`hero`、`eyebrow`、`herocta`、`socialproof`、`herovisual`、`tooltip`、`modal`、`trust`、`featuregrid`、`featurecard`、`zigzag`、`ringtimer`、`bento`、`steps`、`testimonial`、`pricing`、`faq`、`finalcta`、`footer`、`toast`、`cookie`。
 
 ## 點解寫呢個
 
@@ -168,7 +168,7 @@ npm test                     # 28 個 e2e（desktop + mobile 各 14）
 - 📱 **手機完整可用** — Inspector 底部 pill、Detail bottom sheet + drag handle + swipe-down 關
 - 🎨 **`(hover: none)`** — touch 裝置自動隱藏 tooltip、提示文字切換
 - 🔍 **Search + category filter** — Inspector 入面打字過濾、按分類顯示/隱藏
-- 🎯 **Guided Tour mode** — 18 站順序、進度 1/18、完成有 celebration modal
+- 🎯 **Guided Tour mode** — 24 站順序、進度 1/24、完成有 celebration modal
 - 🔗 **Deep linking** — `?lesson=xxx` 跳任何一課，URL 自動 sync
 - 💾 **Progress 持久化** — localStorage 記住已睇過嘅 lesson + dark/light preference
 - 📦 **PWA installable** — `manifest.json` + icons，可以 Add to Home Screen
@@ -176,7 +176,7 @@ npm test                     # 28 個 e2e（desktop + mobile 各 14）
 
 ## Open Graph image
 
-`og-image.svg` 係 1200×630 用 SVG 嘅 placeholder。如果想 maximal 社交平台兼容，建議手動將佢 export 做 `og-image.png` 再喺 `index.html` 度改返路徑（Twitter 唔接受 SVG）。
+社交分享圖用緊 `og-image.png`（1200×630），`index.html` 嘅 `og:image` / `twitter:image` 已經指向絕對 URL，社交平台兼容。`og-image.svg` 係原始 source。
 
 ## 用咗咩技術（純前端）
 

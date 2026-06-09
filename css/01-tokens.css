@@ -177,6 +177,8 @@ body, .inspector, .detail-panel, .ann-tip,
 [data-theme="dark"] .avatars > div { border-color: var(--card); }
 [data-theme="dark"] .hero-card { background: var(--card); border: 1px solid var(--line); }
 [data-theme="dark"] .hero-float { background: var(--card); border: 1px solid var(--line); }
+/* dark mode：mini-chart hover 用實色亮 coral 做 active，唔好食到 --coral-dark（dark 嗰個係淺色）整到上深下淺反轉 */
+[data-theme="dark"] .mini-chart .bar:hover { background: var(--coral); }
 [data-theme="dark"] .feature-icon { filter: brightness(0.85); }
 
 /* Annotate pin in dark */

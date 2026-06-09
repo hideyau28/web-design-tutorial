@@ -25,6 +25,8 @@ export const dom = {
   progressTotal: $('progressTotal'),
   progressFill: $('progressFill'),
   progressReset: $('progressReset'),
+  inspectorEmpty: $('inspectorEmpty'),
+  inspectorReset: $('inspectorReset'),
 
   // Intro
   intro: $('intro'),

@@ -4,8 +4,9 @@
    ========================================================= */
 import { state, data, CAT_LABEL } from './state.js';
 import { dom } from './dom.js';
-import { copyText } from './util.js';
+import { copyText, pushModal, popModal } from './util.js';
 import { hideTooltip } from './tooltip.js';
+import { showToast } from './widgets.js';
 import { markVisited } from './progress.js';
 import { updateTourNav } from './tour.js';
 
@@ -109,13 +110,28 @@ export function openDetail(id, triggerEl) {
   state.openedFrom = triggerEl || document.activeElement;
   detail.classList.add('open');
   detail.setAttribute('aria-hidden', 'false');
+  pushModal(detail);              // 背景 inert（鍵盤 + SR 都去唔到後面）
   detail.scrollTop = 0;
   hideTooltip();
   setActiveHighlight(id);
   markVisited(id);
 
-  // Auto scroll element into 可見區（手機尤其重要，bottom sheet 蓋住下半）
+  // Tour: toast / modal / cookie 嘅元素平時未必喺畫面 — 補返 anchor 體驗，唔好開咗 panel 但畫面冇嘢
   const targetEl = document.querySelector(`[data-annotate][data-id="${id}"]`);
+  const note = detail.querySelector('#dAnchorNote');
+  if (id === 'toast') showToast();   // 令 toast 真係彈出嚟示範
+  if (note) {
+    if (id === 'modal') {
+      note.hidden = false;
+      note.textContent = '👉 撳 Hero 區嘅「▶ 睇 2 分鐘 demo」掣，就會見到呢個 native <dialog> 彈出。';
+    } else if (id === 'cookie' && !document.getElementById('cookieBanner')) {
+      note.hidden = false;
+      note.textContent = '👉 你已經撳走咗 cookie banner — 佢通常喺頁面最底彈出。';
+    } else {
+      note.hidden = true;
+      note.textContent = '';
+    }
+  }
   if (targetEl) setTimeout(() => scrollToAnnotation(targetEl), 150);
   updateUrlForLesson(id);
 
@@ -129,7 +145,9 @@ export function openDetail(id, triggerEl) {
     dom.detailNav.hidden = true;
   }
 
-  setTimeout(() => dom.detailClose.focus(), 50);
+  // Tour 模式：focus 落 panel 容器（有 aria-labelledby），等 screen reader 由 lesson 名 + 內容讀起，
+  // 唔好每跳一站都搶 focus 去關閉掣搞到要重新 Tab 入內容
+  setTimeout(() => { (state.tourMode ? detail : dom.detailClose).focus(); }, 50);
 }
 
 export function closeDetail() {
@@ -137,6 +155,7 @@ export function closeDetail() {
   if (!detail.classList.contains('open')) return;
   detail.classList.remove('open');
   detail.setAttribute('aria-hidden', 'true');
+  popModal(detail);                // 解除背景 inert（要喺 focus 還原之前）
   state.tourMode = false;          // 關 detail = 退出 tour
   dom.detailNav.hidden = true;
   clearActiveHighlight();
@@ -193,7 +212,9 @@ function initSwipeDown() {
 
   detail.addEventListener('touchstart', e => {
     if (!isMobileSheet() || !detail.classList.contains('open')) return;
-    if (detail.scrollTop > 0) return;   // 只係 scroll 到頂先可以 swipe 關
+    // 由頂部 drag handle 區（44px）起步就一定接受拖動；否則要 scroll 到頂先 swipe 關
+    const fromHandle = (e.touches[0].clientY - detail.getBoundingClientRect().top) < 44;
+    if (detail.scrollTop > 0 && !fromHandle) return;
     startY = e.touches[0].clientY;
     currentY = startY;
     dragging = true;

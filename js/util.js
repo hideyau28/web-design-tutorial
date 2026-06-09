@@ -70,3 +70,38 @@ export function trapFocusIn(container, e) {
     e.preventDefault(); first.focus();
   }
 }
+
+/* =========================================================
+   背景 inert 管理 — modal 打開時將其餘 <body> 子元素設 inert，
+   令鍵盤 + screen reader（virtual cursor）+ pointer 都去唔到後面內容。
+   配合 focus trap 做雙重保障，亦兌現 aria-modal="true" 嘅承諾。
+   ========================================================= */
+const modalStack = [];
+
+function refreshInert() {
+  const top = modalStack[modalStack.length - 1] || null;
+  Array.from(document.body.children).forEach(child => {
+    const tag = child.tagName;
+    if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'NOSCRIPT' || tag === 'TEMPLATE') return;
+    if (child.classList.contains('skip-link') ||
+        child.id === 'tourLive' ||
+        child.classList.contains('scroll-progress')) return;
+    child.inert = top ? child !== top : false;
+  });
+}
+
+/** Modal 打開：推上 stack，其餘背景設 inert */
+export function pushModal(el) {
+  if (!el) return;
+  const i = modalStack.indexOf(el);
+  if (i >= 0) modalStack.splice(i, 1);
+  modalStack.push(el);
+  refreshInert();
+}
+
+/** Modal 關閉：由 stack 移走，回復背景（仲有其他 modal 開住就 inert 返佢哋）*/
+export function popModal(el) {
+  const i = modalStack.indexOf(el);
+  if (i >= 0) modalStack.splice(i, 1);
+  refreshInert();
+}

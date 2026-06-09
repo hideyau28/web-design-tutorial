@@ -13,7 +13,8 @@ export function setInspect(on) {
   document.body.classList.toggle('inspect-on', on);
   dom.modeLabel.textContent = on
     ? (isTouch ? '已開啟 — 撳任何方塊' : '已開啟 — Tab / Hover 任何方塊')
-    : '已關閉';
+    : '已關閉 · 撳開關睇返教學';
+  dom.toggle.title = on ? '關閉標註教學' : '開返標註教學';
   dom.toggle.setAttribute('aria-checked', String(on));
   dom.pinEls.forEach(p => { p.tabIndex = on ? 0 : -1; });  // 只 pin 可 keyboard focus
   if (!on) hideTooltip();
@@ -89,6 +90,7 @@ export function initInspector() {
 
 /* ---------- 搜尋 + 分類 filter ---------- */
 function applyFilter() {
+  let visible = 0;
   dom.annotateEls.forEach(el => {
     const d = data.ANNOTATIONS[el.dataset.id];
     if (!d) return;
@@ -97,9 +99,13 @@ function applyFilter() {
     const term = state.searchTerm.toLowerCase().trim();
     const searchOk = !term || text.includes(term);
     const matchSearch = !!term && searchOk;
-    el.classList.toggle('filter-hidden', !catOk || !searchOk);
+    const hidden = !catOk || !searchOk;
+    el.classList.toggle('filter-hidden', hidden);
     el.classList.toggle('filter-match-glow', matchSearch && catOk);
+    if (!hidden) visible++;
   });
+  // 冇結果 → 喺 inspector 顯示 empty state（唔會似壞咗）
+  if (dom.inspectorEmpty) dom.inspectorEmpty.hidden = visible > 0;
 }
 
 export function initSearch() {
@@ -115,5 +121,14 @@ export function initSearch() {
       else { state.activeCats.add(cat); chip.setAttribute('aria-pressed', 'true'); }
       applyFilter();
     });
+  });
+  // Empty state 嘅「清除全部」— 重設搜尋 + 全開分類
+  dom.inspectorReset && dom.inspectorReset.addEventListener('click', () => {
+    state.searchTerm = '';
+    if (dom.annSearch) dom.annSearch.value = '';
+    state.activeCats = new Set(['structure', 'design', 'tech']);
+    dom.catChips.forEach(c => c.setAttribute('aria-pressed', 'true'));
+    applyFilter();
+    dom.annSearch && dom.annSearch.focus();
   });
 }

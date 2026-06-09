@@ -235,7 +235,7 @@
 }
 .hero h1 em {
   font-style: italic;
-  color: var(--coral);
+  color: var(--coral-text);   /* 對比足；底線高光仍用淺 coral 做 marker */
   position: relative;
 }
 .hero h1 em::after {

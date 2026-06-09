@@ -4,7 +4,7 @@
    ========================================================= */
 import { state, data } from './state.js';
 import { dom } from './dom.js';
-import { copyText, haptic, trapFocusIn } from './util.js';
+import { copyText, haptic, trapFocusIn, pushModal, popModal } from './util.js';
 import { hideTooltip } from './tooltip.js';
 import { openDetail, closeDetail, scrollToAnnotation } from './detail.js';
 import { startTour, tourPrev, tourNext } from './tour.js';
@@ -13,6 +13,7 @@ import { startTour, tourPrev, tourNext } from './tour.js';
 export function closeIntro() {
   dom.intro.classList.add('hidden');
   dom.intro.setAttribute('aria-hidden', 'true');
+  popModal(dom.intro);
   hideTooltip();
   setTimeout(() => dom.toggle.focus(), 50);  // 方便鍵盤用家
 }
@@ -26,12 +27,14 @@ export function openCelebrate() {
   }
   dom.celebrate.classList.remove('hidden');
   dom.celebrate.setAttribute('aria-hidden', 'false');
+  pushModal(dom.celebrate);
   setTimeout(() => dom.celebrateRestart.focus(), 50);
 }
 
 function closeCelebrate() {
   dom.celebrate.classList.add('hidden');
   dom.celebrate.setAttribute('aria-hidden', 'true');
+  popModal(dom.celebrate);
   const from = state.celebrateOpenedFrom;
   if (from && typeof from.focus === 'function') from.focus();
 }
@@ -41,12 +44,14 @@ function openAbout() {
   state.aboutOpenedFrom = document.activeElement;
   dom.about.classList.remove('hidden');
   dom.about.setAttribute('aria-hidden', 'false');
+  pushModal(dom.about);
   setTimeout(() => dom.aboutClose.focus(), 50);
 }
 
 function closeAbout() {
   dom.about.classList.add('hidden');
   dom.about.setAttribute('aria-hidden', 'true');
+  popModal(dom.about);
   const from = state.aboutOpenedFrom;
   if (from && typeof from.focus === 'function') from.focus();
 }
@@ -102,9 +107,10 @@ function wireAbout() {
 }
 
 function wireDemo() {
-  dom.openDemoBtn && dom.openDemoBtn.addEventListener('click', () => {
-    // inspect on 嗰陣 click 會 bubble 落 annotate 開 lesson；inspect off 先開 demo
-    if (!state.inspectOn) openDemoDialog();
+  dom.openDemoBtn && dom.openDemoBtn.addEventListener('click', e => {
+    // 粒掣行為同真 landing page 一致：永遠開 demo dialog，唔好俾 inspect annotate click 騎劫
+    e.stopPropagation();
+    openDemoDialog();
   });
   dom.demoDialogClose && dom.demoDialogClose.addEventListener('click', closeDemoDialog);
   dom.demoDialog && dom.demoDialog.addEventListener('click', e => {
@@ -145,6 +151,7 @@ function wireIntro() {
   dom.introStartTour.addEventListener('click', () => {
     dom.intro.classList.add('hidden');
     dom.intro.setAttribute('aria-hidden', 'true');
+    popModal(dom.intro);
     setTimeout(startTour, 250);   // 等 intro fade-out
   });
   dom.introClose.addEventListener('click', closeIntro);
@@ -162,6 +169,8 @@ function initEntry() {
   if (lessonParam && data.ANNOTATIONS[lessonParam]) {
     dom.intro.classList.add('hidden');
     dom.intro.setAttribute('aria-hidden', 'true');
+    popModal(dom.intro);
+    state.tourMode = true;   // 收 ?lesson 連結嘅人都見到導航，可以由嗰課繼續行落去
     const el = document.querySelector(`[data-id="${lessonParam}"]`);
     setTimeout(() => { scrollToAnnotation(el); openDetail(lessonParam, el); }, 200);
   } else {
@@ -175,5 +184,6 @@ export function initModals() {
   wireAbout();
   wireDemo();
   wireGlobalKeydown();
+  if (!dom.intro.classList.contains('hidden')) pushModal(dom.intro);
   initEntry();
 }

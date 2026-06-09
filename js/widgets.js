@@ -6,7 +6,7 @@ import { state, COOKIE_KEY } from './state.js';
 import { dom } from './dom.js';
 
 /* ---------- Toast ---------- */
-function showToast() {
+export function showToast() {
   const toast = dom.toast;
   if (!toast) return;
   toast.removeAttribute('hidden');
@@ -42,6 +42,7 @@ function initToast() {
 /* ---------- Cookie Banner ---------- */
 function dismissCookie(choice) {
   try { localStorage.setItem(COOKIE_KEY, choice); } catch (e) {}
+  document.body.classList.remove('cookie-active');
   dom.cookieBanner?.classList.add('dismissed');
   setTimeout(() => dom.cookieBanner?.remove(), 400);
 }
@@ -52,6 +53,8 @@ function initCookie() {
   let stored = null;
   try { stored = localStorage.getItem(COOKIE_KEY); } catch (e) {}
   if (stored) { banner.remove(); return; }
+
+  document.body.classList.add('cookie-active');   // 手機：inspector pill 避開 cookie
 
   dom.cookieAccept?.addEventListener('click', () => dismissCookie('accept'));
   dom.cookieReject?.addEventListener('click', () => dismissCookie('reject'));
@@ -102,10 +105,22 @@ function initFaq() {
   document.querySelectorAll('.faq-item').forEach(item => {
     const q = item.querySelector('.faq-q');
     const a = item.querySelector('.faq-a');
+    a.hidden = true;                              // 收埋時真正離開 a11y tree（唔止 max-height:0）
     q.addEventListener('click', () => {
       const isOpen = item.classList.toggle('open');
       q.setAttribute('aria-expanded', String(isOpen));
-      a.style.maxHeight = isOpen ? a.scrollHeight + 'px' : '0px';
+      if (isOpen) {
+        a.hidden = false;
+        requestAnimationFrame(() => { a.style.maxHeight = a.scrollHeight + 'px'; });
+      } else {
+        a.style.maxHeight = '0px';
+        const onEnd = e => {
+          if (e.propertyName !== 'max-height') return;
+          a.hidden = true;
+          a.removeEventListener('transitionend', onEnd);
+        };
+        a.addEventListener('transitionend', onEnd);
+      }
     });
   });
 }
@@ -132,6 +147,7 @@ function initReveal() {
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  window.__revealReady = true;   // 畀 end-of-body 安全網知道 reveal 系統正常啟動咗
 }
 
 export function initWidgets() {

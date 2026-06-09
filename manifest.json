@@ -1,7 +1,7 @@
 {
   "name": "同 AI 講設計 — 網頁拆解互動教學",
   "short_name": "同 AI 講設計",
-  "description": "互動教學：用一個假 SaaS landing page 拆解 18 個 web design pattern，教你識指、識睇、識叫 AI 改。",
+  "description": "互動教學：用一個假 SaaS landing page 拆解 24 個 web design pattern，教你識指、識睇、識叫 AI 改。",
   "lang": "zh-HK",
   "start_url": "./",
   "scope": "./",
