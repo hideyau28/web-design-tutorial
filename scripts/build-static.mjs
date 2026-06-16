@@ -12,7 +12,7 @@ import { dirname, join } from 'node:path';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ANN_PATH = join(ROOT, 'data', 'annotations.json');
 const HTML_PATH = join(ROOT, 'index.html');
-const BASE = 'https://web-design-tutorial.vercel.app/';
+const BASE = 'https://web.flowstudiohk.com/';
 
 // 同 js/data.js 嘅 TOUR_ORDER 一致（視覺由上至下）
 const ORDER = [

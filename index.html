@@ -14,17 +14,17 @@
 <meta property="og:title" content="同 AI 講設計 — 網頁拆解互動教學">
 <meta property="og:description" content="互動式拆解 24 個 web design pattern，教你識指、識睇、識叫 AI 改。粵語、免費、開源。">
 <meta property="og:locale" content="zh_HK">
-<meta property="og:image" content="https://web-design-tutorial.vercel.app/og-image.png">
+<meta property="og:image" content="https://web.flowstudiohk.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="同 AI 講設計 — 網頁設計互動教學">
-<meta property="og:url" content="https://web-design-tutorial.vercel.app/">
+<meta property="og:url" content="https://web.flowstudiohk.com/">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="同 AI 講設計 — 網頁拆解互動教學">
 <meta name="twitter:description" content="互動式拆解 24 個 web design pattern，教你同 AI 講設計。">
-<meta name="twitter:image" content="https://web-design-tutorial.vercel.app/og-image.png">
+<meta name="twitter:image" content="https://web.flowstudiohk.com/og-image.png">
 
 <!-- Favicon + PWA -->
 <link rel="icon" type="image/svg+xml" href="icon.svg">
@@ -34,8 +34,17 @@
 <!-- 標記 JS 可用：.reveal 只喺有 JS 時先 hide，冇 JS / JS 掛咗都唔會成版空白 -->
 <script>document.documentElement.classList.add('js')</script>
 
-<!-- Canonical — 所有 ?lesson=xxx 變體都歸主 URL -->
-<link rel="canonical" href="https://web-design-tutorial.vercel.app/">
+<!-- Google Analytics 4（Flow Studio HK 5 個站共用 G-S0E389EYF7）-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S0E389EYF7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-S0E389EYF7');
+</script>
+
+<!-- Canonical — 所有 ?lesson=xxx 變體都歸主 URL（品牌子域）-->
+<link rel="canonical" href="https://web.flowstudiohk.com/">
 
 <!-- Serif display webfont（標題）— Windows / Android 都有真 serif，唔會 fallback 落黑體 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,18 +59,26 @@
 <link rel="stylesheet" href="css/06-dialogs.css?v=12">
 <link rel="stylesheet" href="css/07-responsive.css?v=12">
 
-<!-- JSON-LD structured data (HowTo + WebSite) -->
+<!-- JSON-LD structured data (Organization + WebSite + HowTo) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "Organization",
+      "@id": "https://www.flowstudiohk.com/#org",
+      "name": "Flow Studio HK",
+      "url": "https://www.flowstudiohk.com/",
+      "description": "香港 AI / 數碼顧問 — 教學系列同網頁、營銷服務。"
+    },
+    {
       "@type": "WebSite",
       "name": "同 AI 講設計",
       "alternateName": "網頁拆解互動教學",
-      "url": "https://web-design-tutorial.vercel.app/",
+      "url": "https://web.flowstudiohk.com/",
       "description": "粵語互動教學 — 用一個假 SaaS landing page 拆解 24 個常見 web design pattern。教叫 AI 寫網頁嘅人識指、識睇、識叫 AI 改。",
-      "inLanguage": "zh-HK"
+      "inLanguage": "zh-HK",
+      "publisher": { "@id": "https://www.flowstudiohk.com/#org" }
     },
     {
       "@type": "HowTo",
@@ -92,168 +109,168 @@
       "position": 1,
       "name": "Announcement Bar（公告條 · 又叫 Promo Bar / Top Bar）",
       "description": "網頁最頂嗰條細條，用嚟推新嘢嘅 banner。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-announce"
+      "url": "https://web.flowstudiohk.com/#lesson-announce"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Navigation Bar（導覽列 · Nav / Header）",
       "description": "永遠黐喺最頂嗰條導覽列，幫人跳去任何地方。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-nav"
+      "url": "https://web.flowstudiohk.com/#lesson-nav"
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": "Dropdown / Mega Menu（下拉選單 · 又叫 Flyout / Mega Menu）",
       "description": "Hover / Click trigger 出嚟嘅 panel。Nav 想 expand 多嘢就用呢個。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-dropdown"
+      "url": "https://web.flowstudiohk.com/#lesson-dropdown"
     },
     {
       "@type": "ListItem",
       "position": 4,
       "name": "Hero Section（Hero 區 · 又叫 Above the Fold）",
       "description": "網頁最頂、最大、最搶眼嗰幅。一打開第一眼睇到嘅嘢。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-hero"
+      "url": "https://web.flowstudiohk.com/#lesson-hero"
     },
     {
       "@type": "ListItem",
       "position": 5,
       "name": "Eyebrow（眉標 · 又叫 Kicker / Pre-headline）",
       "description": "Headline 上面嗰粒細嘅 label。畀 context 用嘅。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-eyebrow"
+      "url": "https://web.flowstudiohk.com/#lesson-eyebrow"
     },
     {
       "@type": "ListItem",
       "position": 6,
       "name": "Primary CTA（Call to Action · 主要轉換按鈕）",
       "description": "叫人撳嘅主掣。網頁最重要嗰粒按鈕。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-herocta"
+      "url": "https://web.flowstudiohk.com/#lesson-herocta"
     },
     {
       "@type": "ListItem",
       "position": 7,
       "name": "Social Proof（社會證明 · Trust Signal）",
       "description": "頭像 + 評分 + 用戶數。轉化率最高 ROI 嘅元素之一。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-socialproof"
+      "url": "https://web.flowstudiohk.com/#lesson-socialproof"
     },
     {
       "@type": "ListItem",
       "position": 8,
       "name": "Hero Visual / Product Mockup（主視覺 · 產品截圖）",
       "description": "右邊嗰個 product mockup。一眼睇明個 app 做咩。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-herovisual"
+      "url": "https://web.flowstudiohk.com/#lesson-herovisual"
     },
     {
       "@type": "ListItem",
       "position": 9,
       "name": "Info Tooltip（懸停提示 · 又叫 Popover）",
       "description": "Hover ⓘ icon 出嘅小提示。畀額外 detail 而唔擠 layout。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-tooltip"
+      "url": "https://web.flowstudiohk.com/#lesson-tooltip"
     },
     {
       "@type": "ListItem",
       "position": 10,
       "name": "Modal / Dialog（彈出視窗 · 又叫 Lightbox）",
       "description": "蓋住成個畫面嘅 popup。video preview、sign-up、確認 dialog 都係呢個 pattern。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-modal"
+      "url": "https://web.flowstudiohk.com/#lesson-modal"
     },
     {
       "@type": "ListItem",
       "position": 11,
       "name": "Trust Bar / Logo Wall（信任列 · 客戶 Logo 牆）",
       "description": "一行客戶 logo。「呢啲大公司都用緊」借勢借得最直接。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-trust"
+      "url": "https://web.flowstudiohk.com/#lesson-trust"
     },
     {
       "@type": "ListItem",
       "position": 12,
       "name": "Feature Grid (3-col)（功能 3 欄格仔）",
       "description": "3 欄 grid 講 3 個 key feature。「3」係 magic number。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-featuregrid"
+      "url": "https://web.flowstudiohk.com/#lesson-featuregrid"
     },
     {
       "@type": "ListItem",
       "position": 13,
       "name": "Feature Card（功能卡）",
       "description": "單一張功能卡。Card 係而家 web design 嘅基本單位。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-featurecard"
+      "url": "https://web.flowstudiohk.com/#lesson-featurecard"
     },
     {
       "@type": "ListItem",
       "position": 14,
       "name": "Zigzag / Alternating Layout（交錯排版）",
       "description": "深入講 feature 用嘅交錯 layout — 一行圖+文，下一行文+圖。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-zigzag"
+      "url": "https://web.flowstudiohk.com/#lesson-zigzag"
     },
     {
       "@type": "ListItem",
       "position": 15,
       "name": "SVG Progress Ring（SVG 環狀進度條）",
       "description": "SVG 整圓形進度。比 PNG 細、retina 清，可以即時改色。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-ringtimer"
+      "url": "https://web.flowstudiohk.com/#lesson-ringtimer"
     },
     {
       "@type": "ListItem",
       "position": 16,
       "name": "Bento Grid（便當格 · 大小拼接 layout）",
       "description": "Apple keynote 嘅大小 cell 拼接 layout。一塊大配兩塊細，視覺有節奏。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-bento"
+      "url": "https://web.flowstudiohk.com/#lesson-bento"
     },
     {
       "@type": "ListItem",
       "position": 17,
       "name": "How It Works (Steps)（操作流程 · 3 步教學）",
       "description": "1 → 2 → 3 流程教學。降低「我用唔嚟啩」嘅心理 barrier。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-steps"
+      "url": "https://web.flowstudiohk.com/#lesson-steps"
     },
     {
       "@type": "ListItem",
       "position": 18,
       "name": "Testimonial Section（客戶評價）",
       "description": "深色 section + 一句客戶引言。真人證言勝過萬字 marketing。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-testimonial"
+      "url": "https://web.flowstudiohk.com/#lesson-testimonial"
     },
     {
       "@type": "ListItem",
       "position": 19,
       "name": "Pricing Table（收費表）",
       "description": "收費表。設計目標：引導人揀你最想佢揀嗰個 plan（通常中間）。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-pricing"
+      "url": "https://web.flowstudiohk.com/#lesson-pricing"
     },
     {
       "@type": "ListItem",
       "position": 20,
       "name": "FAQ Accordion（常見問題 · 摺合式）",
       "description": "摺合式常見問題。SEO 加分 + 解最後疑慮。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-faq"
+      "url": "https://web.flowstudiohk.com/#lesson-faq"
     },
     {
       "@type": "ListItem",
       "position": 21,
       "name": "Final CTA Section（結尾 CTA · 又叫 Closing Pitch）",
       "description": "Footer 之前嗰大幅。最後一次叫人撳。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-finalcta"
+      "url": "https://web.flowstudiohk.com/#lesson-finalcta"
     },
     {
       "@type": "ListItem",
       "position": 22,
       "name": "Footer（頁腳）",
       "description": "網站最底嘅「萬能備胎」。揾唔到嘢嘅人會 scroll 到底揾。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-footer"
+      "url": "https://web.flowstudiohk.com/#lesson-footer"
     },
     {
       "@type": "ListItem",
       "position": 23,
       "name": "Toast Notification（Toast 通知 · 又叫 Snackbar）",
       "description": "上面 slide 入嚟、3-6 秒自動消失嘅 mini 通知。Save 成功、welcome back 都用。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-toast"
+      "url": "https://web.flowstudiohk.com/#lesson-toast"
     },
     {
       "@type": "ListItem",
       "position": 24,
       "name": "Cookie Banner（Cookie 通知條）",
       "description": "底部浮起嘅 cookie consent。GDPR 同 ePrivacy 要求。",
-      "url": "https://web-design-tutorial.vercel.app/#lesson-cookie"
+      "url": "https://web.flowstudiohk.com/#lesson-cookie"
     }
   ]
 }
@@ -302,6 +319,28 @@
 .hire-badge button:hover{background:rgba(255,255,255,.3)}
 @keyframes hireIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @media(max-width:880px){.hire-badge{display:none}}  /* 手機唔出 badge，靠 CTA section + 頁尾署名 */
+
+/* ---- 頁頂免責聲明：呢個係 Flow Studio HK 教學示範，Lumo 只係虛構例子 ---- */
+.demo-disclaimer{background:var(--ink);color:var(--bg);font-size:13px;line-height:1.5;text-align:center;padding:9px 24px}
+.demo-disclaimer strong{color:var(--coral)}
+.demo-disclaimer a{color:#fff;text-decoration:underline;font-weight:600;text-underline-offset:2px}
+.demo-disclaimer a:hover{color:var(--coral)}
+[data-theme="dark"] .demo-disclaimer{background:var(--card);color:var(--ink)}
+[data-theme="dark"] .demo-disclaimer a{color:var(--ink)}
+
+/* ---- Flow Studio HK 教學系列品牌條（5 個站統一）---- */
+.fs-brandbar{background:var(--soft);border-top:1px solid var(--line);padding:36px 0 40px;text-align:center}
+.fs-brandbar-tag{font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.fs-brandbar-tag a{color:var(--coral-text);font-weight:700}
+.fs-brandbar-sub{font-size:13px;color:var(--muted);margin-bottom:20px}
+.fs-brandbar-links{display:flex;flex-wrap:wrap;gap:10px 14px;justify-content:center;max-width:760px;margin:0 auto 22px}
+.fs-brandbar-links a{font-size:14px;font-weight:600;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px;transition:border-color .2s var(--ease),color .2s var(--ease)}
+.fs-brandbar-links a:hover{border-color:var(--coral);color:var(--coral-text)}
+.fs-brandbar-wa{display:inline-flex;align-items:center;gap:8px;background:var(--coral);color:#fff;font-weight:700;font-size:15px;border-radius:999px;padding:11px 22px;box-shadow:var(--shadow-sm);transition:background .2s var(--ease)}
+.fs-brandbar-wa:hover{background:var(--coral-dark)}
+[data-theme="dark"] .fs-brandbar{background:var(--card)}
+[data-theme="dark"] .fs-brandbar-links a{background:var(--bg);color:var(--ink)}
+[data-theme="dark"] .fs-brandbar-wa{color:var(--bg)}
 </style>
 </head>
 <body>
@@ -311,6 +350,12 @@
 
 <!-- Skip to content link -->
 <a href="#main-content" class="skip-link">跳到主內容</a>
+
+<!-- 頁頂免責聲明：講明係 Flow Studio HK 教學示範，下面個 Lumo 只係虛構例子 -->
+<div class="demo-disclaimer">
+  呢個係 <strong>Flow Studio HK</strong> 嘅互動教學示範 — 下面個「Lumo」只係用嚟拆解嘅<strong>虛構例子</strong>，唔係真產品。
+  <a href="https://www.flowstudiohk.com/">了解 Flow Studio HK →</a>
+</div>
 
 <noscript>
   <p style="padding:12px 24px;background:#F0EBE3;color:#1A1A2E;text-align:center;font:14px/1.5 system-ui;margin:0;">
@@ -466,7 +511,7 @@
     <h3>注意</h3>
     <p>頁面入面個 Lumo 係<strong>虛構嘅產品</strong>，純粹示範用。所有圖、客戶、評價、收費、stat 都係假嘅。</p>
     <h3>邊個整呢個？</h3>
-    <p><strong>你個名</strong> — 我用 AI 幫人砌收得到 lead 嘅網頁。鍾意呢個拆解嘅話，<a href="mailto:你嘅email">搵我傾 →</a>。</p>
+    <p><strong>Flow Studio HK</strong> — 我用 AI 幫人砌收得到 lead 嘅網頁。鍾意呢個拆解嘅話，<a href="mailto:hello@flowstudio.hk">搵我傾 →</a>。</p>
     <h3>License</h3>
     <p>純教學用，免費，開源。技術細節同 code 可以參考 README。</p>
     <button type="button" class="btn btn-primary btn-lg" id="aboutDone">明白晒 →</button>
@@ -984,10 +1029,9 @@
     <h2 id="hireTitle">鍾意呢個拆解？等我幫你個網生意</h2>
     <p class="hire-pitch">我用 AI 幫你由零砌、或者執靚你 AI 出嘅版本 — 做到一個睇得明、收得到 lead 嘅 landing page。識指、識睇、識改，先做得出令客戶撳得落手嘅嘢。</p>
     <div class="hire-actions">
-      <a class="btn btn-coral btn-lg" href="mailto:你嘅email">搵我傾 →</a>
-      <a class="btn btn-outline btn-lg" href="你嘅作品集連結" target="_blank" rel="noopener">睇我嘅作品</a>
+      <a class="btn btn-coral btn-lg" href="mailto:hello@flowstudio.hk">搵我傾 →</a>
     </div>
-    <p class="hire-by">由 <strong>你個名</strong> 設計同製作 · 你嘅 handle</p>
+    <p class="hire-by">由 <strong>Flow Studio HK</strong> 設計同製作</p>
   </div>
 </section>
 
@@ -1801,8 +1845,24 @@
 </section>
 <!-- ALL-LESSONS:END -->
 
-<!-- 頁尾真署名 + 浮動 badge（接 job）— placeholder 改成你真資料 -->
-<div class="author-credit"><div class="container">呢個互動拆解由 <strong>你個名</strong> 設計同製作 · <a href="mailto:你嘅email">搵我整網頁 →</a></div></div>
+<!-- 頁尾真署名 -->
+<div class="author-credit"><div class="container">© 2026 <strong>Flow Studio HK</strong> · 呢個互動拆解由 Flow Studio HK 設計同製作 · <a href="mailto:hello@flowstudio.hk">搵我整網頁 →</a></div></div>
+
+<!-- ====== Flow Studio HK 教學系列品牌條（5 個站統一）====== -->
+<aside class="fs-brandbar" aria-label="Flow Studio HK 教學系列">
+  <div class="container">
+    <p class="fs-brandbar-tag"><a href="https://www.flowstudiohk.com/">← Flow Studio HK</a> 教學系列 · 香港 AI / 數碼顧問</p>
+    <p class="fs-brandbar-sub">同一個 Flow Studio HK 出品 — 仲有其他免費教學：</p>
+    <div class="fs-brandbar-links">
+      <a href="https://www.flowstudiohk.com/seo-geo-aeo">SEO·GEO·AEO 教學</a>
+      <a href="https://claude.flowstudiohk.com/">我的好朋友 Claude</a>
+      <a href="https://growth.flowstudiohk.com/">增長軌道（網上營銷）</a>
+    </div>
+    <a class="fs-brandbar-wa" href="https://wa.me/85254323686?text=%E6%88%91%E5%96%BA%E3%80%8C%E5%90%8C%20AI%20%E8%AC%9B%E8%A8%AD%E8%A8%88%E3%80%8D%E8%A6%8B%E5%88%B0%EF%BC%8C%E6%83%B3%E5%95%8F%E4%B8%8B%20Flow%20Studio%20HK%20%E5%95%B2%E6%9C%8D%E5%8B%99" target="_blank" rel="noopener">
+      <span aria-hidden="true">💬</span> WhatsApp 搵 Flow Studio HK 傾
+    </a>
+  </div>
+</aside>
 <div class="hire-badge" id="hireBadge" hidden>
   <a href="#hire">💼 搵我整網頁</a>
   <button type="button" id="hireBadgeClose" aria-label="收起呢個提示">✕</button>
