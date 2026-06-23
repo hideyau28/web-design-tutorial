@@ -1329,7 +1329,7 @@
       <h4>想叫 AI 改？抄呢句</h4>
       <dl class="lesson-ref-fix">
         <dt>只係 mouse hover work</dt>
-        <dd>用 :focus-within 而唔係 :focus — etrigger 同 bubble 都 visible 喺 focus-within 範圍內。加 aria-describedby 等 screen reader 讀到。</dd>
+        <dd>用 :focus-within 而唔係 :focus — trigger 同 bubble 都 visible 喺 focus-within 範圍內。加 aria-describedby 等 screen reader 讀到。</dd>
         <dt>Tooltip 跑出 viewport</dt>
         <dd>CSS Anchor Positioning（新）或者 JS Floating UI library。簡單版用 transform translateX(-50%) 居中 + 加箭嘴 ::after。</dd>
         <dt>Bubble 太細睇唔清</dt>
@@ -1362,7 +1362,7 @@
       <h4>想叫 AI 改？抄呢句</h4>
       <dl class="lesson-ref-fix">
         <dt>自己用 div 砌 modal 唔啱 a11y</dt>
-        <dd>用 native &lt;dialog&gt; element + dialog.showModal()。Browser 自動 focus trap、Esc 關閉、backdrop、role=dialog aria-modal — 唔使自己寫。</dd>
+        <dd>用 native &lt;dialog&gt; element + dialog.showModal()。Browser 自動 focus trap、Esc 關閉、backdrop、role=dialog aria-modal — 唔使自己寫。（相容性：所有現代瀏覽器自 2022 年起原生支援；要兼顧好舊版就加 dialog polyfill。）</dd>
         <dt>Backdrop 唔識點整</dt>
         <dd>用 ::backdrop pseudo-element：dialog::backdrop { background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); }</dd>
         <dt>想加入動畫 entrance</dt>
@@ -1527,7 +1527,7 @@
       <h4>想叫 AI 改？抄呢句</h4>
       <dl class="lesson-ref-fix">
         <dt>進度條太細嘢</dt>
-        <dd>同 AI 講：「個進度環太幼，整粗啲、由 12 點開始順時針填」。技術版：stroke-width 12px，r=90，stroke-dasharray = 2πr ≈ 565。</dd>
+        <dd>同 AI 講：「個進度環太幼，整粗啲、由 12 點開始順時針填」。技術版：stroke-width 12px，r=90，stroke-dasharray = 2πr = 565.5（2π×90，即圓周長）。</dd>
         <dt>想 animate 進度</dt>
         <dd>加 transition: stroke-dashoffset 1s cubic-bezier(0.22, 1, 0.36, 1)，updating dashoffset 即係改進度。</dd>
         <dt>想加中間數字</dt>
