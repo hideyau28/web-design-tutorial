@@ -66,10 +66,11 @@
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://www.flowstudiohk.com/#org",
+      "@id": "https://web.flowstudiohk.com/#org",
       "name": "Flow Studio HK",
-      "url": "https://www.flowstudiohk.com/",
-      "description": "香港 AI / 數碼顧問 — 教學系列同網頁、營銷服務。"
+      "url": "https://web.flowstudiohk.com/",
+      "description": "香港 AI / 數碼顧問 — 教學系列同網頁、營銷服務。",
+      "parentOrganization": { "@id": "https://www.flowstudiohk.com/#org" }
     },
     {
       "@type": "WebSite",
@@ -78,7 +79,7 @@
       "url": "https://web.flowstudiohk.com/",
       "description": "粵語互動教學 — 用一個假 SaaS landing page 拆解 24 個常見 web design pattern。教叫 AI 寫網頁嘅人識指、識睇、識叫 AI 改。",
       "inLanguage": "zh-HK",
-      "publisher": { "@id": "https://www.flowstudiohk.com/#org" }
+      "publisher": { "@id": "https://web.flowstudiohk.com/#org" }
     },
     {
       "@type": "HowTo",
@@ -1876,5 +1877,7 @@
 <!-- 安全網：如果 main.js 因任何原因 load 唔到 / boot 失敗，2 秒後強制顯示所有 section，唔會成版空白 -->
 <script>addEventListener('load',function(){setTimeout(function(){if(!window.__revealReady){document.querySelectorAll('.reveal').forEach(function(e){e.style.opacity='1';e.style.transform='none';});}},2000);});</script>
 <script type="module" src="js/main.js?v=12"></script>
+<!-- WhatsApp lead 追蹤：同 hub 一致，fire whatsapp_click 落 GA4（5 站共用 G-S0E389EYF7） -->
+<script>(function(){Array.prototype.forEach.call(document.querySelectorAll('a[href*="wa.me/"]'),function(el){el.addEventListener('click',function(){if(typeof gtag==='function')gtag('event','whatsapp_click',{cta_location:'brandbar'});});});})();</script>
 </body>
 </html>

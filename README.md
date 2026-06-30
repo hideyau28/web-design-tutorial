@@ -10,7 +10,7 @@
 
 ## Demo
 
-🔗 **線上版：https://web-design-tutorial.vercel.app**
+🔗 **線上版：https://web.flowstudiohk.com**
 
 本地睇：直接 double-click `index.html`，或者用 dev server：
 
